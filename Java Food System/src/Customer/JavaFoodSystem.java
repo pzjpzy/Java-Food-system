@@ -4,6 +4,8 @@
  */
 package Customer;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author pangz
@@ -15,6 +17,8 @@ public class JavaFoodSystem {
      */
     public static void main(String[] args) {
         System.out.println("hello");
+        JFrame dummy = new JFrame();
+        
         // TODO code application logic here
     }
     
