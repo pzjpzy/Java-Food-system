@@ -18,18 +18,7 @@ public class JavaFoodSystem {
      */
     public static void main(String[] args) {
         System.out.println("hello");
-        JFrame dummy = new JFrame();
-        
-        LogIn panel  = new LogIn();  //your panel
-        
-        dummy.setTitle("Clinic Management System"); 
-        dummy.setVisible(true);
-        dummy.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        dummy.setResizable(false);
-        dummy.setLayout(null);
-        dummy.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        dummy.add(panel);                                    //add your panel
-        // TODO code application logic here
+        frame fram = new frame();
     }
     
 }
