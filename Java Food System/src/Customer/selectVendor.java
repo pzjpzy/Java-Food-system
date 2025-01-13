@@ -33,7 +33,7 @@ public class selectVendor extends javax.swing.JPanel {
         try{
         FileReader fr = new FileReader("Vendor.txt");
         BufferedReader br = new BufferedReader(fr);
-        //show all vendor
+        //show all doctor
         String line = null;
         int height = 200;
         
