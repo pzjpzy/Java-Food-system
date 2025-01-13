@@ -8,12 +8,12 @@ package Customer;
  *
  * @author Nour
  */
-public class LogIn extends javax.swing.JPanel {
+public class SignIn extends javax.swing.JPanel {
 
     /**
-     * Creates new form LogIn
+     * Creates new form SignIn
      */
-    public LogIn() {
+    public SignIn() {
         initComponents();
     }
 

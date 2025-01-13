@@ -13,7 +13,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
  */
 public class frame extends JFrame{
     public frame() {
-        test panel  = new test(this);           //put your login panel here
+        SignUp panel  = new SignUp(this);           //put your login panel here, you're putting panel into this frame
         
         setTitle("Clinic Management System");
         setVisible(true);
