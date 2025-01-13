@@ -16,8 +16,7 @@ public class JavaFoodSystem2 {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {           //this is Main, so you should run this
-        System.out.println("hello");
-        frame frame = new frame();       //we call our frame in Main
+    public static void main(String[] args) {
+        frame frame = new frame();
     }
 }

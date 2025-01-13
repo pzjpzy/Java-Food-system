@@ -4,6 +4,9 @@
  */
 package Customer;
 
+import javax.swing.JFrame;
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+
 /**
  *
  * @author Nour
@@ -13,8 +16,15 @@ public class LogIn extends javax.swing.JPanel {
     /**
      * Creates new form LogIn
      */
-    public LogIn() {
+    JFrame frame;
+    public LogIn(JFrame frame) {
         initComponents();
+//        setTitle("Clinic Management System"); 
+//        setVisible(true);
+//        setDefaultCloseOperation(EXIT_ON_CLOSE);
+//        setResizable(false);
+//        setLayout(null);
+//        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**

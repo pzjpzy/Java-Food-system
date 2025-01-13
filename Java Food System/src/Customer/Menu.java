@@ -19,21 +19,21 @@ import javax.swing.JPanel;
  *
  * @author pangz
  */
-public class selectVendor extends javax.swing.JPanel {
+public class Menu extends javax.swing.JPanel {
 
     /**
      * Creates new form selectVendor
      */
     JFrame frame;
-    public selectVendor(JFrame frame) {
+    public Menu(JFrame frame, String vendorID) {
         initComponents();
         setBounds(0,0,1536,864);     //this line must exist in every JPanel
         this.frame = frame;  
         frame.setLayout(null);
         try{
-        FileReader fr = new FileReader("Vendor.txt");
+        FileReader fr = new FileReader("Menu.txt");
         BufferedReader br = new BufferedReader(fr);
-        //show all vendor
+        //show all dishes
         String line = null;
         int height = 200;
         
@@ -42,60 +42,29 @@ public class selectVendor extends javax.swing.JPanel {
             String values[] = line.split(",");
             System.out.println(values[1]);
             
-            // Create panel
-            JPanel subban = new JPanel();
-            subban.setLayout(null);
-            subban.setBackground(new Color(92, 201, 205));
-            subban.setBounds(200, height, 1100, 140); // Position for panel
+            if(values[0].equals(vendorID)){
+                // Create panel
+                vendorOption subban = new vendorOption();
+                subban.setLayout(null);
+                subban.setBackground(new Color(92, 201, 205));
+                subban.setBounds(200, height, 1100, 140); // Position for panel
 
-            //vendor name
-            JLabel label = new JLabel("Vendor: " + values[1]);
-            label.setFont(new Font("Arial", Font.BOLD, 50));
-            label.setBounds(50,40,600,50);
-            subban.add(label);
+                //vendor name
+                JLabel label = new JLabel("Item: " + values[1]);
+                label.setFont(new Font("Arial", Font.BOLD, 50));
+                label.setBounds(50,40,600,50);
+                subban.add(label);
 
-            //review button
-            JButton Review = new JButton(); //logout button
-            Review.setBounds(650,20,200,100);
-            Review.setFocusable(false);
-            Review.setText("Review");
-            Review.setFont(new Font("My Boli",Font.PLAIN,25));
-            Review.setFont(new Font("My Boli",Font.PLAIN,25));
-            Review.setBackground(new Color(209, 232, 238));
-            Review.addActionListener((ActionEvent e)->{
-//                frame.remove(this);
-//
-//                login panel = new login(frame);
-//                frame.add(panel);
-//                frame.revalidate();
-//                frame.repaint();
-            });
-            
-            //menu button
-            JButton menu = new JButton(); //logout button
-            menu.setBounds(880,20,200,100);
-            menu.setFocusable(false);
-            menu.setText("Menu");
-            menu.setFont(new Font("My Boli",Font.PLAIN,25));
-            menu.setFont(new Font("My Boli",Font.PLAIN,25));
-            menu.setBackground(new Color(209, 232, 238));
-            menu.addActionListener((ActionEvent e)->{
-                System.out.println("Menu button clicked!");
-                frame.getContentPane().removeAll();
-                Menu panel = new Menu(frame,values[0]);
-                frame.add(panel);
+
+
+                frame.add(subban);
                 frame.revalidate();
                 frame.repaint();
-            });
+
+                height += 200; // Increment the height for the next panel
+            }
             
-            subban.add(Review);
-            subban.add(menu);
             
-            frame.add(subban);
-            frame.revalidate();
-            frame.repaint();
-            
-            height += 200; // Increment the height for the next panel
         }
 
         br.close();
@@ -136,16 +105,16 @@ public class selectVendor extends javax.swing.JPanel {
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        jLabel1.setText("Select Vendor");
+        jLabel1.setText("Menu");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addGap(75, 75, 75)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 723, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 700, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
         );

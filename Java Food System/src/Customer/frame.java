@@ -13,9 +13,10 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
  */
 public class frame extends JFrame{
     public frame() {
-        SignUp panel  = new SignUp(this);           //put your login panel here, you're putting panel into this frame
+        selectVendor panel  = new selectVendor(this);           //put your login panel here
         
-        setTitle("Clinic Management System");
+        
+        setTitle("Food Management System");
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
