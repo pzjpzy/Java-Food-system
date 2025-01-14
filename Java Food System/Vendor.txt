@@ -1,2 +1,2 @@
-V1,Pasta Corner,{Pasta:12.50, Burger: 8.90}
-V2,Papa Louis,{Pizza:18.50, Coke: 5.00}
+V1,Pasta Corner
+V2,Papa Louis
