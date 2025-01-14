@@ -6,14 +6,17 @@ package Customer;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -25,11 +28,13 @@ public class Menu extends javax.swing.JPanel {
      * Creates new form selectVendor
      */
     JFrame frame;
-    public Menu(JFrame frame, String vendorID) {
+    protected ArrayList<ItemData> items = new ArrayList<>();
+    public Menu(JFrame frame, String vendorID, String vendorName) {
         initComponents();
         setBounds(0,0,1536,864);     //this line must exist in every JPanel
         this.frame = frame;  
         frame.setLayout(null);
+        jLabel1.setText(vendorName + "'s Menu");
         try{
         FileReader fr = new FileReader("Menu.txt");
         BufferedReader br = new BufferedReader(fr);
@@ -44,18 +49,33 @@ public class Menu extends javax.swing.JPanel {
             
             if(values[0].equals(vendorID)){
                 // Create panel
-                vendorOption subban = new vendorOption();
+                JPanel subban = new JPanel();
                 subban.setLayout(null);
                 subban.setBackground(new Color(92, 201, 205));
                 subban.setBounds(200, height, 1100, 140); // Position for panel
 
-                //vendor name
+                //items name
                 JLabel label = new JLabel("Item: " + values[1]);
                 label.setFont(new Font("Arial", Font.BOLD, 50));
-                label.setBounds(50,40,600,50);
+                label.setBounds(50,40,600,70);
+                
+                //Quantity:
+                JLabel quan = new JLabel("Quantity:");
+                quan.setFont(new Font("Arial", Font.BOLD, 50));
+                quan.setBounds(650,40,300,70);
+                
+                //quantity textfield
+                JTextField quantity = new JTextField("0"); 
+                quantity.setBounds(880,20,100,100);
+                quantity.setFont(new Font("My Boli",Font.PLAIN,40));
+                quantity.setHorizontalAlignment(JTextField.CENTER);
+                
+                items.add(new ItemData(values[1], quantity));
+
+
                 subban.add(label);
-
-
+                subban.add(quan);
+                subban.add(quantity);
 
                 frame.add(subban);
                 frame.revalidate();
@@ -87,6 +107,7 @@ public class Menu extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(186, 208, 231));
         setMinimumSize(new java.awt.Dimension(1552, 837));
@@ -128,17 +149,33 @@ public class Menu extends javax.swing.JPanel {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
+        jButton2.setBackground(new java.awt.Color(209, 232, 238));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jButton2.setText("Back");
+        jButton2.setFocusable(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 700, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 561, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -150,10 +187,36 @@ public class Menu extends javax.swing.JPanel {
 //        frame.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    frame.getContentPane().removeAll();
+    selectVendor panel = new selectVendor(frame);   //the panel you want to switch to
+    frame.add(panel);
+    frame.revalidate();
+    frame.repaint();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    private static class ItemData {
+        String foodName;
+        JTextField quanField;
+        public ItemData(String foodName, JTextField quanField) {
+            this.foodName = foodName;
+            this.quanField = quanField;
+        }
+        
+        public String getFoodName() {
+            return foodName;
+        }
+
+        public JTextField getQuanField() {
+            return quanField;
+        }
+    }
 }

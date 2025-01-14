@@ -77,12 +77,11 @@ public class selectVendor extends javax.swing.JPanel {
             menu.setFocusable(false);
             menu.setText("Menu");
             menu.setFont(new Font("My Boli",Font.PLAIN,25));
-            menu.setFont(new Font("My Boli",Font.PLAIN,25));
             menu.setBackground(new Color(209, 232, 238));
             menu.addActionListener((ActionEvent e)->{
                 System.out.println("Menu button clicked!");
                 frame.getContentPane().removeAll();
-                Menu panel = new Menu(frame,values[0]);
+                Menu panel = new Menu(frame,values[0],values[1]);
                 frame.add(panel);
                 frame.revalidate();
                 frame.repaint();
@@ -118,6 +117,7 @@ public class selectVendor extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(186, 208, 231));
         setMinimumSize(new java.awt.Dimension(1552, 837));
@@ -159,17 +159,33 @@ public class selectVendor extends javax.swing.JPanel {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
+        jButton2.setBackground(new java.awt.Color(209, 232, 238));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jButton2.setText("Back");
+        jButton2.setFocusable(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 700, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 568, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -181,9 +197,18 @@ public class selectVendor extends javax.swing.JPanel {
 //        frame.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+//        test2 panel = new test2(frame);   //the panel you want to switch to
+//        frame.remove(this);
+//        frame.add(panel);
+//        frame.revalidate();
+//        frame.repaint();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
