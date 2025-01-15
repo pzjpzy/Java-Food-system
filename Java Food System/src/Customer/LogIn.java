@@ -273,17 +273,14 @@ public class LogIn extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void setDefaultCloseOperation(int EXIT_ON_CLOSE) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     private static class jComboBox1 {
 
         private static void addActionListener(ActionListener actionListener) {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         }
 
         private static void setModel(DefaultComboBoxModel<String> defaultComboBoxModel) {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         }
 
         public jComboBox1() {
