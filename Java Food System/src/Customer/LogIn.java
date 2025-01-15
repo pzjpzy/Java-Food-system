@@ -4,6 +4,8 @@
  */
 package Customer;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author Nour
@@ -13,8 +15,12 @@ public class LogIn extends javax.swing.JPanel {
     /**
      * Creates new form LogIn
      */
-    public LogIn() {
+    JFrame frame;
+
+    public LogIn(JFrame frame) {
         initComponents();
+        setBounds(0,0,1535,864);
+        this.frame = frame;
     }
 
     /**
@@ -78,6 +84,11 @@ public class LogIn extends javax.swing.JPanel {
         });
 
         jCheckBox1.setText("Show Password");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -154,6 +165,16 @@ public class LogIn extends javax.swing.JPanel {
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(178, 171, 179));
         jButton1.setText("SIGNUP");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -203,6 +224,26 @@ public class LogIn extends javax.swing.JPanel {
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    SignUp panel = new SignUp(frame);
+    frame.remove(this);
+    frame.add(panel);
+    frame.revalidate();
+    frame.repaint();
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //todo
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    if (jCheckBox1.isSelected()) {
+        jPasswordField1.setEchoChar((char) 0);
+    } else {
+        jPasswordField1.setEchoChar('•');
+    }
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
