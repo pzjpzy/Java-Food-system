@@ -21,13 +21,12 @@ public class LogIn extends javax.swing.JPanel {
 
     public LogIn(JFrame frame) {
         initComponents();
-<<<<<<< Updated upstream
         setBounds(0,0,1535,864);
         this.frame = frame;
-=======
         setVisible(true);
         setLayout(null);
->>>>>>> Stashed changes
+        setVisible(true);
+        setLayout(null);
     }
 
     /**
@@ -234,17 +233,15 @@ public class LogIn extends javax.swing.JPanel {
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-<<<<<<< Updated upstream
     SignUp panel = new SignUp(frame);
     frame.remove(this);
     frame.add(panel);
     frame.revalidate();
     frame.repaint();
-=======
+
         SignUp sign = new SignUp();
         sign.setVisible(true);
         frame.remove(this);
->>>>>>> Stashed changes
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
