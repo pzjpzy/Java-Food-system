@@ -25,6 +25,7 @@ public class LogIn extends javax.swing.JPanel {
         this.frame = frame;
         setVisible(true);
         setLayout(null);
+
         setVisible(true);
         setLayout(null);
     }
@@ -239,9 +240,6 @@ public class LogIn extends javax.swing.JPanel {
     frame.revalidate();
     frame.repaint();
 
-        SignUp sign = new SignUp();
-        sign.setVisible(true);
-        frame.remove(this);
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
