@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package Customer;
+package Vendor;
 
 /**
  *
  * @author pangz
  */
-public class select_vendor extends javax.swing.JPanel {
+public class RevenueD extends javax.swing.JPanel {
 
     /**
-     * Creates new form select_vendor
+     * Creates new form RevenueD
      */
-    public select_vendor() {
+    public RevenueD() {
         initComponents();
     }
 

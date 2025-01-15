@@ -47,6 +47,7 @@ public class LogIn extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1552, 837));
 
         jPanel1.setBackground(new java.awt.Color(203, 203, 203));
