@@ -4,6 +4,8 @@
  */
 package Customer;
 
+import java.awt.event.ActionListener;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 
 /**
@@ -19,8 +21,13 @@ public class LogIn extends javax.swing.JPanel {
 
     public LogIn(JFrame frame) {
         initComponents();
+<<<<<<< Updated upstream
         setBounds(0,0,1535,864);
         this.frame = frame;
+=======
+        setVisible(true);
+        setLayout(null);
+>>>>>>> Stashed changes
     }
 
     /**
@@ -227,11 +234,17 @@ public class LogIn extends javax.swing.JPanel {
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+<<<<<<< Updated upstream
     SignUp panel = new SignUp(frame);
     frame.remove(this);
     frame.add(panel);
     frame.revalidate();
     frame.repaint();
+=======
+        SignUp sign = new SignUp();
+        sign.setVisible(true);
+        frame.remove(this);
+>>>>>>> Stashed changes
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -263,4 +276,22 @@ public class LogIn extends javax.swing.JPanel {
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+    private void setDefaultCloseOperation(int EXIT_ON_CLOSE) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private static class jComboBox1 {
+
+        private static void addActionListener(ActionListener actionListener) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+
+        private static void setModel(DefaultComboBoxModel<String> defaultComboBoxModel) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+
+        public jComboBox1() {
+        }
+    }
 }
