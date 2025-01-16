@@ -48,7 +48,6 @@ public class Menu extends javax.swing.JPanel {
         while((line = br.readLine())!= null){
  
             String values[] = line.split(",");
-            System.out.println(values[1]);
             
             if(values[0].equals(vendorID)){
                 // Create panel
@@ -230,14 +229,45 @@ public class Menu extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String order;
         try {
-            FileWriter fw = new FileWriter("Order.txt");
+            FileReader fr = new FileReader("Order.txt");
+            BufferedReader br  = new BufferedReader(fr);
+            String line = null;
+
+
+            FileWriter fw = new FileWriter("Order.txt",true);
+            
+            //loop through each item
             for (ItemData item : items) {
                 String itemName = item.getFoodName();
                 String quantity = item.getQuanField().getText();
-                fw.append(userID + "," + itemName + "," + quantity + "\n");
+                order = userID + "," + itemName + "," + quantity;
+                
+                //loop through existing order to see existed or not
+                while((line = br.readLine()) != null){
+                    String values[] = line.split(",");
+//                    userID.equals(values[0]) && itemName.equals(values[1])
+                    if (line.equals(order)){
+                        System.out.println("yes");
+                    }
+                    else{
+                        System.out.println("nope");
+                    }
+                }
+
+                fw.append(order + "\n");
             }
             fw.close();
+
+
+                
+
+            
+            br.close();
+            fr.close();
+            
+            
             JOptionPane.showMessageDialog(this, "Quantities saved successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error saving quantities.", "Error", JOptionPane.ERROR_MESSAGE);
