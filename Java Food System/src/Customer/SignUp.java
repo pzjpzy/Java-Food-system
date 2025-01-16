@@ -5,6 +5,12 @@
 package Customer;
 
 import javax.swing.JFrame;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,6 +22,13 @@ public class SignUp extends javax.swing.JPanel {
      * Creates new form SignUp
      */
     JFrame frame;
+    private javax.swing.JTextField usernameTextField;
+    private javax.swing.JPasswordField passwordField;
+    private javax.swing.JComboBox<String> roleComboBox;
+    private javax.swing.JTextField idTextField;
+    private javax.swing.JPanel loginPanel;
+    private javax.swing.JPanel signupPanel;
+
     
     public SignUp(JFrame frame) {
         initComponents();
@@ -67,6 +80,11 @@ public class SignUp extends javax.swing.JPanel {
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(213, 213, 213));
         jButton2.setText("SIGN UP");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -182,6 +200,56 @@ public class SignUp extends javax.swing.JPanel {
         frame.revalidate();
         frame.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+    BufferedReader reader = new BufferedReader(new FileReader("login.txt"));
+    String line;
+    boolean isIdTaken = false;
+
+    String newUsername = usernameTextField.getText();
+    String newPassword = new String(passwordField.getPassword());
+    String role = roleComboBox.getSelectedItem().toString(); // role
+    String id = idTextField.getText();
+
+    if (newUsername.isEmpty() || newPassword.isEmpty() || role.isEmpty() || id.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Please fill all fields", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    while ((line = reader.readLine()) != null) {
+        String[] parts = line.split(", ");
+        if (parts.length >= 4) { // Ensure the line has enough parts
+            String existingId = parts[3];
+            if (id.equals(existingId)) {
+                isIdTaken = true;
+                break;
+            }
+        }
+    }
+    reader.close();
+
+    if (isIdTaken) {
+        JOptionPane.showMessageDialog(null, "ID already exists. Please enter a unique ID.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    BufferedWriter writer = new BufferedWriter(new FileWriter("login.txt", true));
+    writer.write(newUsername + ", " + newPassword + ", " + role + ", " + id);
+    writer.newLine();
+    writer.close();
+
+    JOptionPane.showMessageDialog(null, "Sign-Up successful! You can now log in.");
+    
+    loginPanel.setVisible(true);
+    signupPanel.setVisible(false);
+
+} catch (IOException e) {
+    e.printStackTrace();
+    JOptionPane.showMessageDialog(null, "Error accessing the file", "Error", JOptionPane.ERROR_MESSAGE);
+}
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

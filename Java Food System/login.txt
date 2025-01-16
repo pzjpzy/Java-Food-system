@@ -1,0 +1,5 @@
+nour, 1122, admin, A1
+pangzai, 3344, manager, M1
+dinie, 5566, customer, C1
+choo, 7788, vendor, V1
+zaiyong, 9900, deliveryrunner, D1
