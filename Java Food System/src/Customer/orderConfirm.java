@@ -24,7 +24,7 @@ import javax.swing.JTextField;
  *
  * @author pangz
  */
-public class Menu extends javax.swing.JPanel {
+public class orderConfirm extends javax.swing.JPanel {
 
     /**
      * Creates new form selectVendor
@@ -32,12 +32,11 @@ public class Menu extends javax.swing.JPanel {
     JFrame frame;
     String userID = "C1";
     protected ArrayList<ItemData> items = new ArrayList<>();
-    public Menu(JFrame frame, String vendorID, String vendorName) {
+    public orderConfirm(JFrame frame, String userID) {
         initComponents();
         setBounds(0,0,1536,864);     //this line must exist in every JPanel
         this.frame = frame;  
         frame.setLayout(null);
-        jLabel1.setText(vendorName + "'s Menu");
         try{
         FileReader fr = new FileReader("Menu.txt");
         BufferedReader br = new BufferedReader(fr);
@@ -49,7 +48,7 @@ public class Menu extends javax.swing.JPanel {
  
             String values[] = line.split(",");
             
-            if(values[0].equals(vendorID)){
+            if(values[0].equals(userID)){
                 // Create panel
                 JPanel subban = new JPanel();
                 subban.setLayout(null);
@@ -130,7 +129,7 @@ public class Menu extends javax.swing.JPanel {
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        jLabel1.setText("Menu");
+        jLabel1.setText("Order");
         jLabel1.setFocusable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -302,11 +301,7 @@ public class Menu extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        frame.getContentPane().removeAll();
-        orderConfirm panel = new orderConfirm(frame,userID);   //the panel you want to switch to
-        frame.add(panel);
-        frame.revalidate();
-        frame.repaint();
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
 
