@@ -22,7 +22,7 @@ public class frame extends JFrame{
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
-
+        setLayout(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         add(panel);
         }
