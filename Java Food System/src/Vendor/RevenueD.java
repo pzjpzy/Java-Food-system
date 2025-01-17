@@ -6,6 +6,11 @@ package Vendor;
 
 import javax.swing.JFrame;
 import Customer.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -21,8 +26,48 @@ public class RevenueD extends javax.swing.JPanel {
     public RevenueD(JFrame frame) {
         initComponents();
         this.frame = frame;
-        
         setBounds(0,0,1536,864);
+        
+//        FileReader fr;
+//        try {
+//            fr = new FileReader("medicalrecord.txt");
+//            BufferedReader br  = new BufferedReader(fr);
+//            String line = null;
+//            while((line = br.readLine()) != null){
+//                String values[] = line.split(",");
+//                String datarow[] = {values[2],values[3],values[5],values[7]};
+//                if(user.disease.equals(datarow[0]) && user.medicine.equals(datarow[1]) && user.date.equals(datarow[2]) && user.followup.equals(datarow[3]) ){
+//                    String ndatarow[] = {values[0],values[1],values[2],values[3],values[4],values[5],values[6],values[7]};
+//                    textArea.setText(
+//                        "\n"+   
+//                        "       "+"Patient Info  "+"\n"+
+//                        "\n"+   
+//                        "           "+"Name : "+ndatarow[0]+"\n"+
+//                        "           "+"IC Number : "+ndatarow[1]+"\n"+
+//                        "\n"+   
+//                        "       "+"Medical History "+"\n"+
+//                        "\n"+   
+//                        "           "+"Disease : "+ndatarow[2]+"\n"+
+//                        "           "+"Medicine : "+ndatarow[3]+"\n"+
+//                        "           "+"Allergies : "+ndatarow[4]+"\n"+
+//                        "\n"+   
+//                        "       "+"Health Information  "+"\n"+
+//                        "\n"+   
+//                        "           "+"Date : "+ndatarow[5]+"\n"+
+//                        "           "+"Vitals : "+ndatarow[6]+"\n"+
+//                        "\n"+   
+//                        "       "+"Next Step  "+"\n"+
+//                        "\n"+   
+//                        "           "+"Follow-up Appointment : "+ndatarow[7]+"\n"                
+//                    );  
+//
+//                }
+//            }
+//        } catch (FileNotFoundException ex) {
+//            System.out.println("file not found");
+//        } catch (IOException e){
+//            System.out.println("error occured");
+//        }
         
         
     }
@@ -55,6 +100,7 @@ public class RevenueD extends javax.swing.JPanel {
         jButton1.setBackground(new java.awt.Color(116, 136, 158));
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jButton1.setText("Log Out");
+        jButton1.setDefaultCapable(false);
         jButton1.setFocusPainted(false);
         jButton1.setFocusable(false);
         jButton1.setNextFocusableComponent(jPanel1);
@@ -170,7 +216,7 @@ public class RevenueD extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
- // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
@@ -178,9 +224,9 @@ public class RevenueD extends javax.swing.JPanel {
         frame.remove(this);
         frame.add(panel);
         frame.revalidate();
-        frame.repaint();        
+        frame.repaint();
 
-// TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1MouseReleased
 
 
