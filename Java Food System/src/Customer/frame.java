@@ -15,6 +15,7 @@ import  Vendor.*;
 public class frame extends JFrame{
     public frame() {
         SignUp panel1  = new SignUp(this);           //put your login panel here, you're putting panel into this frame
+
        
         setTitle("Ordering Food System");
         setVisible(true);

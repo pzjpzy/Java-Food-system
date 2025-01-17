@@ -34,10 +34,8 @@ public class LogIn extends javax.swing.JPanel {
         setBounds(0,0,1535,864);
         this.frame = frame;
         setVisible(true);
-        setLayout(null);
-
-        setVisible(true);
-        setLayout(null);
+        
+        frame.setLayout(null);
     }
 
     /**
@@ -280,12 +278,10 @@ public class LogIn extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
-    // Read the login.txt file
     BufferedReader reader = new BufferedReader(new FileReader("login.txt"));
     String line;
     boolean isLoggedIn = false;
 
-    // Fetch user input
     String enteredUsername = usernameTextField.getText();
     String enteredPassword = new String(passwordField.getPassword());
 
@@ -295,14 +291,12 @@ public class LogIn extends javax.swing.JPanel {
         String password = parts[1];
         String role = parts[2];
 
-        // Check credentials
         if (enteredUsername.equals(username) && enteredPassword.equals(password)) {
             JOptionPane.showMessageDialog(this, "Login successful as " + role);
             isLoggedIn = true;
 
-            // Navigate to Home or Admin Panel based on Role
             if (role.equalsIgnoreCase("admin")) {
-                // Switch JPanel to Home or Admin Panel
+
                 homePanel.setVisible(true);
                 loginPanel.setVisible(false);
             }

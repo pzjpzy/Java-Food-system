@@ -203,7 +203,7 @@ public class SignUp extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
-    BufferedReader reader = new BufferedReader(new FileReader("login.txt"));
+    BufferedReader reader = new BufferedReader(new FileReader("users.txt"));
     String line;
     boolean isIdTaken = false;
 
@@ -234,7 +234,7 @@ public class SignUp extends javax.swing.JPanel {
         return;
     }
 
-    BufferedWriter writer = new BufferedWriter(new FileWriter("login.txt", true));
+    BufferedWriter writer = new BufferedWriter(new FileWriter("users.txt", true));
     writer.write(newUsername + ", " + newPassword + ", " + role + ", " + id);
     writer.newLine();
     writer.close();
