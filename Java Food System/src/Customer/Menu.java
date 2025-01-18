@@ -35,7 +35,7 @@ public class Menu extends javax.swing.JPanel {
      * Creates new form selectVendor
      */
     JFrame frame;
-    String userID = "C1";
+    String userID = customer.userID;
     protected ArrayList<ItemData> items = new ArrayList<>();
     // Create a panel for the scrollable content
     JPanel scrollp = new JPanel();
@@ -74,20 +74,27 @@ public class Menu extends javax.swing.JPanel {
                 label.setFont(new Font("Arial", Font.BOLD, 50));
                 label.setBounds(50,40,600,70);
                 
+                //item price
+                JLabel price = new JLabel("RM" + values[2]);
+                price.setFont(new Font("Arial", Font.BOLD, 30));
+                price.setBounds(550,40,200,70);
+                
+
+                
                 //Quantity:
                 JLabel quan = new JLabel("Quantity:");
                 quan.setFont(new Font("Arial", Font.BOLD, 50));
-                quan.setBounds(650,40,300,70);
+                quan.setBounds(750,40,300,70);
                 
                 //quantity textfield
                 JTextField quantity = new JTextField("0"); 
-                quantity.setBounds(880,20,100,100);
+                quantity.setBounds(980,20,100,100);
                 quantity.setFont(new Font("My Boli",Font.PLAIN,40));
                 quantity.setHorizontalAlignment(JTextField.CENTER);
                 
                 items.add(new ItemData(values[1], quantity));
 
-
+                subban.add(price);
                 subban.add(label);
                 subban.add(quan);
                 subban.add(quantity);

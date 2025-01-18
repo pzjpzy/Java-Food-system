@@ -37,7 +37,7 @@ public class orderConfirm extends javax.swing.JPanel {
      * Creates new form selectVendor
      */
     JFrame frame;
-    String userID = "C1";
+    String userID = customer.userID;
     double total = 0;
     protected ArrayList<ItemData> items = new ArrayList<>();
     public orderConfirm(JFrame frame, String userID) {
@@ -73,21 +73,37 @@ public class orderConfirm extends javax.swing.JPanel {
                 label.setFont(new Font("Arial", Font.BOLD, 50));
                 label.setBounds(50,40,600,70);
                 
+                //item price
+                FileReader fr2 = new FileReader("Menu.txt");
+                BufferedReader br2  = new BufferedReader(fr2);
+                while((line = br2.readLine()) != null){
+                    String menu[] = line.split(",");
+                    if (menu[1].equals(values[2])){
+                        JLabel price = new JLabel("RM" + menu[2]);
+                        price.setFont(new Font("Arial", Font.BOLD, 30));
+                        price.setBounds(550,40,200,70);
+                        subban.add(price);
+                    }
+                }
+                fr2.close();
+                br2.close();
+                
+                
                 //Quantity:
                 JLabel quan = new JLabel("Quantity:");
                 quan.setFont(new Font("Arial", Font.BOLD, 50));
-                quan.setBounds(650,40,300,70);
+                quan.setBounds(750,40,300,70);
                 
                 //quantity textfield
                 JTextField quantity = new JTextField("0"); 
-                quantity.setBounds(880,20,100,100);
+                quantity.setBounds(980,20,100,100);
                 quantity.setFont(new Font("My Boli",Font.PLAIN,40));
                 quantity.setHorizontalAlignment(JTextField.CENTER);
                 quantity.setText(values[3]);
                 
                 items.add(new ItemData(values[2], quantity));
 
-
+                
                 subban.add(label);
                 subban.add(quan);
                 subban.add(quantity);
@@ -444,7 +460,58 @@ public class orderConfirm extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        String order;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDateTime now = LocalDateTime.now();
+        String date = dtf.format(now);
         
+        try {
+            //store every line in array
+            FileReader fr = new FileReader("Order.txt");
+            BufferedReader br  = new BufferedReader(fr);
+            String line = null;
+            ArrayList<String> table = new ArrayList<>();
+            
+            while((line = br.readLine()) != null){
+                table.add(line);
+            }
+            fr.close();
+            br.close();
+            
+            //loop through each item for file writing
+            for (ItemData item : items) {
+                String itemName = item.getFoodName();
+                String quantity = item.getQuanField().getText();
+                //order line
+                order = userID + "," + customer.orderID + "," + itemName + "," + quantity + "," + jComboBox1.getSelectedItem() + "," + date + "," + "1";
+                
+
+                // Loop through existing orders to check if the record already exists
+                boolean exists = false;
+                for (int i=0; i < table.size(); i++) {
+                    String record = table.get(i);
+                    String recor[] = record.split(",");
+                    if (record != null && recor[0].equals(userID) && recor[1].equals(customer.orderID) && recor[2].equals(itemName)) {   //if record different, then overwrite it
+                        table.set(i,order);
+                        exists = true;
+                        break;
+                    }
+                }
+            }
+            
+            //write every line into file
+            FileWriter fw = new FileWriter("Order.txt");
+            for (String record : table) {
+                if (record != null){
+                    fw.append(record + "\n");
+                }
+            }
+            fw.close(); 
+            
+            JOptionPane.showMessageDialog(this, "Payment successfull!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Payment failed.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
