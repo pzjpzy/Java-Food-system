@@ -4,6 +4,7 @@
  */
 package Customer;
 
+import  DeliveryRunner.*;
 import java.awt.event.ActionListener;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
@@ -12,6 +13,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.JOptionPane;
+import Admin.*;
+import Manager.*;
+import Vendor.*;
 
 /**
  *
@@ -34,6 +38,7 @@ public class LogIn extends javax.swing.JPanel {
         setBounds(0,0,1535,864);
         this.frame = frame;
         setVisible(true);
+        
         
         frame.setLayout(null);
     }
@@ -277,43 +282,71 @@ public class LogIn extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+                  
         try {
-    BufferedReader reader = new BufferedReader(new FileReader("login.txt"));
-    String line;
-    boolean isLoggedIn = false;
+        BufferedReader reader = new BufferedReader(new FileReader("users.txt"));
+        String line;
+        boolean isLoggedIn = false;
 
-    String enteredUsername = usernameTextField.getText();
-    String enteredPassword = new String(passwordField.getPassword());
+        String enteredUsername = jTextField1.getText().trim();
+        String enteredPassword = new String(jPasswordField1.getPassword()).trim();
+        String selectedRole = jComboBox2.getSelectedItem().toString().trim();
 
-    while ((line = reader.readLine()) != null) {
-        String[] parts = line.split(", ");
-        String username = parts[0];
-        String password = parts[1];
-        String role = parts[2];
+        while ((line = reader.readLine()) != null) {
+            
+            String[] parts = line.split(", ");
+            if (parts.length < 4) continue;
 
-        if (enteredUsername.equals(username) && enteredPassword.equals(password)) {
-            JOptionPane.showMessageDialog(this, "Login successful as " + role);
-            isLoggedIn = true;
+            String username = parts[0]; // First column is username
+            String password = parts[1]; // Second column is password
+            String role = parts[2];     // Third column is role
+            String id = parts[3];       // Fourth column is ID
 
-            if (role.equalsIgnoreCase("admin")) {
+            // Check if username, password, and role match
+            if (enteredUsername.equals(username) && enteredPassword.equals(password) && selectedRole.equalsIgnoreCase(role)) {
+                isLoggedIn = true;
 
-                homePanel.setVisible(true);
-                loginPanel.setVisible(false);
+                // Show the message (testing)
+                JOptionPane.showMessageDialog(this, "Login successful as " + role + " (ID: " + id + ")");
+
+                // Open Home panel based on role entered
+                frame.remove(this);
+                switch (role.toLowerCase()) {
+                    case "admin":
+                        frame.add(new AdminHome(frame)); // Admin home panel
+                        break;
+                    case "customer":
+                        frame.add(new CustomerHome(frame)); // Customer home panel
+                        break;
+                    case "manager":
+                        frame.add(new ManagerHome(frame)); // Manager home panel
+                        break;
+                    case "vendor":
+                        frame.add(new VendorHome(frame)); // Vendor home panel
+                        break;
+                    case "deliveryrunner":
+                        frame.add(new DRHome(frame)); // Delivery Runner home panel
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(this, "Unknown role detected!", "Error", JOptionPane.ERROR_MESSAGE);
+                        break;
+                }
+                frame.revalidate();
+                frame.repaint();
+                break;
             }
-            break;
         }
+
+        // If no match is found brings up the error
+        if (!isLoggedIn) {
+            JOptionPane.showMessageDialog(this, "Invalid username, password, or role", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        reader.close();
+    } catch (IOException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
-
-    if (!isLoggedIn) {
-        JOptionPane.showMessageDialog(this, "Invalid username or password", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-
-    reader.close();
-} catch (IOException e) {
-    e.printStackTrace();
-    JOptionPane.showMessageDialog(this, "Error reading file", "Error", JOptionPane.ERROR_MESSAGE);
-}
-
     }//GEN-LAST:event_jButton3ActionPerformed
 
 

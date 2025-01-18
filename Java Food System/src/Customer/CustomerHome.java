@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Customer;
+import javax.swing.JFrame;
 
 /**
  *
@@ -13,8 +14,14 @@ public class CustomerHome extends javax.swing.JPanel {
     /**
      * Creates new form CustomerHome
      */
-    public CustomerHome() {
+    JFrame frame;
+    public CustomerHome(JFrame frame) {
         initComponents();
+        setBounds(0,0,1535,864);
+        this.frame = frame;
+        setVisible(true);
+        
+        frame.setLayout(null);
     }
 
     /**

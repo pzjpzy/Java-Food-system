@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Manager;
+import javax.swing.JFrame;
 
 /**
  *
@@ -13,8 +14,14 @@ public class ManagerHome extends javax.swing.JPanel {
     /**
      * Creates new form ManagerHome
      */
-    public ManagerHome() {
+    JFrame frame;
+    public ManagerHome(JFrame frame) {
         initComponents();
+        setBounds(0,0,1535,864);
+        this.frame = frame;
+        setVisible(true);
+        
+        frame.setLayout(null);
     }
 
     /**

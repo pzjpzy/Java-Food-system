@@ -202,53 +202,53 @@ public class SignUp extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try {
-    BufferedReader reader = new BufferedReader(new FileReader("users.txt"));
-    String line;
-    boolean isIdTaken = false;
+            try {
+        BufferedReader reader = new BufferedReader(new FileReader("users.txt"));
+        String line;
+        boolean isIdTaken = false;
 
-    String newUsername = usernameTextField.getText();
-    String newPassword = new String(passwordField.getPassword());
-    String role = roleComboBox.getSelectedItem().toString(); // role
-    String id = idTextField.getText();
+        String newUsername = jTextField1.getText();
+        String newPassword = new String(jPasswordField1.getPassword());
+        String role = roleComboBox.getSelectedItem().toString(); // roleComboBox must exist in your design
+        String id = idTextField.getText(); // idTextField must exist in your design
 
-    if (newUsername.isEmpty() || newPassword.isEmpty() || role.isEmpty() || id.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Please fill all fields", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
+        if (newUsername.isEmpty() || newPassword.isEmpty() || role.isEmpty() || id.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please fill all fields", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-    while ((line = reader.readLine()) != null) {
-        String[] parts = line.split(", ");
-        if (parts.length >= 4) { // Ensure the line has enough parts
-            String existingId = parts[3];
-            if (id.equals(existingId)) {
-                isIdTaken = true;
-                break;
+        while ((line = reader.readLine()) != null) {
+            String[] parts = line.split(", ");
+            if (parts.length >= 4) { // Ensure the line has enough parts
+                String existingId = parts[3];
+                if (id.equals(existingId)) {
+                    isIdTaken = true;
+                    break;
+                }
             }
         }
+        reader.close();
+
+        if (isIdTaken) {
+            JOptionPane.showMessageDialog(null, "ID already exists. Please enter a unique ID.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        BufferedWriter writer = new BufferedWriter(new FileWriter("users.txt", true));
+        writer.write(newUsername + ", " + newPassword + ", " + role + ", " + id);
+        writer.newLine();
+        writer.close();
+
+        JOptionPane.showMessageDialog(null, "Sign-Up successful! You can now log in.");
+        
+        // Switch panels
+        jPanel1.setVisible(false); // Hide the sign-up panel
+        jPanel2.setVisible(true);  // Show the login panel
+
+    } catch (IOException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error accessing the file", "Error", JOptionPane.ERROR_MESSAGE);
     }
-    reader.close();
-
-    if (isIdTaken) {
-        JOptionPane.showMessageDialog(null, "ID already exists. Please enter a unique ID.", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    BufferedWriter writer = new BufferedWriter(new FileWriter("users.txt", true));
-    writer.write(newUsername + ", " + newPassword + ", " + role + ", " + id);
-    writer.newLine();
-    writer.close();
-
-    JOptionPane.showMessageDialog(null, "Sign-Up successful! You can now log in.");
-    
-    loginPanel.setVisible(true);
-    signupPanel.setVisible(false);
-
-} catch (IOException e) {
-    e.printStackTrace();
-    JOptionPane.showMessageDialog(null, "Error accessing the file", "Error", JOptionPane.ERROR_MESSAGE);
-}
-
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

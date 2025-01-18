@@ -4,6 +4,8 @@
  */
 package Admin;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author Nour
@@ -13,8 +15,14 @@ public class AdminHome extends javax.swing.JPanel {
     /**
      * Creates new form AdminHome
      */
-    public AdminHome() {
+    JFrame frame;
+    public AdminHome(JFrame frame) {
         initComponents();
+        setBounds(0,0,1535,864);
+        this.frame = frame;
+        setVisible(true);
+        
+        frame.setLayout(null);
     }
 
     /**
