@@ -13,6 +13,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -54,7 +56,7 @@ public class orderConfirm extends javax.swing.JPanel {
  
             String values[] = line.split(",");
             
-            if(values[0].equals(userID)){
+            if(values[1].equals(customer.orderID)){
                 // Create panel
                 JPanel subban = new JPanel();
                 subban.setLayout(null);
@@ -62,7 +64,7 @@ public class orderConfirm extends javax.swing.JPanel {
                 subban.setPreferredSize(new Dimension(1100, 140)); // Set preferred size
 
                 //items name
-                JLabel label = new JLabel("Item: " + values[1]);
+                JLabel label = new JLabel("Item: " + values[2]);
                 label.setFont(new Font("Arial", Font.BOLD, 50));
                 label.setBounds(50,40,600,70);
                 
@@ -76,9 +78,9 @@ public class orderConfirm extends javax.swing.JPanel {
                 quantity.setBounds(880,20,100,100);
                 quantity.setFont(new Font("My Boli",Font.PLAIN,40));
                 quantity.setHorizontalAlignment(JTextField.CENTER);
-                quantity.setText(values[2]);
+                quantity.setText(values[3]);
                 
-                items.add(new ItemData(values[1], quantity));
+                items.add(new ItemData(values[2], quantity));
 
 
                 subban.add(label);
@@ -263,12 +265,15 @@ public class orderConfirm extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String order;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDateTime now = LocalDateTime.now();
+        String date = dtf.format(now);
+        
         try {
             //store every line in array
             FileReader fr = new FileReader("Order.txt");
             BufferedReader br  = new BufferedReader(fr);
             String line = null;
-            
             ArrayList<String> table = new ArrayList<>();
             
             while((line = br.readLine()) != null){
@@ -279,7 +284,6 @@ public class orderConfirm extends javax.swing.JPanel {
             
 
 
-
 //            FileReader fr = new FileReader("Order.txt");
 //            BufferedReader br  = new BufferedReader(fr);
 
@@ -288,7 +292,8 @@ public class orderConfirm extends javax.swing.JPanel {
             for (ItemData item : items) {
                 String itemName = item.getFoodName();
                 String quantity = item.getQuanField().getText();
-                order = userID + "," + itemName + "," + quantity;
+                //order line
+                order = userID + "," + customer.orderID + "," + itemName + "," + quantity + "," + jComboBox1.getSelectedItem() + "," + date + "," + "0";
                 
 
                 // Loop through existing orders to check if the record already exists
@@ -301,7 +306,7 @@ public class orderConfirm extends javax.swing.JPanel {
                         exists = true;
                         break;
                     }
-                    else if (record != null && recor[0].equals(userID) && recor[1].equals(itemName)) {   //if record different, then overwrite it
+                    else if (record != null && recor[0].equals(userID) && recor[1].equals(customer.orderID) && recor[2].equals(itemName)) {   //if record different, then overwrite it
                         table.set(i,order);
                         exists = true;
                         break;
@@ -332,6 +337,7 @@ public class orderConfirm extends javax.swing.JPanel {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error saving quantities.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        System.out.println();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

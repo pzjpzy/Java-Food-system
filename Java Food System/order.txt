@@ -1,8 +1,11 @@
 C1,O1,Pasta,1,dine in,29-12-24,1
-C1,O2,Hamburger,0,nothing,18-01-2025,0
+C1,O2,Pasta,2,nothing,18-01-2025,0
+C1,O2,Hamburger,3,nothing,18-01-2025,0
+C1,O2,Coke,4,nothing,18-01-2025,0
+C1,O3,Pasta,2,nothing,18-01-2025,0
+C1,O3,Hamburger,3,nothing,18-01-2025,0
 C1,O3,Coke,0,nothing,18-01-2025,0
+C1,O4,Pasta,0,nothing,18-01-2025,0
 C1,O4,Hamburger,0,nothing,18-01-2025,0
-C1,O5,Hamburger,0,nothing,18-01-2025,0
-C1,O6,Pasta,0,nothing,18-01-2025,0
-C1,O6,Hamburger,0,nothing,18-01-2025,0
-C1,O6,Coke,1,nothing,18-01-2025,0
+C1,O5,Pasta,0,Delivery,18-01-2025,0
+C1,O5,Hamburger,0,Delivery,18-01-2025,0
