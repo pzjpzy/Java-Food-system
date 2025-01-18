@@ -5,6 +5,7 @@
 package Customer;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.List;
 import java.awt.event.ActionEvent;
@@ -12,12 +13,16 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 /**
@@ -32,12 +37,20 @@ public class Menu extends javax.swing.JPanel {
     JFrame frame;
     String userID = "C1";
     protected ArrayList<ItemData> items = new ArrayList<>();
+    // Create a panel for the scrollable content
+    JPanel scrollp = new JPanel();
+    int highestNum = 0;
+        
     public Menu(JFrame frame, String vendorID, String vendorName) {
         initComponents();
         setBounds(0,0,1536,864);     //this line must exist in every JPanel
         this.frame = frame;  
         frame.setLayout(null);
         jLabel1.setText(vendorName + "'s Menu");
+        // Create a panel for the scrollable content
+        JPanel scrollp = new JPanel();
+        scrollp.setLayout(new BoxLayout(scrollp, BoxLayout.Y_AXIS));
+        
         try{
         FileReader fr = new FileReader("Menu.txt");
         BufferedReader br = new BufferedReader(fr);
@@ -54,7 +67,7 @@ public class Menu extends javax.swing.JPanel {
                 JPanel subban = new JPanel();
                 subban.setLayout(null);
                 subban.setBackground(new Color(92, 201, 205));
-                subban.setBounds(200, height, 1100, 140); // Position for panel
+                subban.setPreferredSize(new Dimension(1100, 140)); // Set preferred size
 
                 //items name
                 JLabel label = new JLabel("Item: " + values[1]);
@@ -79,7 +92,9 @@ public class Menu extends javax.swing.JPanel {
                 subban.add(quan);
                 subban.add(quantity);
 
-                frame.add(subban);
+                // Add sub-panel to the scrollable panel
+                scrollp.add(subban);
+                
                 frame.revalidate();
                 frame.repaint();
 
@@ -87,7 +102,24 @@ public class Menu extends javax.swing.JPanel {
             }
             
             
+            //generate new orderID
+            
+            
         }
+        
+        // Set the preferred size for the scrollable panel
+        scrollp.setPreferredSize(new Dimension(1100, scrollp.getComponentCount() * 160));
+
+        // Create a JScrollPane with the scrollable panel as its viewport
+        JScrollPane scrollPane = new JScrollPane(scrollp);
+        scrollPane.setBounds(200, 200, 1100, 550); // Set bounds for JScrollPane
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+        // Add the JScrollPane to the frame
+        frame.add(scrollPane);
+        frame.revalidate();
+        frame.repaint();
 
         br.close();
         fr.close();      
@@ -95,6 +127,41 @@ public class Menu extends javax.swing.JPanel {
         }catch(IOException e){
             System.out.println("error");
         }
+        
+        
+        //generate orderID
+
+        if (customer.orderID == null){
+            try {
+            //store every line in array
+            FileReader fr = new FileReader("Order.txt");
+            BufferedReader br  = new BufferedReader(fr);
+            String line = null;
+
+            int num = 0;
+            ArrayList<String> table = new ArrayList<>();
+            
+            while((line = br.readLine()) != null){
+                String values[] = line.split(",");
+                try{
+                    num = Integer.parseInt(values[1].substring(1));
+                }catch (ArrayIndexOutOfBoundsException e){
+                    num = 0;
+                }
+                
+                if (num > highestNum){
+                    highestNum = num;
+                }
+            }
+            } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error saving quantities.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+            
+            int newNum = highestNum + 1;
+            customer.orderID = "O" + newNum;
+            System.out.println("new order ID:" + customer.orderID);
+        }
+        
     }
 
     /**
@@ -230,12 +297,15 @@ public class Menu extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String order;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDateTime now = LocalDateTime.now();
+        String date = dtf.format(now);
+        
         try {
             //store every line in array
             FileReader fr = new FileReader("Order.txt");
             BufferedReader br  = new BufferedReader(fr);
             String line = null;
-            
             ArrayList<String> table = new ArrayList<>();
             
             while((line = br.readLine()) != null){
@@ -246,7 +316,6 @@ public class Menu extends javax.swing.JPanel {
             
 
 
-
 //            FileReader fr = new FileReader("Order.txt");
 //            BufferedReader br  = new BufferedReader(fr);
 
@@ -255,7 +324,8 @@ public class Menu extends javax.swing.JPanel {
             for (ItemData item : items) {
                 String itemName = item.getFoodName();
                 String quantity = item.getQuanField().getText();
-                order = userID + "," + itemName + "," + quantity;
+                //order line
+                order = userID + "," + customer.orderID + "," + itemName + "," + quantity + "," + "nothing" + "," + date + "," + "0";
                 
 
                 // Loop through existing orders to check if the record already exists
@@ -268,7 +338,7 @@ public class Menu extends javax.swing.JPanel {
                         exists = true;
                         break;
                     }
-                    else if (record != null && recor[0].equals(userID) && recor[1].equals(itemName)) {   //if record different, then overwrite it
+                    else if (record != null && recor[0].equals(userID) && recor[1].equals(customer.orderID) && recor[2].equals(itemName)) {   //if record different, then overwrite it
                         table.set(i,order);
                         exists = true;
                         break;

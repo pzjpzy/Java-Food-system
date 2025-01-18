@@ -5,6 +5,7 @@
 package Customer;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.List;
 import java.awt.event.ActionEvent;
@@ -13,11 +14,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 /**
@@ -37,8 +40,11 @@ public class orderConfirm extends javax.swing.JPanel {
         setBounds(0,0,1536,864);     //this line must exist in every JPanel
         this.frame = frame;  
         frame.setLayout(null);
+        // Create a panel for the scrollable content
+        JPanel scrollp = new JPanel();
+        scrollp.setLayout(new BoxLayout(scrollp, BoxLayout.Y_AXIS));
         try{
-        FileReader fr = new FileReader("Menu.txt");
+        FileReader fr = new FileReader("Order.txt");
         BufferedReader br = new BufferedReader(fr);
         //show all dishes
         String line = null;
@@ -53,7 +59,7 @@ public class orderConfirm extends javax.swing.JPanel {
                 JPanel subban = new JPanel();
                 subban.setLayout(null);
                 subban.setBackground(new Color(92, 201, 205));
-                subban.setBounds(200, height, 1100, 140); // Position for panel
+                subban.setPreferredSize(new Dimension(1100, 140)); // Set preferred size
 
                 //items name
                 JLabel label = new JLabel("Item: " + values[1]);
@@ -70,6 +76,7 @@ public class orderConfirm extends javax.swing.JPanel {
                 quantity.setBounds(880,20,100,100);
                 quantity.setFont(new Font("My Boli",Font.PLAIN,40));
                 quantity.setHorizontalAlignment(JTextField.CENTER);
+                quantity.setText(values[2]);
                 
                 items.add(new ItemData(values[1], quantity));
 
@@ -78,7 +85,9 @@ public class orderConfirm extends javax.swing.JPanel {
                 subban.add(quan);
                 subban.add(quantity);
 
-                frame.add(subban);
+                // Add sub-panel to the scrollable panel
+                scrollp.add(subban);
+                
                 frame.revalidate();
                 frame.repaint();
 
@@ -87,6 +96,19 @@ public class orderConfirm extends javax.swing.JPanel {
             
             
         }
+        // Set the preferred size for the scrollable panel
+        scrollp.setPreferredSize(new Dimension(1100, scrollp.getComponentCount() * 160));
+
+        // Create a JScrollPane with the scrollable panel as its viewport
+        JScrollPane scrollPane = new JScrollPane(scrollp);
+        scrollPane.setBounds(200, 200, 1100, 550); // Set bounds for JScrollPane
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+        // Add the JScrollPane to the frame
+        frame.add(scrollPane);
+        frame.revalidate();
+        frame.repaint();
 
         br.close();
         fr.close();      
@@ -111,6 +133,7 @@ public class orderConfirm extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(186, 208, 231));
         setMinimumSize(new java.awt.Dimension(1552, 837));
@@ -183,6 +206,13 @@ public class orderConfirm extends javax.swing.JPanel {
             }
         });
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dine in", "Take away", "Delivery"}));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -192,16 +222,20 @@ public class orderConfirm extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(17, 17, 17))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 456, Short.MAX_VALUE)
+                .addGap(65, 65, 65)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 347, Short.MAX_VALUE)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -304,12 +338,17 @@ public class orderConfirm extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

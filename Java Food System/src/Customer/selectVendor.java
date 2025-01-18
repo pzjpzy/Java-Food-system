@@ -5,15 +5,18 @@
 package Customer;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -27,81 +30,82 @@ public class selectVendor extends javax.swing.JPanel {
     JFrame frame;
     public selectVendor(JFrame frame) {
         initComponents();
-        setBounds(0,0,1536,864);     //this line must exist in every JPanel
-        this.frame = frame;  
+        setBounds(0, 0, 1536, 864); // This line must exist in every JPanel
+        this.frame = frame;
         frame.setLayout(null);
-        try{
-        FileReader fr = new FileReader("Vendor.txt");
-        BufferedReader br = new BufferedReader(fr);
-        //show all doctor
-        String line = null;
-        int height = 200;
-        
-        while((line = br.readLine())!= null){
- 
-            String values[] = line.split(",");
-            System.out.println(values[1]);
-            
-            // Create panel
-            JPanel subban = new JPanel();
-            subban.setLayout(null);
-            subban.setBackground(new Color(92, 201, 205));
-            subban.setBounds(200, height, 1100, 140); // Position for panel
 
-            //vendor name
-            JLabel label = new JLabel("Vendor: " + values[1]);
-            label.setFont(new Font("Arial", Font.BOLD, 50));
-            label.setBounds(50,40,600,50);
-            subban.add(label);
+        // Create a panel for the scrollable content
+        JPanel scrollp = new JPanel();
+        scrollp.setLayout(new BoxLayout(scrollp, BoxLayout.Y_AXIS));
 
-            //review button
-            JButton Review = new JButton(); //logout button
-            Review.setBounds(650,20,200,100);
-            Review.setFocusable(false);
-            Review.setText("Review");
-            Review.setFont(new Font("My Boli",Font.PLAIN,25));
-            Review.setFont(new Font("My Boli",Font.PLAIN,25));
-            Review.setBackground(new Color(209, 232, 238));
-            Review.addActionListener((ActionEvent e)->{
-//                frame.remove(this);
-//
-//                login panel = new login(frame);
-//                frame.add(panel);
-//                frame.revalidate();
-//                frame.repaint();
-            });
-            
-            //menu button
-            JButton menu = new JButton(); //logout button
-            menu.setBounds(880,20,200,100);
-            menu.setFocusable(false);
-            menu.setText("Menu");
-            menu.setFont(new Font("My Boli",Font.PLAIN,25));
-            menu.setBackground(new Color(209, 232, 238));
-            menu.addActionListener((ActionEvent e)->{
-                System.out.println("Menu button clicked!");
-                frame.getContentPane().removeAll();
-                Menu panel = new Menu(frame,values[0],values[1]);
-                frame.add(panel);
-                frame.revalidate();
-                frame.repaint();
-            });
-            
-            subban.add(Review);
-            subban.add(menu);
-            
-            frame.add(subban);
+        try {
+            FileReader fr = new FileReader("Vendor.txt");
+            BufferedReader br = new BufferedReader(fr);
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                System.out.println(values[1]);
+
+                // Create a sub-panel for each vendor
+                JPanel subban = new JPanel();
+                subban.setLayout(null);
+                subban.setBackground(new Color(92, 201, 205));
+                subban.setPreferredSize(new Dimension(1100, 140)); // Set preferred size
+
+                // Vendor name label
+                JLabel label = new JLabel("Vendor: " + values[1]);
+                label.setFont(new Font("Arial", Font.BOLD, 50));
+                label.setBounds(50, 40, 600, 50);
+                subban.add(label);
+
+                // Review button
+                JButton review = new JButton("Review");
+                review.setBounds(650, 20, 200, 100);
+                review.setFocusable(false);
+                review.setFont(new Font("My Boli", Font.PLAIN, 25));
+                review.setBackground(new Color(209, 232, 238));
+                subban.add(review);
+
+                // Menu button
+                JButton menu = new JButton("Menu");
+                menu.setBounds(880, 20, 200, 100);
+                menu.setFocusable(false);
+                menu.setFont(new Font("My Boli", Font.PLAIN, 25));
+                menu.setBackground(new Color(209, 232, 238));
+                menu.addActionListener((ActionEvent e) -> {
+                    System.out.println("Menu button clicked!");
+                    frame.getContentPane().removeAll();
+                    Menu panel = new Menu(frame, values[0], values[1]);
+                    frame.add(panel);
+                    frame.revalidate();
+                    frame.repaint();
+                });
+                subban.add(menu);
+
+                // Add sub-panel to the scrollable panel
+                scrollp.add(subban);
+            }
+
+            br.close();
+            fr.close();
+
+            // Set the preferred size for the scrollable panel
+            scrollp.setPreferredSize(new Dimension(1100, scrollp.getComponentCount() * 160));
+
+            // Create a JScrollPane with the scrollable panel as its viewport
+            JScrollPane scrollPane = new JScrollPane(scrollp);
+            scrollPane.setBounds(200, 200, 1100, 550); // Set bounds for JScrollPane
+            scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+            scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+            // Add the JScrollPane to the frame
+            frame.add(scrollPane);
             frame.revalidate();
             frame.repaint();
-            
-            height += 200; // Increment the height for the next panel
-        }
 
-        br.close();
-        fr.close();      
-        
-        }catch(IOException e){
-            System.out.println("error");
+        } catch (IOException e) {
+            System.out.println("Error reading vendor file: " + e.getMessage());
         }
     }
 
