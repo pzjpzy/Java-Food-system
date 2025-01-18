@@ -29,7 +29,7 @@ import javax.swing.JTextField;
  *
  * @author pangz
  */
-public class Menu extends javax.swing.JPanel {
+public class orderConfirm extends javax.swing.JPanel {
 
     /**
      * Creates new form selectVendor
@@ -37,22 +37,16 @@ public class Menu extends javax.swing.JPanel {
     JFrame frame;
     String userID = "C1";
     protected ArrayList<ItemData> items = new ArrayList<>();
-    // Create a panel for the scrollable content
-    JPanel scrollp = new JPanel();
-    int highestNum = 0;
-        
-    public Menu(JFrame frame, String vendorID, String vendorName) {
+    public orderConfirm(JFrame frame, String userID) {
         initComponents();
         setBounds(0,0,1536,864);     //this line must exist in every JPanel
         this.frame = frame;  
         frame.setLayout(null);
-        jLabel1.setText(vendorName + "'s Menu");
         // Create a panel for the scrollable content
         JPanel scrollp = new JPanel();
         scrollp.setLayout(new BoxLayout(scrollp, BoxLayout.Y_AXIS));
-        
         try{
-        FileReader fr = new FileReader("Menu.txt");
+        FileReader fr = new FileReader("Order.txt");
         BufferedReader br = new BufferedReader(fr);
         //show all dishes
         String line = null;
@@ -62,7 +56,7 @@ public class Menu extends javax.swing.JPanel {
  
             String values[] = line.split(",");
             
-            if(values[0].equals(vendorID)){
+            if(values[1].equals(customer.orderID)){
                 // Create panel
                 JPanel subban = new JPanel();
                 subban.setLayout(null);
@@ -70,7 +64,7 @@ public class Menu extends javax.swing.JPanel {
                 subban.setPreferredSize(new Dimension(1100, 140)); // Set preferred size
 
                 //items name
-                JLabel label = new JLabel("Item: " + values[1]);
+                JLabel label = new JLabel("Item: " + values[2]);
                 label.setFont(new Font("Arial", Font.BOLD, 50));
                 label.setBounds(50,40,600,70);
                 
@@ -84,8 +78,9 @@ public class Menu extends javax.swing.JPanel {
                 quantity.setBounds(880,20,100,100);
                 quantity.setFont(new Font("My Boli",Font.PLAIN,40));
                 quantity.setHorizontalAlignment(JTextField.CENTER);
+                quantity.setText(values[3]);
                 
-                items.add(new ItemData(values[1], quantity));
+                items.add(new ItemData(values[2], quantity));
 
 
                 subban.add(label);
@@ -102,11 +97,7 @@ public class Menu extends javax.swing.JPanel {
             }
             
             
-            //generate new orderID
-            
-            
         }
-        
         // Set the preferred size for the scrollable panel
         scrollp.setPreferredSize(new Dimension(1100, scrollp.getComponentCount() * 160));
 
@@ -127,41 +118,6 @@ public class Menu extends javax.swing.JPanel {
         }catch(IOException e){
             System.out.println("error");
         }
-        
-        
-        //generate orderID
-
-        if (customer.orderID == null){
-            try {
-            //store every line in array
-            FileReader fr = new FileReader("Order.txt");
-            BufferedReader br  = new BufferedReader(fr);
-            String line = null;
-
-            int num = 0;
-            ArrayList<String> table = new ArrayList<>();
-            
-            while((line = br.readLine()) != null){
-                String values[] = line.split(",");
-                try{
-                    num = Integer.parseInt(values[1].substring(1));
-                }catch (ArrayIndexOutOfBoundsException e){
-                    num = 0;
-                }
-                
-                if (num > highestNum){
-                    highestNum = num;
-                }
-            }
-            } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Error saving quantities.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-            
-            int newNum = highestNum + 1;
-            customer.orderID = "O" + newNum;
-            System.out.println("new order ID:" + customer.orderID);
-        }
-        
     }
 
     /**
@@ -179,6 +135,7 @@ public class Menu extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(186, 208, 231));
         setMinimumSize(new java.awt.Dimension(1552, 837));
@@ -197,7 +154,7 @@ public class Menu extends javax.swing.JPanel {
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        jLabel1.setText("Menu");
+        jLabel1.setText("Order");
         jLabel1.setFocusable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -251,6 +208,13 @@ public class Menu extends javax.swing.JPanel {
             }
         });
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dine in", "Take away", "Delivery"}));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -260,16 +224,20 @@ public class Menu extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(17, 17, 17))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 456, Short.MAX_VALUE)
+                .addGap(65, 65, 65)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 347, Short.MAX_VALUE)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -325,7 +293,7 @@ public class Menu extends javax.swing.JPanel {
                 String itemName = item.getFoodName();
                 String quantity = item.getQuanField().getText();
                 //order line
-                order = userID + "," + customer.orderID + "," + itemName + "," + quantity + "," + "nothing" + "," + date + "," + "0";
+                order = userID + "," + customer.orderID + "," + itemName + "," + quantity + "," + jComboBox1.getSelectedItem() + "," + date + "," + "0";
                 
 
                 // Loop through existing orders to check if the record already exists
@@ -369,15 +337,16 @@ public class Menu extends javax.swing.JPanel {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error saving quantities.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        System.out.println();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        frame.getContentPane().removeAll();
-        orderConfirm panel = new orderConfirm(frame,userID);   //the panel you want to switch to
-        frame.add(panel);
-        frame.revalidate();
-        frame.repaint();
+        
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -385,6 +354,7 @@ public class Menu extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
