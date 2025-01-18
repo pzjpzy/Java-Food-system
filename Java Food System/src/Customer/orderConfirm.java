@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.List;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -24,6 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 
 /**
  *
@@ -36,12 +38,15 @@ public class orderConfirm extends javax.swing.JPanel {
      */
     JFrame frame;
     String userID = "C1";
+    double total = 0;
     protected ArrayList<ItemData> items = new ArrayList<>();
     public orderConfirm(JFrame frame, String userID) {
         initComponents();
         setBounds(0,0,1536,864);     //this line must exist in every JPanel
         this.frame = frame;  
         frame.setLayout(null);
+        
+        jLabel3.setText("RM" + String.format("%.2f", total));
         // Create a panel for the scrollable content
         JPanel scrollp = new JPanel();
         scrollp.setLayout(new BoxLayout(scrollp, BoxLayout.Y_AXIS));
@@ -118,6 +123,66 @@ public class orderConfirm extends javax.swing.JPanel {
         }catch(IOException e){
             System.out.println("error");
         }
+        
+        // Add ActionListener to JComboBox
+        jComboBox1.addActionListener(new ActionListener() {
+            String previousOption = "";
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Get selected item
+                String selectedOption = (String) jComboBox1.getSelectedItem();
+                System.out.println("You selected: " + selectedOption);
+                // Trigger custom action
+                if ("Delivery".equals(selectedOption)) {
+                    JOptionPane.showMessageDialog(frame, "Will add RM10 as delivery charge");
+                    total += 10;
+                    jLabel3.setText("RM" + String.format("%.2f", total));
+                } else {
+                    if ("Delivery".equals(previousOption) && !"Delivery".equals(selectedOption)){
+                        total -= 10;
+                        jLabel3.setText("RM" + String.format("%.2f", total));
+                    }
+                }
+                previousOption = selectedOption;
+            }
+        });
+        
+        //refresh total price
+        String line = null;
+        for (ItemData item : items) {
+            String itemName = item.getFoodName();
+            String quantity = item.getQuanField().getText();
+            //total price counting
+            try {
+            FileReader fr2 = new FileReader("Menu.txt");
+            BufferedReader br2  = new BufferedReader(fr2);
+            while((line = br2.readLine()) != null){
+                String menu[] = line.split(",");
+                if (menu[1].equals(itemName)){
+                    total += Double.parseDouble(menu[2]) * Double.parseDouble(quantity);
+                    //update total
+                    jLabel3.setText("RM" + String.format("%.2f", total));
+                }
+            }
+            fr2.close();
+            br2.close();
+            }catch (IOException e) {
+                System.out.println("Error in updating total");
+            }
+        }
+        
+        // Timer to check the total value every second
+        Timer timer = new Timer(50, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (total > 10) {
+                    jButton4.setEnabled(true);
+                } else {
+                    jButton4.setEnabled(false);
+                }
+            }
+        });
+        timer.start(); // Start the timer
     }
 
     /**
@@ -136,6 +201,8 @@ public class orderConfirm extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(186, 208, 231));
         setMinimumSize(new java.awt.Dimension(1552, 837));
@@ -215,6 +282,12 @@ public class orderConfirm extends javax.swing.JPanel {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        jLabel2.setText("Total:");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        jLabel3.setText("RM here");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -225,11 +298,14 @@ public class orderConfirm extends javax.swing.JPanel {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(17, 17, 17))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(17, 17, 17))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,7 +313,11 @@ public class orderConfirm extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 347, Short.MAX_VALUE)
+                .addGap(72, 72, 72)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -264,6 +344,7 @@ public class orderConfirm extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        total = 0;
         String order;
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDateTime now = LocalDateTime.now();
@@ -288,7 +369,7 @@ public class orderConfirm extends javax.swing.JPanel {
 //            BufferedReader br  = new BufferedReader(fr);
 
             
-            //loop through each item
+            //loop through each item for file writing
             for (ItemData item : items) {
                 String itemName = item.getFoodName();
                 String quantity = item.getQuanField().getText();
@@ -316,7 +397,23 @@ public class orderConfirm extends javax.swing.JPanel {
                 if (!exists){
                     table.add(order);
                 }
+                
+                //total price counting
+                FileReader fr2 = new FileReader("Menu.txt");
+                BufferedReader br2  = new BufferedReader(fr2);
+                while((line = br2.readLine()) != null){
+                    String menu[] = line.split(",");
+                    if (menu[1].equals(itemName)){
+                        total += Double.parseDouble(menu[2]) * Double.parseDouble(quantity);
+                        jLabel3.setText("RM" + String.format("%.2f", total));
+                    }
+                }
+                fr2.close();
+                br2.close();
+                
             }
+            
+
             
             //write every line into file
             FileWriter fw = new FileWriter("Order.txt");
@@ -337,7 +434,13 @@ public class orderConfirm extends javax.swing.JPanel {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error saving quantities.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        System.out.println();
+        
+        //update total
+        if (jComboBox1.getSelectedItem().equals("Delivery")){
+            total += 10;
+            jLabel3.setText("RM" + String.format("%.2f", total));
+        }
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -356,6 +459,8 @@ public class orderConfirm extends javax.swing.JPanel {
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
