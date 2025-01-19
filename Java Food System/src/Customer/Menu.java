@@ -380,7 +380,7 @@ public class Menu extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         frame.getContentPane().removeAll();
-        orderConfirm panel = new orderConfirm(frame,userID);   //the panel you want to switch to
+        orderConfirm panel = new orderConfirm(frame,customer.orderID, false);   //the panel you want to switch to
         frame.add(panel);
         frame.revalidate();
         frame.repaint();

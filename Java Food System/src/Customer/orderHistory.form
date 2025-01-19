@@ -100,7 +100,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="48" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Select Vendor"/>
+            <Property name="text" type="java.lang.String" value="Order history"/>
           </Properties>
         </Component>
       </SubComponents>

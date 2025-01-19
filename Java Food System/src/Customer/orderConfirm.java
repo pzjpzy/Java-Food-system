@@ -40,7 +40,8 @@ public class orderConfirm extends javax.swing.JPanel {
     String userID = customer.userID;
     double total = 0;
     protected ArrayList<ItemData> items = new ArrayList<>();
-    public orderConfirm(JFrame frame, String userID) {
+    
+    public orderConfirm(JFrame frame, String orderID, boolean reorder) {
         initComponents();
         setBounds(0,0,1536,864);     //this line must exist in every JPanel
         this.frame = frame;  
@@ -61,7 +62,7 @@ public class orderConfirm extends javax.swing.JPanel {
  
             String values[] = line.split(",");
             
-            if(values[1].equals(customer.orderID)){
+            if(values[1].equals(orderID)){
                 // Create panel
                 JPanel subban = new JPanel();
                 subban.setLayout(null);
@@ -199,6 +200,40 @@ public class orderConfirm extends javax.swing.JPanel {
             }
         });
         timer.start(); // Start the timer
+        
+        
+        //reorder part
+        if (reorder){
+            try {
+                int highestNum = 0;
+                //store every line in array
+                FileReader fr = new FileReader("Order.txt");
+                BufferedReader br  = new BufferedReader(fr);
+
+                int num = 0;
+                ArrayList<String> table = new ArrayList<>();
+
+                while((line = br.readLine()) != null){
+                    String values[] = line.split(",");
+                    try{
+                        num = Integer.parseInt(values[1].substring(1));
+                    }catch (ArrayIndexOutOfBoundsException e){
+                        num = 0;
+                    }
+
+                    if (num > highestNum){
+                        highestNum = num;
+                    }
+                }
+                int newNum = highestNum + 1;
+                customer.orderID = "O" + newNum;
+                System.out.println("new order ID:" + customer.orderID);
+                } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Error saving quantities.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+                
+            }
     }
 
     /**
