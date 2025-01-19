@@ -11,10 +11,12 @@ import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -22,68 +24,113 @@ import javax.swing.JScrollPane;
  *
  * @author pangz
  */
-public class selectVendor extends javax.swing.JPanel {
+public class orderHistory extends javax.swing.JPanel {
 
 
     JFrame frame;
-    public selectVendor(JFrame frame) {
+    public orderHistory(JFrame frame) {
         initComponents();
         setBounds(0, 0, 1536, 864); // This line must exist in every JPanel
         this.frame = frame;
         frame.setLayout(null);
+        int highestNum = 0;
+        
+        //get highes orderNum
+        try {
+            //store every line in array
+            FileReader fr = new FileReader("Order.txt");
+            BufferedReader br  = new BufferedReader(fr);
+            String line = null;
 
+            int num = 0;
+            ArrayList<String> table = new ArrayList<>();
+            
+            while((line = br.readLine()) != null){
+                String values[] = line.split(",");
+                try{
+                    num = Integer.parseInt(values[1].substring(1));
+                }catch (ArrayIndexOutOfBoundsException e){
+                    num = 0;
+                }
+                
+                if (num > highestNum){
+                    highestNum = num;
+                }
+            }
+            } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error saving quantities.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+            System.out.println(highestNum);
+
+            
+            
         // Create a panel for the scrollable content
         JPanel scrollp = new JPanel();
         scrollp.setLayout(new BoxLayout(scrollp, BoxLayout.Y_AXIS));
+        String orderID;
 
         try {
-            FileReader fr = new FileReader("Vendor.txt");
+            FileReader fr = new FileReader("Order.txt");
             BufferedReader br = new BufferedReader(fr);
 
             String line;
-            while ((line = br.readLine()) != null) {
-                String[] values = line.split(",");
-                System.out.println(values[1]);
+            
+            for(int i=1; i <= highestNum; i++){
+                orderID = "O" + String.valueOf(i);
 
-                // Create a sub-panel for each vendor
-                JPanel subban = new JPanel();
-                subban.setLayout(null);
-                subban.setBackground(new Color(92, 201, 205));
-                subban.setPreferredSize(new Dimension(1100, 140)); // Set preferred size
+                while ((line = br.readLine()) != null) {
+                    String[] values = line.split(",");
 
-                // Vendor name label
-                JLabel label = new JLabel("Vendor: " + values[1]);
-                label.setFont(new Font("Arial", Font.BOLD, 50));
-                label.setBounds(50, 40, 600, 50);
-                subban.add(label);
+                    if(values[0].equals(customer.userID) && values[1].equalsIgnoreCase(orderID)){
+                        // Create a sub-panel for each vendor
+                        JPanel subban = new JPanel();
+                        subban.setLayout(null);
+                        subban.setBackground(new Color(92, 201, 205));
+                        subban.setPreferredSize(new Dimension(1100, 140)); // Set preferred size
 
-                // Review button
-                JButton review = new JButton("Review");
-                review.setBounds(650, 20, 200, 100);
-                review.setFocusable(false);
-                review.setFont(new Font("My Boli", Font.PLAIN, 25));
-                review.setBackground(new Color(209, 232, 238));
-                subban.add(review);
+                        // Date label
+                        JLabel label = new JLabel("Date: " + values[5]);
+                        label.setFont(new Font("Arial", Font.BOLD, 40));
+                        label.setBounds(10, 40, 400, 50);
+                        subban.add(label);
+                        
+                        // Status label
+                        JLabel label2 = new JLabel("Status: " + customer.getOrderStatus(values[1]));
+                        label2.setFont(new Font("Arial", Font.BOLD, 30));
+                        label2.setBounds(350, 40, 300, 50);
+                        subban.add(label2);
 
-                // Menu button
-                JButton menu = new JButton("Menu");
-                menu.setBounds(880, 20, 200, 100);
-                menu.setFocusable(false);
-                menu.setFont(new Font("My Boli", Font.PLAIN, 25));
-                menu.setBackground(new Color(209, 232, 238));
-                menu.addActionListener((ActionEvent e) -> {
-                    System.out.println("Menu button clicked!");
-                    frame.getContentPane().removeAll();
-                    Menu panel = new Menu(frame, values[0], values[1]);
-                    frame.add(panel);
-                    frame.revalidate();
-                    frame.repaint();
-                });
-                subban.add(menu);
+                        // Review button
+                        JButton review = new JButton("Review");
+                        review.setBounds(650, 20, 200, 100);
+                        review.setFocusable(false);
+                        review.setFont(new Font("My Boli", Font.PLAIN, 25));
+                        review.setBackground(new Color(209, 232, 238));
+                        subban.add(review);
 
-                // Add sub-panel to the scrollable panel
-                scrollp.add(subban);
+                        // Details button
+                        JButton Details = new JButton("Details");
+                        Details.setBounds(880, 20, 200, 100);
+                        Details.setFocusable(false);
+                        Details.setFont(new Font("My Boli", Font.PLAIN, 25));
+                        Details.setBackground(new Color(209, 232, 238));
+                        Details.addActionListener((ActionEvent e) -> {
+                            frame.getContentPane().removeAll();
+                            orderStatus panel = new orderStatus(frame, values[1]);
+                            frame.add(panel);
+                            frame.revalidate();
+                            frame.repaint();
+                        });
+                        subban.add(Details);
+
+                        // Add sub-panel to the scrollable panel
+                        scrollp.add(subban);
+                        
+                        break;
+                    }
+                }
             }
+            
 
             br.close();
             fr.close();
@@ -138,7 +185,7 @@ public class selectVendor extends javax.swing.JPanel {
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        jLabel1.setText("Select Vendor");
+        jLabel1.setText("Order history");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

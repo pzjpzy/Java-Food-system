@@ -2,19 +2,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package Delivery_runner;
+package DeliveryRunner;
+import javax.swing.JFrame;
 
 /**
  *
  * @author Nour
  */
-public class DeliveryRunnerHome extends javax.swing.JPanel {
+public class DRHome extends javax.swing.JPanel {
 
     /**
-     * Creates new form DeliveryRunnerHome
+     * Creates new form DRHome
      */
-    public DeliveryRunnerHome() {
+    JFrame frame;
+    public DRHome(JFrame frame) {
         initComponents();
+        setBounds(0,0,1535,864);
+        this.frame = frame;
+        setVisible(true);
+        
+        frame.setLayout(null);
     }
 
     /**

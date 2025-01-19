@@ -24,7 +24,6 @@ public class SignUp extends javax.swing.JPanel {
     JFrame frame;
     private javax.swing.JTextField usernameTextField;
     private javax.swing.JPasswordField passwordField;
-    private javax.swing.JComboBox<String> roleComboBox;
     private javax.swing.JTextField idTextField;
     private javax.swing.JPanel loginPanel;
     private javax.swing.JPanel signupPanel;
@@ -52,6 +51,9 @@ public class SignUp extends javax.swing.JPanel {
         jPasswordField1 = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jLabel6 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -86,28 +88,55 @@ public class SignUp extends javax.swing.JPanel {
             }
         });
 
+        jCheckBox1.setText("Show Password");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(178, 171, 179));
+        jLabel6.setText("Role:");
+
+        jComboBox2.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jComboBox2.setForeground(new java.awt.Color(178, 171, 179));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Customer", "Vendor", "Delivery Runner" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(115, 115, 115)
+                        .addGap(473, 473, 473)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(407, 407, 407)
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(588, 588, 588)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(522, 522, 522)
-                        .addComponent(jLabel3)))
-                .addContainerGap(499, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBox1)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTextField1)
+                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(578, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,11 +149,17 @@ public class SignUp extends javax.swing.JPanel {
                     .addComponent(jLabel4))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(33, 33, 33)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(361, Short.MAX_VALUE))
+                    .addComponent(jLabel5)
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(287, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(178, 171, 179));
@@ -202,64 +237,109 @@ public class SignUp extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try {
-    BufferedReader reader = new BufferedReader(new FileReader("users.txt"));
-    String line;
-    boolean isIdTaken = false;
+            try {
+        // Read existing users
+        BufferedReader reader = new BufferedReader(new FileReader("users.txt"));
+        String line;
+        boolean isUsernameTaken = false;
 
-    String newUsername = usernameTextField.getText();
-    String newPassword = new String(passwordField.getPassword());
-    String role = roleComboBox.getSelectedItem().toString(); // role
-    String id = idTextField.getText();
+        // Get user input
+        String newUsername = jTextField1.getText();
+        String newPassword = new String(jPasswordField1.getPassword());
+        String role = jComboBox2.getSelectedItem().toString(); // Selected role from jComboBox2
+        String generatedId = "";
 
-    if (newUsername.isEmpty() || newPassword.isEmpty() || role.isEmpty() || id.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Please fill all fields", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
+        if (newUsername.isEmpty() || newPassword.isEmpty() || role.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please fill all fields", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-    while ((line = reader.readLine()) != null) {
-        String[] parts = line.split(", ");
-        if (parts.length >= 4) { // Ensure the line has enough parts
-            String existingId = parts[3];
-            if (id.equals(existingId)) {
-                isIdTaken = true;
-                break;
+        // Initialize variables for ID generation
+        int highestId = 0; // Track the highest ID for the selected role
+        while ((line = reader.readLine()) != null) {
+            String[] parts = line.split(", ");
+            if (parts.length >= 4) { // Ensure the line has enough parts
+                String existingUsername = parts[0];
+                String existingRole = parts[2];
+                String existingId = parts[3];
+
+                // Check if the username is already taken
+                if (newUsername.equals(existingUsername)) {
+                    isUsernameTaken = true;
+                    break;
+                }
+
+                // Extract the numeric part of the ID and compare for the selected role
+                if (role.equals(existingRole)) {
+                    try {
+                        int currentId = Integer.parseInt(existingId.substring(1)); // Extract numeric part of the ID
+                        if (currentId > highestId) {
+                            highestId = currentId;
+                        }
+                    } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
+                        // Handle invalid ID format
+                        highestId = 0;
+                    }
+                }
             }
         }
+        reader.close();
+
+        if (isUsernameTaken) {
+            JOptionPane.showMessageDialog(null, "Username already exists. Please choose a different username.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Generate new ID
+        generatedId = role.substring(0, 1).toUpperCase() + (highestId + 1);
+
+        // Save the new user to the file
+        BufferedWriter writer = new BufferedWriter(new FileWriter("users.txt", true));
+        writer.write(newUsername + ", " + newPassword + ", " + role + ", " + generatedId);
+        writer.newLine();
+        writer.close();
+
+        JOptionPane.showMessageDialog(null, "Sign-Up successful! Your new ID is " + generatedId + ". You can now log in.");
+
+        // Clear input fields
+        jTextField1.setText("");
+        jPasswordField1.setText("");
+        jComboBox2.setSelectedIndex(0); // Reset ComboBox selection
+
+        // Switch panels
+        jPanel1.setVisible(false); // Hide the sign-up panel
+        jPanel2.setVisible(true);  // Show the login panel
+
+    } catch (IOException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error accessing the file", "Error", JOptionPane.ERROR_MESSAGE);
     }
-    reader.close();
-
-    if (isIdTaken) {
-        JOptionPane.showMessageDialog(null, "ID already exists. Please enter a unique ID.", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    BufferedWriter writer = new BufferedWriter(new FileWriter("users.txt", true));
-    writer.write(newUsername + ", " + newPassword + ", " + role + ", " + id);
-    writer.newLine();
-    writer.close();
-
-    JOptionPane.showMessageDialog(null, "Sign-Up successful! You can now log in.");
-    
-    loginPanel.setVisible(true);
-    signupPanel.setVisible(false);
-
-} catch (IOException e) {
-    e.printStackTrace();
-    JOptionPane.showMessageDialog(null, "Error accessing the file", "Error", JOptionPane.ERROR_MESSAGE);
-}
-
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+         if (jCheckBox1.isSelected()) {
+        jPasswordField1.setEchoChar((char) 0);
+    } else {
+        jPasswordField1.setEchoChar('•');
+    }
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jPasswordField1;
