@@ -24,7 +24,6 @@ public class SignUp extends javax.swing.JPanel {
     JFrame frame;
     private javax.swing.JTextField usernameTextField;
     private javax.swing.JPasswordField passwordField;
-    private javax.swing.JComboBox<String> roleComboBox;
     private javax.swing.JTextField idTextField;
     private javax.swing.JPanel loginPanel;
     private javax.swing.JPanel signupPanel;
@@ -247,7 +246,7 @@ public class SignUp extends javax.swing.JPanel {
         // Get user input
         String newUsername = jTextField1.getText();
         String newPassword = new String(jPasswordField1.getPassword());
-        String role = roleComboBox.getSelectedItem().toString(); // Selected role
+        String role = jComboBox2.getSelectedItem().toString(); // Selected role from jComboBox2
         String generatedId = "";
 
         if (newUsername.isEmpty() || newPassword.isEmpty() || role.isEmpty()) {
@@ -305,7 +304,7 @@ public class SignUp extends javax.swing.JPanel {
         // Clear input fields
         jTextField1.setText("");
         jPasswordField1.setText("");
-        roleComboBox.setSelectedIndex(0); // Reset ComboBox selection
+        jComboBox2.setSelectedIndex(0); // Reset ComboBox selection
 
         // Switch panels
         jPanel1.setVisible(false); // Hide the sign-up panel
