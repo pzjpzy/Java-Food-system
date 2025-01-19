@@ -34,9 +34,7 @@ import javax.swing.Timer;
  */
 public class orderStatus extends javax.swing.JPanel {
 
-    /**
-     * Creates new form selectVendor
-     */
+
     JFrame frame;
     String userID = customer.userID;
     String orderID = "O36";

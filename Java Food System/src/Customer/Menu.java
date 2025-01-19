@@ -31,9 +31,7 @@ import javax.swing.JTextField;
  */
 public class Menu extends javax.swing.JPanel {
 
-    /**
-     * Creates new form selectVendor
-     */
+
     JFrame frame;
     String userID = customer.userID;
     protected ArrayList<ItemData> items = new ArrayList<>();

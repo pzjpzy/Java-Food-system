@@ -71,3 +71,6 @@ C1,O36,Pasta,3,Delivery,18-01-2025,4
 C1,O36,Hamburger,2,Delivery,18-01-2025,4
 C2,O37,Pasta,3,Delivery,18-01-2025,4
 C1,O38,Pasta,1,Dine in,19-01-2025,1
+C1,O39,Pasta,3,Delivery,19-01-2025,1
+C1,O39,Hamburger,4,Delivery,19-01-2025,1
+C1,O39,Coke,5,Delivery,19-01-2025,1

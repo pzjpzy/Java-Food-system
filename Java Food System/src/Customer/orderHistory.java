@@ -26,9 +26,7 @@ import javax.swing.JScrollPane;
  */
 public class orderHistory extends javax.swing.JPanel {
 
-    /**
-     * Creates new form selectVendor
-     */
+
     JFrame frame;
     public orderHistory(JFrame frame) {
         initComponents();

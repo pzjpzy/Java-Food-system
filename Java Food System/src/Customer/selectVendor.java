@@ -24,9 +24,7 @@ import javax.swing.JScrollPane;
  */
 public class selectVendor extends javax.swing.JPanel {
 
-    /**
-     * Creates new form selectVendor
-     */
+
     JFrame frame;
     public selectVendor(JFrame frame) {
         initComponents();

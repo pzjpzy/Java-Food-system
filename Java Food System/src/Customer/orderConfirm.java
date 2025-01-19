@@ -33,9 +33,7 @@ import javax.swing.Timer;
  */
 public class orderConfirm extends javax.swing.JPanel {
 
-    /**
-     * Creates new form selectVendor
-     */
+
     JFrame frame;
     String userID = customer.userID;
     double total = 0;
