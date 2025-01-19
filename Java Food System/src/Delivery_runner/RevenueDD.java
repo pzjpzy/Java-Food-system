@@ -6,6 +6,10 @@ package Delivery_runner;
 
 import javax.swing.JFrame;
 import Customer.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 /**
  *
@@ -21,6 +25,24 @@ public class RevenueDD extends javax.swing.JPanel {
         initComponents();
         this.frame = frame;
         setBounds(0,0,1536,864);
+        
+        FileReader fr;
+        try {
+            fr = new FileReader("medicalrecord.txt");
+            BufferedReader br  = new BufferedReader(fr);
+            String line = null;
+            while((line = br.readLine()) != null){
+                String values[] = line.split(",");
+                String datarow[] = {values[2],values[3],values[5],values[7]};
+                
+
+                
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println("file not found");
+        } catch (IOException e){
+            System.out.println("error occured");
+        }
     }
 
 
