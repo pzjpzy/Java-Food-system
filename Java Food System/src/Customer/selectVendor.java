@@ -37,52 +37,55 @@ public class selectVendor extends javax.swing.JPanel {
         scrollp.setLayout(new BoxLayout(scrollp, BoxLayout.Y_AXIS));
 
         try {
-            FileReader fr = new FileReader("Vendor.txt");
+            FileReader fr = new FileReader("users.txt");
             BufferedReader br = new BufferedReader(fr);
 
             String line;
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
-                System.out.println(values[1]);
+                System.out.println(values[0]);
+                
+                if (values[2].trim().equals("Vendor")){
+                    // Create a sub-panel for each vendor
+                    JPanel subban = new JPanel();
+                    subban.setLayout(null);
+                    subban.setBackground(new Color(92, 201, 205));
+                    subban.setPreferredSize(new Dimension(1100, 140)); // Set preferred size
 
-                // Create a sub-panel for each vendor
-                JPanel subban = new JPanel();
-                subban.setLayout(null);
-                subban.setBackground(new Color(92, 201, 205));
-                subban.setPreferredSize(new Dimension(1100, 140)); // Set preferred size
+                    // Vendor name label
+                    JLabel label = new JLabel("Vendor: " + values[0]);
+                    label.setFont(new Font("Arial", Font.BOLD, 50));
+                    label.setBounds(50, 40, 600, 50);
+                    subban.add(label);
 
-                // Vendor name label
-                JLabel label = new JLabel("Vendor: " + values[1]);
-                label.setFont(new Font("Arial", Font.BOLD, 50));
-                label.setBounds(50, 40, 600, 50);
-                subban.add(label);
+                    // Review button
+                    JButton review = new JButton("Review");
+                    review.setBounds(650, 20, 200, 100);
+                    review.setFocusable(false);
+                    review.setFont(new Font("My Boli", Font.PLAIN, 25));
+                    review.setBackground(new Color(209, 232, 238));
+                    subban.add(review);
 
-                // Review button
-                JButton review = new JButton("Review");
-                review.setBounds(650, 20, 200, 100);
-                review.setFocusable(false);
-                review.setFont(new Font("My Boli", Font.PLAIN, 25));
-                review.setBackground(new Color(209, 232, 238));
-                subban.add(review);
+                    // Menu button
+                    JButton menu = new JButton("Menu");
+                    menu.setBounds(880, 20, 200, 100);
+                    menu.setFocusable(false);
+                    menu.setFont(new Font("My Boli", Font.PLAIN, 25));
+                    menu.setBackground(new Color(209, 232, 238));
+                    menu.addActionListener((ActionEvent e) -> {
+                        System.out.println("Menu button clicked!");
+                        frame.getContentPane().removeAll();
+                        Menu panel = new Menu(frame, values[3].trim(), values[0].trim());
+                        frame.add(panel);
+                        frame.revalidate();
+                        frame.repaint();
+                    });
+                    subban.add(menu);
 
-                // Menu button
-                JButton menu = new JButton("Menu");
-                menu.setBounds(880, 20, 200, 100);
-                menu.setFocusable(false);
-                menu.setFont(new Font("My Boli", Font.PLAIN, 25));
-                menu.setBackground(new Color(209, 232, 238));
-                menu.addActionListener((ActionEvent e) -> {
-                    System.out.println("Menu button clicked!");
-                    frame.getContentPane().removeAll();
-                    Menu panel = new Menu(frame, values[0], values[1]);
-                    frame.add(panel);
-                    frame.revalidate();
-                    frame.repaint();
-                });
-                subban.add(menu);
-
-                // Add sub-panel to the scrollable panel
-                scrollp.add(subban);
+                    // Add sub-panel to the scrollable panel
+                    scrollp.add(subban);
+                }
+                
             }
 
             br.close();

@@ -100,7 +100,7 @@ public class orderConfirm extends javax.swing.JPanel {
                 quantity.setHorizontalAlignment(JTextField.CENTER);
                 quantity.setText(values[3]);
                 
-                items.add(new ItemData(values[2], quantity));
+                items.add(new ItemData(values[2], quantity,values[7]));
 
                 
                 subban.add(label);
@@ -422,8 +422,9 @@ public class orderConfirm extends javax.swing.JPanel {
             for (ItemData item : items) {
                 String itemName = item.getFoodName();
                 String quantity = item.getQuanField().getText();
+                String orderID = item.getVendorID();
                 //order line
-                order = userID + "," + customer.orderID + "," + itemName + "," + quantity + "," + jComboBox1.getSelectedItem() + "," + date + "," + "0";
+                order = userID + "," + customer.orderID + "," + itemName + "," + quantity + "," + jComboBox1.getSelectedItem() + "," + date + "," + "0" + "," + orderID;
                 
 
                 // Loop through existing orders to check if the record already exists
@@ -515,8 +516,9 @@ public class orderConfirm extends javax.swing.JPanel {
             for (ItemData item : items) {
                 String itemName = item.getFoodName();
                 String quantity = item.getQuanField().getText();
+                String orderID = item.getVendorID();
                 //order line
-                order = userID + "," + customer.orderID + "," + itemName + "," + quantity + "," + jComboBox1.getSelectedItem() + "," + date + "," + "1";
+                order = userID + "," + customer.orderID + "," + itemName + "," + quantity + "," + jComboBox1.getSelectedItem() + "," + date + "," + "1" + "," + orderID;
                 
 
                 // Loop through existing orders to check if the record already exists
@@ -565,11 +567,13 @@ public class orderConfirm extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private static class ItemData {
-        String foodName;
-        JTextField quanField;
-        public ItemData(String foodName, JTextField quanField) {
+        private String foodName;
+        private JTextField quanField;
+        private String vendorID;
+        public ItemData(String foodName, JTextField quanField, String vendorID) {
             this.foodName = foodName;
             this.quanField = quanField;
+            this.vendorID = vendorID;
         }
         
         public String getFoodName() {
@@ -579,5 +583,10 @@ public class orderConfirm extends javax.swing.JPanel {
         public JTextField getQuanField() {
             return quanField;
         }
+        
+        public String getVendorID() {
+            return vendorID;
+        }
     }
+    
 }
