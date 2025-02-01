@@ -106,6 +106,7 @@ public class orderStatus extends javax.swing.JPanel {
         frame.setLayout(null);
         String cline = null;
         String content = "";
+        this.orderID = orderID;
         
         try{
             FileReader fr = new FileReader("Order.txt");
@@ -369,11 +370,14 @@ public class orderStatus extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
     frame.getContentPane().removeAll();
     selectVendor panel = new selectVendor(frame);   //the panel you want to switch to
     frame.add(panel);
     frame.revalidate();
     frame.repaint();
+
+         
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -381,6 +385,7 @@ public class orderStatus extends javax.swing.JPanel {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDateTime now = LocalDateTime.now();
         String date = dtf.format(now);
+        System.out.println(userID + orderID);
         
         try {
             //store every line in array
@@ -403,9 +408,11 @@ public class orderStatus extends javax.swing.JPanel {
             for (int i=0; i < table.size(); i++) {
                 String record = table.get(i);
                 String recor[] = record.split(",");
-                if (record != null && recor[0].equals(userID) && recor[1].equals(orderID)) {   //if record different, then overwrite it
+                if (record != null && recor[0].equals(userID) && recor[1].equals(orderID)) {   //if record same, then overwrite it
                     //order line
-                    order = record.substring(0,record.length()-1) + "4";
+                    System.out.println("yes");
+                    recor[6] = "4";
+                    order = String.join(",", recor);
                     table.set(i,order);
                 }
             }
