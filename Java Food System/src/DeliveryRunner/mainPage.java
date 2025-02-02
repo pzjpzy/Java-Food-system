@@ -288,7 +288,12 @@ public class mainPage extends javax.swing.JPanel {
     }//GEN-LAST:event_jPanel2MouseReleased
 
     private void jPanel3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseReleased
-        // task history
+        // taskHistory
+        frame.remove(this);
+        taskHistory panel = new taskHistory(frame);
+        frame.add(panel);
+        frame.revalidate();
+        frame.repaint();
     }//GEN-LAST:event_jPanel3MouseReleased
 
     private void jPanel4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseReleased

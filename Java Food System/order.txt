@@ -18,9 +18,9 @@ C1,O10,Pasta,1,Take away,03-02-2025,1,V1
 C1,O10,Hamburger,3,Take away,03-02-2025,1,V1
 C1,O11,Pasta,2,Delivery,03-02-2025,4,V1
 C1,O11,Hamburger,3,Delivery,03-02-2025,4,V1
-R1,O12,Pasta,4,Delivery,03-02-2025,1,V1
-R1,O12,Hamburger,5,Delivery,03-02-2025,1,V1
-R1,O13,Pasta,2,Delivery,03-02-2025,1,V1
-R1,O13,Hamburger,3,Delivery,03-02-2025,1,V1
-R1,O14,Pasta,1,Delivery,03-02-2025,1,V1
-R1,O14,Hamburger,2,Delivery,03-02-2025,1,V1
+C1,O12,Pasta,4,Delivery,03-02-2025,1,V1
+C1,O12,Hamburger,5,Delivery,03-02-2025,1,V1
+C1,O13,Pasta,2,Delivery,03-02-2025,1,V1
+C1,O13,Hamburger,3,Delivery,03-02-2025,1,V1
+C1,O14,Pasta,1,Delivery,03-02-2025,1,V1
+C1,O14,Hamburger,2,Delivery,03-02-2025,1,V1

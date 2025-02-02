@@ -29,15 +29,15 @@ import javax.swing.Timer;
  *
  * @author pangz
  */
-public class viewTask extends javax.swing.JPanel {
+public class taskHistory extends javax.swing.JPanel {
 
 
     JFrame frame;
     String date;
     String userID = "R1";
-    String userIDtem = "C1";
+    String cusIDtem = "C1";
     String username;
-    public viewTask(JFrame frame) {
+    public taskHistory(JFrame frame) {
         initComponents();
         setBounds(0, 0, 1536, 864); // This line must exist in every JPanel
         this.frame = frame;
@@ -56,7 +56,7 @@ public class viewTask extends javax.swing.JPanel {
                 String[] values = line.split(":");
                 System.out.println(values[0]);
                 
-                if (values[1].trim().equals(userID) && values[4].equals("0") || values[4].equals("1")){
+                if (values[1].trim().equals(userID) && values[4].equals("2") || values[4].equals("3")){
                     // Create a sub-panel for each vendor
                     JPanel subban = new JPanel();
                     subban.setLayout(null);
@@ -74,14 +74,14 @@ public class viewTask extends javax.swing.JPanel {
 
                         if (order[1].equals(values[2])){
                             date = order[5];
-                            userIDtem = order[0];
+                            cusIDtem = order[0];
                         }
                     }
                     fw2.close();
                     bw2.close();
                     
                     //find username
-                    if (userIDtem != null){
+                    if (cusIDtem != null){
                         //find customer name and date
                         FileReader fw3 = new FileReader("users.txt");
                         BufferedReader bw3 = new BufferedReader(fw3);
@@ -89,8 +89,8 @@ public class viewTask extends javax.swing.JPanel {
                         String line3;
                         while ((line3 = bw3.readLine()) != null) {
                             String[] user = line3.split(",");
-
-                            if (user[3].trim().equals(userIDtem)){
+                            
+                            if (user[3].trim().equals(cusIDtem)){
                                 System.out.println("found user");
                                 username = user[0].trim();
                             }
@@ -108,85 +108,15 @@ public class viewTask extends javax.swing.JPanel {
                     // address label
                     JLabel label2 = new JLabel(values[3]);
                     label2.setFont(new Font("Arial", Font.BOLD, 25));
-                    label2.setBounds(50, 40, 600, 100);
+                    label2.setBounds(50, 40, 900, 100);
                     subban.add(label2);
                     
                     // date label
                     JLabel label3 = new JLabel(date);
                     label3.setFont(new Font("Arial", Font.BOLD, 35));
-                    label3.setBounds(650, 20, 400, 50);
+                    label3.setBounds(850, 20, 400, 50);
                     subban.add(label3);
 
-                    //if haven't accepted by anyone
-                    if (values[4].equals("0")){
-                        // Accept button
-                        JButton accept = new JButton("Accept");
-                        accept.setBounds(650, 70, 200, 50);
-                        accept.setFocusable(false);
-                        accept.setFont(new Font("My Boli", Font.PLAIN, 25));
-                        accept.setBackground(new Color(169, 255, 148));
-                        accept.addActionListener((ActionEvent e) -> {
-                            System.out.println("accept button clicked!");
-                            //change order status
-                            customer.changeOrderStatus(values[2], "2");
-                            //change task status
-                            customer.changeTaskStatus(values[2], "1");
-
-                            frame.getContentPane().removeAll();
-                            mainPage panel = new mainPage(frame);
-                            frame.add(panel);
-                            frame.revalidate();
-                            frame.repaint();
-                        });
-                        subban.add(accept);
-                        
-                        
-                        // Decline button
-                        JButton decline = new JButton("Decline");
-                        decline.setBounds(880, 70, 200, 50);
-                        decline.setFocusable(false);
-                        decline.setFont(new Font("My Boli", Font.PLAIN, 25));
-                        decline.setBackground(new Color(247, 102, 92));
-                        decline.addActionListener((ActionEvent e) -> {
-                            System.out.println("decline button clicked!");
-                            //change order status
-                            customer.changeOrderStatus(values[2], "4");
-                            //change task status
-                            customer.changeTaskStatus(values[2], "3");
-                            frame.getContentPane().removeAll();
-                            mainPage panel = new mainPage(frame);
-                            frame.add(panel);
-                            frame.revalidate();
-                            frame.repaint();
-                        });
-                        subban.add(decline);
-                    }
-                    
-                    else if (values[4].equals("1")){
-                        // Done button
-                        JButton done = new JButton("done");
-                        done.setBounds(650, 70, 200, 50);
-                        done.setFocusable(false);
-                        done.setFont(new Font("My Boli", Font.PLAIN, 25));
-                        done.setBackground(new Color(169, 255, 148));
-                        done.addActionListener((ActionEvent e) -> {
-                            System.out.println("Menu button clicked!");
-                            //change order status
-                            customer.changeOrderStatus(values[2], "3");
-                            //change task status
-                            customer.changeTaskStatus(values[2], "2");
-
-                            frame.getContentPane().removeAll();
-                            mainPage panel = new mainPage(frame);
-                            frame.add(panel);
-                            frame.revalidate();
-                            frame.repaint();
-                        });
-                        subban.add(done);
-                    }
-                    
-
-                    
 
                     // Add sub-panel to the scrollable panel
                     scrollp.add(subban);
@@ -248,7 +178,7 @@ public class viewTask extends javax.swing.JPanel {
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        jLabel1.setText("View tasks");
+        jLabel1.setText("Task history");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
