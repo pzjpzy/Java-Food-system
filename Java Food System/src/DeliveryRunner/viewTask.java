@@ -5,10 +5,12 @@
 package DeliveryRunner;
 
 
+import Customer.customer;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -20,6 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 
 
 /**
@@ -31,7 +34,7 @@ public class viewTask extends javax.swing.JPanel {
 
     JFrame frame;
     String date;
-    String userID = null;
+    String userID = "R1";
     String username;
     public viewTask(JFrame frame) {
         initComponents();
@@ -52,14 +55,14 @@ public class viewTask extends javax.swing.JPanel {
                 String[] values = line.split(":");
                 System.out.println(values[0]);
                 
-                if (values[1].trim().equals("R0")){
+                if (values[1].trim().equals(userID) && values[4].equals("0") || values[4].equals("1")){
                     // Create a sub-panel for each vendor
                     JPanel subban = new JPanel();
                     subban.setLayout(null);
                     subban.setBackground(new Color(162,148,249));
                     subban.setPreferredSize(new Dimension(1100, 140)); // Set preferred size
                     
-                    //find customer name and date
+                    //find customer ID and date
                     FileReader fw2 = new FileReader("Order.txt");
                     BufferedReader bw2 = new BufferedReader(fw2);
 
@@ -68,7 +71,7 @@ public class viewTask extends javax.swing.JPanel {
                         String[] order = line2.split(",");
 
 
-                        if (order[1].equals(values[2])){
+                        if (order.length > 1 && order[1].equals(values[2])){
                             date = order[5];
                             userID = order[0];
                         }
@@ -103,7 +106,7 @@ public class viewTask extends javax.swing.JPanel {
                     
                     // address label
                     JLabel label2 = new JLabel(values[3]);
-                    label2.setFont(new Font("Arial", Font.BOLD, 35));
+                    label2.setFont(new Font("Arial", Font.BOLD, 25));
                     label2.setBounds(50, 40, 600, 100);
                     subban.add(label2);
                     
@@ -113,29 +116,76 @@ public class viewTask extends javax.swing.JPanel {
                     label3.setBounds(650, 20, 400, 50);
                     subban.add(label3);
 
-                    // Accept button
-                    JButton accept = new JButton("Accept");
-                    accept.setBounds(650, 70, 200, 50);
-                    accept.setFocusable(false);
-                    accept.setFont(new Font("My Boli", Font.PLAIN, 25));
-                    accept.setBackground(new Color(169, 255, 148));
-                    subban.add(accept);
+                    //if haven't accepted by anyone
+                    if (values[4].equals("0")){
+                        // Accept button
+                        JButton accept = new JButton("Accept");
+                        accept.setBounds(650, 70, 200, 50);
+                        accept.setFocusable(false);
+                        accept.setFont(new Font("My Boli", Font.PLAIN, 25));
+                        accept.setBackground(new Color(169, 255, 148));
+                        accept.addActionListener((ActionEvent e) -> {
+                            System.out.println("accept button clicked!");
+                            //change order status
+                            customer.changeOrderStatus(values[2], "2");
+                            //change task status
+                            customer.changeTaskStatus(values[2], "1");
 
-                    // Decline button
-                    JButton decline = new JButton("Decline");
-                    decline.setBounds(880, 70, 200, 50);
-                    decline.setFocusable(false);
-                    decline.setFont(new Font("My Boli", Font.PLAIN, 25));
-                    decline.setBackground(new Color(247, 102, 92));
-                    decline.addActionListener((ActionEvent e) -> {
-                        System.out.println("Menu button clicked!");
-                        frame.getContentPane().removeAll();
-                        mainPage panel = new mainPage(frame);
-                        frame.add(panel);
-                        frame.revalidate();
-                        frame.repaint();
-                    });
-                    subban.add(decline);
+                            frame.getContentPane().removeAll();
+                            mainPage panel = new mainPage(frame);
+                            frame.add(panel);
+                            frame.revalidate();
+                            frame.repaint();
+                        });
+                        subban.add(accept);
+                        
+                        
+                        // Decline button
+                        JButton decline = new JButton("Decline");
+                        decline.setBounds(880, 70, 200, 50);
+                        decline.setFocusable(false);
+                        decline.setFont(new Font("My Boli", Font.PLAIN, 25));
+                        decline.setBackground(new Color(247, 102, 92));
+                        decline.addActionListener((ActionEvent e) -> {
+                            System.out.println("decline button clicked!");
+                            //change order status
+                            customer.changeOrderStatus(values[2], "4");
+                            //change task status
+                            customer.changeTaskStatus(values[2], "3");
+                            frame.getContentPane().removeAll();
+                            mainPage panel = new mainPage(frame);
+                            frame.add(panel);
+                            frame.revalidate();
+                            frame.repaint();
+                        });
+                        subban.add(decline);
+                    }
+                    
+                    else if (values[4].equals("1")){
+                        // Done button
+                        JButton done = new JButton("done");
+                        done.setBounds(650, 70, 200, 50);
+                        done.setFocusable(false);
+                        done.setFont(new Font("My Boli", Font.PLAIN, 25));
+                        done.setBackground(new Color(169, 255, 148));
+                        done.addActionListener((ActionEvent e) -> {
+                            System.out.println("Menu button clicked!");
+                            //change order status
+                            customer.changeOrderStatus(values[2], "3");
+                            //change task status
+                            customer.changeTaskStatus(values[2], "2");
+
+                            frame.getContentPane().removeAll();
+                            mainPage panel = new mainPage(frame);
+                            frame.add(panel);
+                            frame.revalidate();
+                            frame.repaint();
+                        });
+                        subban.add(done);
+                    }
+                    
+
+                    
 
                     // Add sub-panel to the scrollable panel
                     scrollp.add(subban);
@@ -161,8 +211,9 @@ public class viewTask extends javax.swing.JPanel {
             frame.repaint();
         }catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error viewing tasks.", "Error", JOptionPane.ERROR_MESSAGE);
-       
         }
+        
+
     }
 
     /**
@@ -177,6 +228,7 @@ public class viewTask extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(245, 239, 255));
         setMinimumSize(new java.awt.Dimension(1552, 837));
@@ -218,17 +270,33 @@ public class viewTask extends javax.swing.JPanel {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
+        jButton2.setBackground(new java.awt.Color(162, 148, 249));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jButton2.setText("Back");
+        jButton2.setFocusable(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(700, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 581, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -240,9 +308,18 @@ public class viewTask extends javax.swing.JPanel {
 //        frame.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        frame.getContentPane().removeAll();
+        mainPage panel = new mainPage(frame);   //the panel you want to switch to
+        frame.add(panel);
+        frame.revalidate();
+        frame.repaint();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

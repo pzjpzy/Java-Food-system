@@ -539,8 +539,7 @@ public class orderConfirm extends javax.swing.JPanel {
                 String orderID = item.getVendorID();
                 //order line
                 order = userID + "," + customer.orderID + "," + itemName + "," + quantity + "," + jComboBox1.getSelectedItem() + "," + date + "," + "1" + "," + orderID;
-                //task line
-                task = "D0" + "," + "R0" + "," + customer.orderID + "," + jTextField1.getText();
+                
 
                 // Loop through existing orders to check if the record already exists
                 boolean exists = false;
@@ -564,9 +563,44 @@ public class orderConfirm extends javax.swing.JPanel {
             }
             fw.close(); 
             
+            //if it's delivery, generate new task line
             if (jComboBox1.getSelectedItem().equals("Delivery")){
+                //store every line in array
+                FileReader fr3 = new FileReader("Task.txt");
+                BufferedReader br3  = new BufferedReader(fr3);
+                String line2 = null;
+                ArrayList<String> table2 = new ArrayList<>();
+
+                while((line2 = br3.readLine()) != null){
+                    table.add(line2);
+                }
+                fr3.close();
+                br3.close();
+
+                //get new deliveryID
+                int largestNum = 0;
+                for (int i=0; i < table2.size(); i++) {
+                    String record = table2.get(i);
+                    String recor[] = record.split(":");
+
+                    try{
+                        largestNum = Integer.parseInt(recor[1].substring(1));
+                    }catch (ArrayIndexOutOfBoundsException e){
+                        largestNum = 0;
+                    }
+                    
+                }
+                
+                System.out.println(largestNum);
+                String newID = "D" + String.valueOf(largestNum + 1);
+                
+                
+                
+                //task line
+                task = newID + ":" + "R1" + ":" + customer.orderID + ":" + jTextField1.getText() + ":" + "0";
+                
                 //write every line into file
-                FileWriter fw2 = new FileWriter("Task.txt");
+                FileWriter fw2 = new FileWriter("Task.txt",true);
                 fw2.append(task + "\n");
                 fw2.close();
             }
