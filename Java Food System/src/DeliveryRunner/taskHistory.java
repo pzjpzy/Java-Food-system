@@ -119,7 +119,7 @@ public class taskHistory extends javax.swing.JPanel {
                     food = food.replace("null", "");
                     JLabel label4 = new JLabel(food);
                     label4.setFont(new Font("Arial", Font.BOLD, 25));
-                    label4.setBounds(700, 40, 600, 100);
+                    label4.setBounds(700, 40, 400, 100);
                     subban.add(label4);
                     
                     // date label
