@@ -18,8 +18,8 @@ import javax.swing.JOptionPane;
  * @author pangz
  */
 public class customer {
-    public static String userID = "C1";
-//    public static String userID = "R1";
+//    public static String userID = "C1";
+    public static String userID = "R1";
      public static String orderID = null;
      
      public void setOrderID(String ID){

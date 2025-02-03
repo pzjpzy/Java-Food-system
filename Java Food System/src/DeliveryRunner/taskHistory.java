@@ -37,6 +37,7 @@ public class taskHistory extends javax.swing.JPanel {
     String userID = "R1";
     String cusIDtem = "C1";
     String username;
+    String food;
     public taskHistory(JFrame frame) {
         initComponents();
         setBounds(0, 0, 1536, 864); // This line must exist in every JPanel
@@ -75,6 +76,9 @@ public class taskHistory extends javax.swing.JPanel {
                         if (order[1].equals(values[2])){
                             date = order[5];
                             cusIDtem = order[0];
+                            food = food + order[2] + ":" + order[3] + "   ";
+
+                            
                         }
                     }
                     fw2.close();
@@ -108,8 +112,15 @@ public class taskHistory extends javax.swing.JPanel {
                     // address label
                     JLabel label2 = new JLabel(values[3]);
                     label2.setFont(new Font("Arial", Font.BOLD, 25));
-                    label2.setBounds(50, 40, 900, 100);
+                    label2.setBounds(50, 40, 650, 100);
                     subban.add(label2);
+                    
+                    // food label
+                    food = food.replace("null", "");
+                    JLabel label4 = new JLabel(food);
+                    label4.setFont(new Font("Arial", Font.BOLD, 25));
+                    label4.setBounds(700, 40, 600, 100);
+                    subban.add(label4);
                     
                     // date label
                     JLabel label3 = new JLabel(date);
@@ -134,7 +145,7 @@ public class taskHistory extends javax.swing.JPanel {
             JScrollPane scrollPane = new JScrollPane(scrollp);
             scrollPane.setBounds(200, 200, 1100, 550); // Set bounds for JScrollPane
             scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-            scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
             // Add the JScrollPane to the frame
             frame.add(scrollPane);
