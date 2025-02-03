@@ -35,7 +35,7 @@ public class orderConfirm extends javax.swing.JPanel {
 
 
     JFrame frame;
-    String userID = customer.userID;
+    String userID = "C1";
     double total = 0;
     protected ArrayList<ItemData> items = new ArrayList<>();
     

@@ -239,19 +239,19 @@ public class orderHistory extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        test2 panel = new test2(frame);   //the panel you want to switch to
-//        frame.remove(this);
-//        frame.add(panel);
-//        frame.revalidate();
-//        frame.repaint();
+        frame.getContentPane().removeAll();
+        orderMainPage panel = new orderMainPage(frame);   //the panel you want to switch to
+        frame.add(panel);
+        frame.revalidate();
+        frame.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-//        test2 panel = new test2(frame);   //the panel you want to switch to
-//        frame.remove(this);
-//        frame.add(panel);
-//        frame.revalidate();
-//        frame.repaint();
+        frame.getContentPane().removeAll();
+        orderMainPage panel = new orderMainPage(frame);   //the panel you want to switch to
+        frame.add(panel);
+        frame.revalidate();
+        frame.repaint();
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

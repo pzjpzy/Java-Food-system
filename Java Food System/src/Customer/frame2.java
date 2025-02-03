@@ -13,10 +13,10 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
  */
 public class frame2 extends JFrame{
     public frame2() {
-        selectVendor panelz = new selectVendor(this);       //put your login panel here, you're putting panel into this frame
+//        selectVendor panelz = new selectVendor(this);       //put your login panel here, you're putting panel into this frame
 //        orderStatus panelz = new orderStatus(this);
 //        orderHistory panelz = new orderHistory(this);
-        
+        cusMainPage panelz = new cusMainPage(this);
         setTitle("Ordering Food System");
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

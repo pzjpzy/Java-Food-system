@@ -37,7 +37,7 @@ public class orderStatus extends javax.swing.JPanel {
 
     JFrame frame;
     String userID = customer.userID;
-    String orderID = "O36";
+    String orderID = customer.orderID;
     String line = null;
         
     public orderStatus(JFrame frame) {
@@ -90,7 +90,7 @@ public class orderStatus extends javax.swing.JPanel {
                 if (customer.getOrderStatus(orderID).equals("Paid")){
                     jButton3.setEnabled(true);
                 }else{
-                    jButton3.setEnabled(false);
+                    jButton3.setVisible(false);
                 }
             }
         });
@@ -370,14 +370,12 @@ public class orderStatus extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
     frame.getContentPane().removeAll();
-    selectVendor panel = new selectVendor(frame);   //the panel you want to switch to
+    orderMainPage panel = new orderMainPage(frame);   //the panel you want to switch to
     frame.add(panel);
     frame.revalidate();
     frame.repaint();
 
-         
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
