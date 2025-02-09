@@ -5,6 +5,7 @@
 package DeliveryRunner;
 
 
+import Delivery_runner.RevenueDD;
 import javax.swing.JFrame;
 
 
@@ -302,6 +303,11 @@ public class mainPage extends javax.swing.JPanel {
 
     private void jPanel5MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseReleased
         // revenue dashboard
+        frame.remove(this);
+        RevenueDD panel = new RevenueDD(frame);
+        frame.add(panel);
+        frame.revalidate();
+        frame.repaint();
     }//GEN-LAST:event_jPanel5MouseReleased
 
 
