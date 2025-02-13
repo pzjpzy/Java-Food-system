@@ -7,6 +7,11 @@ import Admin.*;
 
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+
 
 
 /**
@@ -25,6 +30,9 @@ public class ChooseBalance extends javax.swing.JPanel {
         this.frame = frame;
         setVisible(true);
         
+        updateBalanceDisplay();
+        
+        
         
         frame.setLayout(null);
     }
@@ -32,6 +40,22 @@ public class ChooseBalance extends javax.swing.JPanel {
         private void sendAmountToAdmin(double amount) {
         System.out.println("Amount to be approved by admin: " + amount);
     }
+        
+        private void updateBalanceDisplay() {
+    try {
+        String customerID = "C001"; // Replace with actual logged-in ID
+        List<String> lines = Files.readAllLines(Paths.get("Balance.txt"));
+        for (String line : lines) {
+            String[] parts = line.split(",");
+            if (parts[0].equals(customerID)) {
+                jLabel2.setText("Balance: " + parts[parts.length - 1]);
+                break;
+            }
+        }
+    } catch (IOException ex) {
+        ex.printStackTrace();
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,6 +71,7 @@ public class ChooseBalance extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(1552, 837));
 
@@ -91,6 +116,9 @@ public class ChooseBalance extends javax.swing.JPanel {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Kozuka Mincho Pr6N B", 1, 24)); // NOI18N
+        jLabel2.setText("Balance: 0.00");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -100,12 +128,18 @@ public class ChooseBalance extends javax.swing.JPanel {
                 .addGap(606, 606, 606)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(640, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(140, 140, 140))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 285, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 203, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(276, 276, 276))
         );
@@ -152,6 +186,7 @@ public class ChooseBalance extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
