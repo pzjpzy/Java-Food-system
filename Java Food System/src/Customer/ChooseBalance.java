@@ -3,6 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Customer;
+import Admin.*;
+
+import javax.swing.JOptionPane;
+import javax.swing.JFrame;
+
 
 /**
  *
@@ -13,8 +18,19 @@ public class ChooseBalance extends javax.swing.JPanel {
     /**
      * Creates new form ChooseBalance
      */
-    public ChooseBalance() {
+    JFrame frame;
+    public ChooseBalance(JFrame frame) {
         initComponents();
+        setBounds(0,0,1536,864);
+        this.frame = frame;
+        setVisible(true);
+        
+        
+        frame.setLayout(null);
+    }
+    
+        private void sendAmountToAdmin(double amount) {
+        System.out.println("Amount to be approved by admin: " + amount);
     }
 
     /**
@@ -26,19 +42,117 @@ public class ChooseBalance extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+
+        setMinimumSize(new java.awt.Dimension(1552, 837));
+
+        jPanel1.setBackground(new java.awt.Color(203, 203, 203));
+        jPanel1.setForeground(new java.awt.Color(203, 203, 203));
+
+        jPanel2.setBackground(new java.awt.Color(178, 171, 179));
+
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton1.setText("Log Out");
+
+        jLabel1.setFont(new java.awt.Font("Adobe Caslon Pro", 1, 48)); // NOI18N
+        jLabel1.setText("Top-Up Balance");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addContainerGap(51, Short.MAX_VALUE))
+        );
+
+        jButton2.setBackground(new java.awt.Color(178, 171, 179));
+        jButton2.setFont(new java.awt.Font("Monotype Corsiva", 1, 24)); // NOI18N
+        jButton2.setText("Top-up Balance");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(606, 606, 606)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(640, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 285, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(276, 276, 276))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+            // Open a dialog to ask for the amount
+    String input = JOptionPane.showInputDialog(this, "Enter the amount to top-up:", "Top-up Balance", JOptionPane.PLAIN_MESSAGE);
+
+    // Check if the user provided input and didn't cancel the dialog
+    if (input != null && !input.isEmpty()) {
+        try {
+            // Parse the input to a double (assuming the amount is a number)
+            double amount = Double.parseDouble(input);
+
+            // Send the amount to the admin (for now, just print it)
+            sendAmountToAdmin(amount);
+
+            // Notify the customer that the request has been sent
+            JOptionPane.showMessageDialog(this, "Top-up request of RM" + amount + " sent to admin for approval.", "Request Sent", JOptionPane.INFORMATION_MESSAGE);
+        } catch (NumberFormatException ex) {
+            // Handle invalid input (non-numeric)
+            JOptionPane.showMessageDialog(this, "Invalid amount. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } else {
+        // Handle case where the user cancels or provides no input
+        JOptionPane.showMessageDialog(this, "Top-up canceled or no amount entered.", "Info", JOptionPane.INFORMATION_MESSAGE);
+    }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }
