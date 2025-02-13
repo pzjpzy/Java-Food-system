@@ -30,7 +30,9 @@ public class ChooseBalance extends javax.swing.JPanel {
         this.frame = frame;
         setVisible(true);
         
+        double amount = 10;
         updateBalanceDisplay();
+        requestTopUp(amount);
         
         
         
@@ -56,6 +58,18 @@ public class ChooseBalance extends javax.swing.JPanel {
         ex.printStackTrace();
     }
 }
+        
+     private void requestTopUp(double amount) {
+    try {
+        String customerID = "C001"; // Replace with actual logged-in ID
+        String entry = customerID + "," + amount + "\n";
+        Files.write(Paths.get("Topup.txt"), entry.getBytes(), java.nio.file.StandardOpenOption.APPEND);
+        JOptionPane.showMessageDialog(this, "Top-up request sent successfully!");
+    } catch (IOException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error sending top-up request.");
+    }
+}   
 
     /**
      * This method is called from within the constructor to initialize the form.

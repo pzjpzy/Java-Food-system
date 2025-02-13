@@ -1,1 +1,1 @@
-CostumerID,topUpAmount,status
+CostumerID,topUpAmount,statusC001,10.0
