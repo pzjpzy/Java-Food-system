@@ -1,0 +1,6 @@
+V01, Coffee, C01, RM 3.00
+V01, Eggs, E03, RM 0.60
+V01, Coffee, C01, RM 3.00
+V01, Coffee, C01, RM 3.00
+, , , 
+, , , 
