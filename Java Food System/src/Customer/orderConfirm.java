@@ -33,14 +33,13 @@ import javax.swing.Timer;
  */
 public class orderConfirm extends javax.swing.JPanel {
 
-    /**
-     * Creates new form selectVendor
-     */
+
     JFrame frame;
-    String userID = customer.userID;
+    String userID = "C1";
     double total = 0;
     protected ArrayList<ItemData> items = new ArrayList<>();
-    public orderConfirm(JFrame frame, String userID) {
+    
+    public orderConfirm(JFrame frame, String orderID, boolean reorder) {
         initComponents();
         setBounds(0,0,1536,864);     //this line must exist in every JPanel
         this.frame = frame;  
@@ -61,7 +60,7 @@ public class orderConfirm extends javax.swing.JPanel {
  
             String values[] = line.split(",");
             
-            if(values[1].equals(customer.orderID)){
+            if(values[1].equals(orderID)){
                 // Create panel
                 JPanel subban = new JPanel();
                 subban.setLayout(null);
@@ -101,7 +100,7 @@ public class orderConfirm extends javax.swing.JPanel {
                 quantity.setHorizontalAlignment(JTextField.CENTER);
                 quantity.setText(values[3]);
                 
-                items.add(new ItemData(values[2], quantity));
+                items.add(new ItemData(values[2], quantity,values[7]));
 
                 
                 subban.add(label);
@@ -124,7 +123,7 @@ public class orderConfirm extends javax.swing.JPanel {
 
         // Create a JScrollPane with the scrollable panel as its viewport
         JScrollPane scrollPane = new JScrollPane(scrollp);
-        scrollPane.setBounds(200, 200, 1100, 550); // Set bounds for JScrollPane
+        scrollPane.setBounds(200, 150, 1100, 550); // Set bounds for JScrollPane
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -199,6 +198,40 @@ public class orderConfirm extends javax.swing.JPanel {
             }
         });
         timer.start(); // Start the timer
+        
+        
+        //reorder part
+        if (reorder){
+            try {
+                int highestNum = 0;
+                //store every line in array
+                FileReader fr = new FileReader("Order.txt");
+                BufferedReader br  = new BufferedReader(fr);
+
+                int num = 0;
+                ArrayList<String> table = new ArrayList<>();
+
+                while((line = br.readLine()) != null){
+                    String values[] = line.split(",");
+                    try{
+                        num = Integer.parseInt(values[1].substring(1));
+                    }catch (ArrayIndexOutOfBoundsException e){
+                        num = 0;
+                    }
+
+                    if (num > highestNum){
+                        highestNum = num;
+                    }
+                }
+                int newNum = highestNum + 1;
+                customer.orderID = "O" + newNum;
+                System.out.println("new order ID:" + customer.orderID);
+                } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Error saving quantities.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+                
+            }
     }
 
     /**
@@ -219,6 +252,8 @@ public class orderConfirm extends javax.swing.JPanel {
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(186, 208, 231));
         setMinimumSize(new java.awt.Dimension(1552, 837));
@@ -304,6 +339,11 @@ public class orderConfirm extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         jLabel3.setText("RM here");
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel4.setText("Address:");
+
+        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -312,6 +352,10 @@ public class orderConfirm extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(104, 104, 104)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 942, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -333,13 +377,21 @@ public class orderConfirm extends javax.swing.JPanel {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(60, 60, 60))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -389,8 +441,9 @@ public class orderConfirm extends javax.swing.JPanel {
             for (ItemData item : items) {
                 String itemName = item.getFoodName();
                 String quantity = item.getQuanField().getText();
+                String orderID = item.getVendorID();
                 //order line
-                order = userID + "," + customer.orderID + "," + itemName + "," + quantity + "," + jComboBox1.getSelectedItem() + "," + date + "," + "0";
+                order = userID + "," + customer.orderID + "," + itemName + "," + quantity + "," + jComboBox1.getSelectedItem() + "," + date + "," + "0" + "," + orderID;
                 
 
                 // Loop through existing orders to check if the record already exists
@@ -461,6 +514,7 @@ public class orderConfirm extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         String order;
+        String task = "error";
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDateTime now = LocalDateTime.now();
         String date = dtf.format(now);
@@ -482,8 +536,9 @@ public class orderConfirm extends javax.swing.JPanel {
             for (ItemData item : items) {
                 String itemName = item.getFoodName();
                 String quantity = item.getQuanField().getText();
+                String orderID = item.getVendorID();
                 //order line
-                order = userID + "," + customer.orderID + "," + itemName + "," + quantity + "," + jComboBox1.getSelectedItem() + "," + date + "," + "1";
+                order = userID + "," + customer.orderID + "," + itemName + "," + quantity + "," + jComboBox1.getSelectedItem() + "," + date + "," + "1" + "," + orderID;
                 
 
                 // Loop through existing orders to check if the record already exists
@@ -508,6 +563,51 @@ public class orderConfirm extends javax.swing.JPanel {
             }
             fw.close(); 
             
+            //if it's delivery, generate new task line
+            if (jComboBox1.getSelectedItem().equals("Delivery")){
+                //store every line in array
+                FileReader fr3 = new FileReader("Task.txt");
+                BufferedReader br3  = new BufferedReader(fr3);
+                String line2 = null;
+                ArrayList<String> table2 = new ArrayList<>();
+
+                while((line2 = br3.readLine()) != null){
+                    table.add(line2);
+                }
+                fr3.close();
+                br3.close();
+
+                //get new deliveryID
+                int largestNum = 0;
+                for (int i=0; i < table2.size(); i++) {
+                    String record = table2.get(i);
+                    String recor[] = record.split(":");
+
+                    try{
+                        largestNum = Integer.parseInt(recor[1].substring(1));
+                    }catch (ArrayIndexOutOfBoundsException e){
+                        largestNum = 0;
+                    }
+                    
+                }
+                
+                System.out.println(largestNum);
+                String newID = "D" + String.valueOf(largestNum + 1);
+                
+                
+                
+                //task line
+                task = newID + ":" + "R1" + ":" + customer.orderID + ":" + jTextField1.getText() + ":" + "0";
+                
+                //write every line into file
+                FileWriter fw2 = new FileWriter("Task.txt",true);
+                fw2.append(task + "\n");
+                fw2.close();
+            }
+            
+
+            fw.close(); 
+            
             JOptionPane.showMessageDialog(this, "Payment successfull!", "Success", JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Payment failed.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -528,15 +628,19 @@ public class orderConfirm extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
     private static class ItemData {
-        String foodName;
-        JTextField quanField;
-        public ItemData(String foodName, JTextField quanField) {
+        private String foodName;
+        private JTextField quanField;
+        private String vendorID;
+        public ItemData(String foodName, JTextField quanField, String vendorID) {
             this.foodName = foodName;
             this.quanField = quanField;
+            this.vendorID = vendorID;
         }
         
         public String getFoodName() {
@@ -546,5 +650,10 @@ public class orderConfirm extends javax.swing.JPanel {
         public JTextField getQuanField() {
             return quanField;
         }
+        
+        public String getVendorID() {
+            return vendorID;
+        }
     }
+    
 }

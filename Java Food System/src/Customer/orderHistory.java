@@ -26,9 +26,7 @@ import javax.swing.JScrollPane;
  */
 public class orderHistory extends javax.swing.JPanel {
 
-    /**
-     * Creates new form selectVendor
-     */
+
     JFrame frame;
     public orderHistory(JFrame frame) {
         initComponents();
@@ -101,7 +99,6 @@ public class orderHistory extends javax.swing.JPanel {
                         label2.setFont(new Font("Arial", Font.BOLD, 30));
                         label2.setBounds(350, 40, 300, 50);
                         subban.add(label2);
-                        System.out.println(values[6]);
 
                         // Review button
                         JButton review = new JButton("Review");
@@ -118,12 +115,11 @@ public class orderHistory extends javax.swing.JPanel {
                         Details.setFont(new Font("My Boli", Font.PLAIN, 25));
                         Details.setBackground(new Color(209, 232, 238));
                         Details.addActionListener((ActionEvent e) -> {
-        //                    System.out.println("Menu button clicked!");
-        //                    frame.getContentPane().removeAll();
-        //                    Menu panel = new Menu(frame, values[0], values[1]);
-        //                    frame.add(panel);
-        //                    frame.revalidate();
-        //                    frame.repaint();
+                            frame.getContentPane().removeAll();
+                            orderStatus panel = new orderStatus(frame, values[1]);
+                            frame.add(panel);
+                            frame.revalidate();
+                            frame.repaint();
                         });
                         subban.add(Details);
 
@@ -189,7 +185,7 @@ public class orderHistory extends javax.swing.JPanel {
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        jLabel1.setText("Select Vendor");
+        jLabel1.setText("Order history");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -243,19 +239,19 @@ public class orderHistory extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        test2 panel = new test2(frame);   //the panel you want to switch to
-//        frame.remove(this);
-//        frame.add(panel);
-//        frame.revalidate();
-//        frame.repaint();
+        frame.getContentPane().removeAll();
+        orderMainPage panel = new orderMainPage(frame);   //the panel you want to switch to
+        frame.add(panel);
+        frame.revalidate();
+        frame.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-//        test2 panel = new test2(frame);   //the panel you want to switch to
-//        frame.remove(this);
-//        frame.add(panel);
-//        frame.revalidate();
-//        frame.repaint();
+        frame.getContentPane().removeAll();
+        orderMainPage panel = new orderMainPage(frame);   //the panel you want to switch to
+        frame.add(panel);
+        frame.revalidate();
+        frame.repaint();
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

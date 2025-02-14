@@ -2,12 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package Customer;
+package DeliveryRunner;
 
+
+import Customer.customer;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,18 +18,27 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.Timer;
+
 
 /**
  *
  * @author pangz
  */
-public class selectVendor extends javax.swing.JPanel {
+public class taskHistory extends javax.swing.JPanel {
 
 
     JFrame frame;
-    public selectVendor(JFrame frame) {
+    String date;
+    String userID = "R1";
+    String cusIDtem = "C1";
+    String username;
+    String food;
+    public taskHistory(JFrame frame) {
         initComponents();
         setBounds(0, 0, 1536, 864); // This line must exist in every JPanel
         this.frame = frame;
@@ -37,50 +49,85 @@ public class selectVendor extends javax.swing.JPanel {
         scrollp.setLayout(new BoxLayout(scrollp, BoxLayout.Y_AXIS));
 
         try {
-            FileReader fr = new FileReader("users.txt");
+            FileReader fr = new FileReader("Task.txt");
             BufferedReader br = new BufferedReader(fr);
 
             String line;
             while ((line = br.readLine()) != null) {
-                String[] values = line.split(",");
+                String[] values = line.split(":");
                 System.out.println(values[0]);
                 
-                if (values[2].trim().equals("Vendor")){
+                if (values[1].trim().equals(userID) && values[4].equals("2") || values[4].equals("3")){
                     // Create a sub-panel for each vendor
                     JPanel subban = new JPanel();
                     subban.setLayout(null);
-                    subban.setBackground(new Color(92, 201, 205));
+                    subban.setBackground(new Color(162,148,249));
                     subban.setPreferredSize(new Dimension(1100, 140)); // Set preferred size
+                    
+                    //find customer ID and date
+                    FileReader fw2 = new FileReader("Order.txt");
+                    BufferedReader bw2 = new BufferedReader(fw2);
 
-                    // Vendor name label
-                    JLabel label = new JLabel("Vendor: " + values[0]);
-                    label.setFont(new Font("Arial", Font.BOLD, 50));
-                    label.setBounds(50, 40, 600, 50);
+                    String line2;
+                    while ((line2 = bw2.readLine()) != null) {
+                        String[] order = line2.split(",");
+
+
+                        if (order[1].equals(values[2])){
+                            date = order[5];
+                            cusIDtem = order[0];
+                            food = food + order[2] + ":" + order[3] + "   ";
+
+                            
+                        }
+                    }
+                    fw2.close();
+                    bw2.close();
+                    
+                    //find username
+                    if (cusIDtem != null){
+                        //find customer name and date
+                        FileReader fw3 = new FileReader("users.txt");
+                        BufferedReader bw3 = new BufferedReader(fw3);
+
+                        String line3;
+                        while ((line3 = bw3.readLine()) != null) {
+                            String[] user = line3.split(",");
+                            
+                            if (user[3].trim().equals(cusIDtem)){
+                                System.out.println("found user");
+                                username = user[0].trim();
+                            }
+                        }
+                        fw2.close();
+                        bw2.close();
+                    }
+
+                    // customer name label
+                    JLabel label = new JLabel(username);
+                    label.setFont(new Font("Arial", Font.BOLD, 45));
+                    label.setBounds(50, 20, 600, 35);
                     subban.add(label);
+                    
+                    // address label
+                    JLabel label2 = new JLabel(values[3]);
+                    label2.setFont(new Font("Arial", Font.BOLD, 25));
+                    label2.setBounds(50, 40, 650, 100);
+                    subban.add(label2);
+                    
+                    // food label
+                    food = food.replace("null", "");
+                    JLabel label4 = new JLabel(food);
+                    label4.setFont(new Font("Arial", Font.BOLD, 25));
+                    label4.setBounds(700, 40, 400, 100);
+                    subban.add(label4);
+                    
+                    // date label
+                    JLabel label3 = new JLabel(date);
+                    label3.setFont(new Font("Arial", Font.BOLD, 35));
+                    label3.setBounds(850, 20, 400, 50);
+                    subban.add(label3);
 
-                    // Review button
-                    JButton review = new JButton("Review");
-                    review.setBounds(650, 20, 200, 100);
-                    review.setFocusable(false);
-                    review.setFont(new Font("My Boli", Font.PLAIN, 25));
-                    review.setBackground(new Color(209, 232, 238));
-                    subban.add(review);
-
-                    // Menu button
-                    JButton menu = new JButton("Menu");
-                    menu.setBounds(880, 20, 200, 100);
-                    menu.setFocusable(false);
-                    menu.setFont(new Font("My Boli", Font.PLAIN, 25));
-                    menu.setBackground(new Color(209, 232, 238));
-                    menu.addActionListener((ActionEvent e) -> {
-                        System.out.println("Menu button clicked!");
-                        frame.getContentPane().removeAll();
-                        Menu panel = new Menu(frame, values[3].trim(), values[0].trim());
-                        frame.add(panel);
-                        frame.revalidate();
-                        frame.repaint();
-                    });
-                    subban.add(menu);
 
                     // Add sub-panel to the scrollable panel
                     scrollp.add(subban);
@@ -98,16 +145,17 @@ public class selectVendor extends javax.swing.JPanel {
             JScrollPane scrollPane = new JScrollPane(scrollp);
             scrollPane.setBounds(200, 200, 1100, 550); // Set bounds for JScrollPane
             scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-            scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
             // Add the JScrollPane to the frame
             frame.add(scrollPane);
             frame.revalidate();
             frame.repaint();
-
-        } catch (IOException e) {
-            System.out.println("Error reading vendor file: " + e.getMessage());
+        }catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error viewing tasks.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        
+
     }
 
     /**
@@ -124,11 +172,11 @@ public class selectVendor extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(186, 208, 231));
+        setBackground(new java.awt.Color(245, 239, 255));
         setMinimumSize(new java.awt.Dimension(1552, 837));
         setPreferredSize(new java.awt.Dimension(1552, 837));
 
-        jPanel1.setBackground(new java.awt.Color(76, 88, 126));
+        jPanel1.setBackground(new java.awt.Color(162, 148, 249));
 
         jButton1.setBackground(new java.awt.Color(136, 151, 170));
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
@@ -141,7 +189,7 @@ public class selectVendor extends javax.swing.JPanel {
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        jLabel1.setText("Select Vendor");
+        jLabel1.setText("Task history");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -149,8 +197,8 @@ public class selectVendor extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(52, 52, 52)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 723, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 867, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 369, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
         );
@@ -164,7 +212,7 @@ public class selectVendor extends javax.swing.JPanel {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        jButton2.setBackground(new java.awt.Color(209, 232, 238));
+        jButton2.setBackground(new java.awt.Color(162, 148, 249));
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jButton2.setText("Back");
         jButton2.setFocusable(false);
@@ -188,9 +236,9 @@ public class selectVendor extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 568, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 581, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53))
+                .addGap(40, 40, 40))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -204,7 +252,7 @@ public class selectVendor extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         frame.getContentPane().removeAll();
-        orderMainPage panel = new orderMainPage(frame);   //the panel you want to switch to
+        mainPage panel = new mainPage(frame);   //the panel you want to switch to
         frame.add(panel);
         frame.revalidate();
         frame.repaint();

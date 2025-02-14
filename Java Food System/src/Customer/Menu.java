@@ -31,9 +31,7 @@ import javax.swing.JTextField;
  */
 public class Menu extends javax.swing.JPanel {
 
-    /**
-     * Creates new form selectVendor
-     */
+
     JFrame frame;
     String userID = customer.userID;
     protected ArrayList<ItemData> items = new ArrayList<>();
@@ -92,7 +90,7 @@ public class Menu extends javax.swing.JPanel {
                 quantity.setFont(new Font("My Boli",Font.PLAIN,40));
                 quantity.setHorizontalAlignment(JTextField.CENTER);
                 
-                items.add(new ItemData(values[1], quantity));
+                items.add(new ItemData(values[1], quantity,vendorID));
 
                 subban.add(price);
                 subban.add(label);
@@ -331,8 +329,9 @@ public class Menu extends javax.swing.JPanel {
             for (ItemData item : items) {
                 String itemName = item.getFoodName();
                 String quantity = item.getQuanField().getText();
+                String orderID = item.getVendorID();
                 //order line
-                order = userID + "," + customer.orderID + "," + itemName + "," + quantity + "," + "nothing" + "," + date + "," + "0";
+                order = userID + "," + customer.orderID + "," + itemName + "," + quantity + "," + "nothing" + "," + date + "," + "0" + "," + orderID;
                 
 
                 // Loop through existing orders to check if the record already exists
@@ -380,7 +379,7 @@ public class Menu extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         frame.getContentPane().removeAll();
-        orderConfirm panel = new orderConfirm(frame,userID);   //the panel you want to switch to
+        orderConfirm panel = new orderConfirm(frame,customer.orderID, false);   //the panel you want to switch to
         frame.add(panel);
         frame.revalidate();
         frame.repaint();
@@ -397,11 +396,13 @@ public class Menu extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private static class ItemData {
-        String foodName;
-        JTextField quanField;
-        public ItemData(String foodName, JTextField quanField) {
+        private String foodName;
+        private JTextField quanField;
+        private String vendorID;
+        public ItemData(String foodName, JTextField quanField, String vendorID) {
             this.foodName = foodName;
             this.quanField = quanField;
+            this.vendorID = vendorID;
         }
         
         public String getFoodName() {
@@ -410,6 +411,10 @@ public class Menu extends javax.swing.JPanel {
 
         public JTextField getQuanField() {
             return quanField;
+        }
+        
+        public String getVendorID() {
+            return vendorID;
         }
     }
 }

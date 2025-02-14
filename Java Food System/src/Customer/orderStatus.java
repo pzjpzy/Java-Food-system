@@ -34,12 +34,10 @@ import javax.swing.Timer;
  */
 public class orderStatus extends javax.swing.JPanel {
 
-    /**
-     * Creates new form selectVendor
-     */
+
     JFrame frame;
     String userID = customer.userID;
-    String orderID = "O36";
+    String orderID = customer.orderID;
     String line = null;
         
     public orderStatus(JFrame frame) {
@@ -89,6 +87,87 @@ public class orderStatus extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 jLabel3.setText(customer.getOrderStatus(orderID));
+                if (customer.getOrderStatus(orderID).equals("Paid")){
+                    jButton3.setEnabled(true);
+                }else{
+                    jButton3.setVisible(false);
+                }
+            }
+        });
+        timer.start(); // Start the timer
+        
+    }
+    
+    //buffer overloading (come from order history)
+    public orderStatus(JFrame frame, String orderID) {
+        initComponents();
+        setBounds(0,0,1536,864);     //this line must exist in every JPanel
+        this.frame = frame;  
+        frame.setLayout(null);
+        String cline = null;
+        String content = "";
+        this.orderID = orderID;
+        
+        try{
+            FileReader fr = new FileReader("Order.txt");
+            BufferedReader br = new BufferedReader(fr);
+            while((line = br.readLine())!= null){
+                String values[] = line.split(",");
+                if (values[1].equals(orderID)){
+                    cline = values[2] + ": " + values[3] + "\n";
+                    content += cline;
+                    switch(values[6]){
+                        case "1":
+                            jLabel3.setText("Paid");
+                            break;
+                        case "2":
+                            jLabel3.setText("Delivery in progress...");
+                            break;
+                        case "3":
+                            jLabel3.setText("Completed");
+                            break;
+                        case "4":
+                            jLabel3.setText("Order cancelled");
+                            break;
+                    }
+                }
+                
+            }
+            fr.close();
+            br.close();
+        }catch(IOException e){
+            System.out.println("error occured");
+        }
+        
+        // Reorder button
+        JButton Reorder = new JButton("Reorder");
+        Reorder.setBounds(580, 720, 400, 100);
+        Reorder.setFocusable(false);
+        Reorder.setFont(new Font("My Boli", Font.PLAIN, 50));
+        Reorder.setBackground(new Color(209, 232, 238));
+        Reorder.addActionListener((ActionEvent e) -> {
+            frame.getContentPane().removeAll();
+            orderConfirm panel = new orderConfirm(frame, orderID, true);
+            frame.add(panel);
+            frame.revalidate();
+            frame.repaint();
+        });
+        frame.add(Reorder);
+                        
+                        
+        //show ordered items in text area
+        jTextArea1.setText(content);
+        
+        // Timer to refresh status
+        Timer timer = new Timer(50, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jLabel3.setText(customer.getOrderStatus(orderID));
+                if (customer.getOrderStatus(orderID).equals("Paid")){
+                    jButton3.setEnabled(true);
+                }else{
+                    jButton3.setEnabled(false);
+                }
             }
         });
         timer.start(); // Start the timer
@@ -292,10 +371,11 @@ public class orderStatus extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
     frame.getContentPane().removeAll();
-    selectVendor panel = new selectVendor(frame);   //the panel you want to switch to
+    orderMainPage panel = new orderMainPage(frame);   //the panel you want to switch to
     frame.add(panel);
     frame.revalidate();
     frame.repaint();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -303,6 +383,7 @@ public class orderStatus extends javax.swing.JPanel {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDateTime now = LocalDateTime.now();
         String date = dtf.format(now);
+        System.out.println(userID + orderID);
         
         try {
             //store every line in array
@@ -325,9 +406,11 @@ public class orderStatus extends javax.swing.JPanel {
             for (int i=0; i < table.size(); i++) {
                 String record = table.get(i);
                 String recor[] = record.split(",");
-                if (record != null && recor[0].equals(userID) && recor[1].equals(orderID)) {   //if record different, then overwrite it
+                if (record != null && recor[0].equals(userID) && recor[1].equals(orderID)) {   //if record same, then overwrite it
                     //order line
-                    order = record.substring(0,record.length()-1) + "4";
+                    System.out.println("yes");
+                    recor[6] = "4";
+                    order = String.join(",", recor);
                     table.set(i,order);
                 }
             }

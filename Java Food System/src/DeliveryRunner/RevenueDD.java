@@ -2,10 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package Delivery_runner;
+package DeliveryRunner;
 
 import javax.swing.JFrame;
 import Customer.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 /**
  *
@@ -21,7 +32,121 @@ public class RevenueDD extends javax.swing.JPanel {
         initComponents();
         this.frame = frame;
         setBounds(0,0,1536,864);
+
+
+        // Lists to store order IDs and dates
+        List<String> orderIdsWithStatus2 = new ArrayList<>();
+        Map<String, LocalDate> orderIdToDateMap = new HashMap<>();
+        System.out.println("test");
+
+        // Step 1: Read task.txt and collect order IDs with status 2
+        try {
+            FileReader fr = new FileReader("Task.txt");
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(":");
+                // Split the line by colon (:) instead of comma (,)
+                String[] array = line.split(":"); // Colon-separated values
+                if (array.length >= 5 && "2".equals(array[4].trim())) { // Check if status is 2
+                    String deliveryId = array[0].trim(); // D1, D0, etc.
+                    String orderId = array[2].trim(); // O4, O7, etc.
+                    orderIdsWithStatus2.add(orderId);
+                    System.out.println("Found order ID with status 2: " + orderId); // Debug
+                }
+            }
+            br.close();
+            fr.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // Step 2: Read order.txt and map order IDs to their dates
+        try {
+            FileReader fr = new FileReader("order.txt");
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] array = line.split(","); // Assuming comma-separated values
+                if (array.length >= 6 && orderIdsWithStatus2.contains(array[1].trim())) {
+                    String orderId = array[1].trim();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy"); // Adjust the pattern
+                    LocalDate orderDate = LocalDate.parse(array[5].trim(), formatter);
+                    orderIdToDateMap.put(orderId, orderDate);
+//                    System.out.println("Mapped order ID to date: " + orderId + " -> " + orderDate); // Debug
+                }
+            }
+            fr.close();
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Step 3: Calculate daily, monthly, and yearly counts
+        LocalDate currentDate = LocalDate.now();
+        int dailyCount = 0;
+        int monthlyCount = 0;
+        int yearlyCount = 0;
+
+        for (Map.Entry<String, LocalDate> entry : orderIdToDateMap.entrySet()) {
+            LocalDate orderDate = entry.getValue();
+            long daysDifference = ChronoUnit.DAYS.between(orderDate, currentDate);
+
+            if (daysDifference == 0) {
+                dailyCount++;
+            }
+            if (orderDate.getMonth() == currentDate.getMonth() && orderDate.getYear() == currentDate.getYear()) {
+                monthlyCount++;
+            }
+            if (orderDate.getYear() == currentDate.getYear()) {
+                yearlyCount++;
+            }
+        }
+
+
+        // Step 4: Count the lines in task.txt that meet the condition
+        int taskLinesWithStatus2 = orderIdsWithStatus2.size();
+
+        // Output results
+        
+        String x = "RM " + dailyCount*5;
+        String y = "RM " + monthlyCount*5;
+        String z = "RM " + yearlyCount*5;
+        jLabel3.setText(x);
+        jLabel7.setText(y);
+        jLabel9.setText(z);
+//        System.out.println("Lines in task.txt with status 2: " + taskLinesWithStatus2);
     }
+
+//        String file = "C:\\Users\\pangz\\OneDrive - Asia Pacific University\\Year 3 sem 1\\OOP Java\\Assignment\\Java-Food-system\\Java Food System\\task.txt"; // Path to the text file
+//        int count = 0; // Counter for lines meeting the condition
+//
+//        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+//            String line;
+//            while ((line = br.readLine()) != null) {
+//                // Split the line by spaces or any delimiter used in the file
+//                String[] array = line.split(",");
+//
+//                // Check if the array has at least 5 elements
+//                if (array.length >= 5) {
+//                    String deliveryId = array[0];
+//                    int status = Integer.parseInt(array[4]);
+//
+//                    // Check if the status is 2
+//                    if (status == 2) {
+//                        System.out.println("Delivery ID: " + deliveryId + " has status 2.");
+//                        count++;
+//                    }
+//                }
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        // Print the total count of lines meeting the condition
+//        System.out.println("Total lines with status 2: " + count);
+//    }
+
+    
 
 
 
