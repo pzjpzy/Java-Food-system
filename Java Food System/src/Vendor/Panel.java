@@ -6,8 +6,13 @@ package Vendor;
 
 /**
  *
- * @author pangz
+ * @author Choo JF
  */
-public class test {
+public class Panel {
+    
+    public static void main(String[] args) {
+        VendorPanel ar=new VendorPanel();
+        ar.setVisible(true);
+    }
     
 }
