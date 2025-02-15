@@ -4,6 +4,8 @@
  */
 package Vendor;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author Choo JF
@@ -13,7 +15,8 @@ public class VendorHome extends javax.swing.JPanel {
     /**
      * Creates new form VendorHome
      */
-    public VendorHome() {
+    JFrame frame;
+    public VendorHome(JFrame frame) {
         initComponents();
     }
 
