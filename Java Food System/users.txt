@@ -2,5 +2,6 @@ nour, 1122, Admin, A1
 pangzai, 3344, Manager, M1
 dinie, 5566, Customer, C1
 choo, 7788, Vendor, V1
-zaiyong, 9900, Deliveryrunner, D1
+zaiyong, 9900, Deliveryrunner, R1
 Test, 1234, Vendor, V2
+zaijie, 9900, Deliveryrunner, R2

@@ -285,7 +285,9 @@ public class LogIn extends javax.swing.JPanel {
                         frame.add(new AdminHome(frame)); // Admin home panel
                         break;
                     case "customer":
-                        frame.add(new CustomerHome(frame)); // Customer home panel
+                        customer customer = new customer();
+                        customer.setUserID(parts[3]);
+                        frame.add(new cusMainPage(frame)); // Customer home panel
                         break;
                     case "manager":
                         frame.add(new ManagerHome(frame)); // Manager home panel
@@ -294,7 +296,9 @@ public class LogIn extends javax.swing.JPanel {
                         frame.add(new VendorHome(frame)); // Vendor home panel
                         break;
                     case "deliveryrunner":
-                        frame.add(new DRHome(frame)); // Delivery Runner home panel
+                        runner runner = new runner();
+                        runner.setUserID(parts[3]);
+                        frame.add(new mainPage(frame)); // Delivery Runner home panel
                         break;
                     default:
                         JOptionPane.showMessageDialog(this, "Unknown role detected!", "Error", JOptionPane.ERROR_MESSAGE);

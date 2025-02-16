@@ -6,6 +6,7 @@ package DeliveryRunner;
 
 
 import Customer.customer;
+import Customer.user;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -34,8 +35,8 @@ public class taskHistory extends javax.swing.JPanel {
 
     JFrame frame;
     String date;
-    String userID = "R1";
-    String cusIDtem = "C1";
+    String userID = runner.userID;
+    String cusIDtem = null;
     String username;
     String food;
     public taskHistory(JFrame frame) {
@@ -243,11 +244,7 @@ public class taskHistory extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        test2 panel = new test2(frame);   //the panel you want to switch to
-//        frame.remove(this);
-//        frame.add(panel);
-//        frame.revalidate();
-//        frame.repaint();
+        user.logout(frame);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

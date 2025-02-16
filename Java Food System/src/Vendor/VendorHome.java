@@ -5,6 +5,8 @@
 package Vendor;
 import javax.swing.JFrame;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author Nour
