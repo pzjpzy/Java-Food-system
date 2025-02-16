@@ -5,6 +5,7 @@
 package DeliveryRunner;
 
 
+import Customer.user;
 import javax.swing.JFrame;
 
 
@@ -272,11 +273,7 @@ public class mainPage extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        test2 panel = new test2(frame);   //the panel you want to switch to
-//        frame.remove(this);
-//        frame.add(panel);
-//        frame.revalidate();
-//        frame.repaint();
+        user.logout(frame);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jPanel2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseReleased
