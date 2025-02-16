@@ -17,6 +17,7 @@ public class mainPage extends javax.swing.JPanel {
 
     JFrame frame;
     public mainPage(JFrame frame) {
+        System.out.println(runner.userID);
         initComponents();
         setBounds(0, 0, 1536, 864); // This line must exist in every JPanel
         this.frame = frame;

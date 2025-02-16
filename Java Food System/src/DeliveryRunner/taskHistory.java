@@ -34,8 +34,8 @@ public class taskHistory extends javax.swing.JPanel {
 
     JFrame frame;
     String date;
-    String userID = "R1";
-    String cusIDtem = "C1";
+    String userID = runner.userID;
+    String cusIDtem = null;
     String username;
     String food;
     public taskHistory(JFrame frame) {

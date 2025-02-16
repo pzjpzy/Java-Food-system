@@ -34,8 +34,8 @@ public class viewTask extends javax.swing.JPanel {
 
     JFrame frame;
     String date;
-    String userID = "R1";
-    String userIDtem = "C1";
+    String userID = runner.userID;
+    String userIDtem = null;
     String username;
     public viewTask(JFrame frame) {
         initComponents();

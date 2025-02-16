@@ -17,6 +17,7 @@ public class cusMainPage extends javax.swing.JPanel {
 
     JFrame frame;
     public cusMainPage(JFrame frame) {
+        System.out.println(customer.userID);
         initComponents();
         setBounds(0, 0, 1536, 864); // This line must exist in every JPanel
         this.frame = frame;
