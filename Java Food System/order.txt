@@ -1,9 +1,7 @@
-C1,O1,Pasta,1,dine in,29-12-24,1,V1
-C1,O2,Pasta,2,nothing,21-01-2025,0,V1
-C1,O2,Hamburger,3,nothing,21-01-2025,0,V1
-C1,O3,Pasta,3,Delivery,21-01-2025,1,V1
-C1,O3,Hamburger,3,Delivery,21-01-2025,1,V1
-C1,O4,Coke,4,Delivery,21-01-2025,3,V2
+C1,O1,Pasta,1,dine in,29-12-2024,1,V1
+C1,O2,Pasta,2,nothing,21-01-2025,4,V1
+C1,O2,Pasta,2,nothing,21-01-2025,4,V1
+C1,O4,Coke,4,Delivery,21-01-2025,5,V2
 C1,O5,Pasta,1,nothing,03-02-2025,0,V1
 C1,O5,Hamburger,1,nothing,03-02-2025,0,V1
 C1,O6,Pasta,1,nothing,03-02-2025,0,V1
@@ -24,10 +22,8 @@ C1,O13,Pasta,2,Delivery,03-02-2025,4,V1
 C1,O13,Hamburger,3,Delivery,03-02-2025,4,V1
 C1,O14,Pasta,1,Delivery,03-02-2025,3,V1
 C1,O14,Hamburger,2,Delivery,03-02-2025,3,V1
-C1,O15,Pasta,1,Delivery,03-02-2025,1,V1
-C1,O15,Hamburger,0,Delivery,03-02-2025,1,V1
-C1,O15,Coke,2,Delivery,03-02-2025,1,V2
 C1,O16,Pasta,2,Delivery,03-02-2025,1,V1
 C1,O16,Hamburger,3,Delivery,03-02-2025,1,V1
 C1,O17,Pasta,2,Dine in,03-02-2025,1,V1
 C1,O17,Hamburger,1,Dine in,03-02-2025,1,V1
+C1,017,Coke,2,Delivery,15-2-2025,1,V1

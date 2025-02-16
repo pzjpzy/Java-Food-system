@@ -4,7 +4,6 @@
  */
 package Vendor;
 
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.io.*;
@@ -17,7 +16,6 @@ import java.util.List;
  */
 public class VendorStatus extends javax.swing.JFrame {
     private DefaultTableModel tableModel;
-
 
     /**
      * Creates new form VendorStatus
@@ -43,12 +41,10 @@ public class VendorStatus extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         ShowOrder = new javax.swing.JButton();
-        update = new javax.swing.JButton();
         accept = new javax.swing.JButton();
         cancel = new javax.swing.JButton();
 
@@ -83,16 +79,13 @@ public class VendorStatus extends javax.swing.JFrame {
 
             },
             new String [] {
-                "VendorID", "ItemID", "Item", "Price", "Status"
+                "CustomerID", "OrderID", "Item", "Amount", "Type", "date", "Status", "VendorID"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Display Customer Orders ");
-
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Update Status");
+        jLabel5.setText("Display Customer Orders");
 
         jButton2.setText("Add Row");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -108,13 +101,6 @@ public class VendorStatus extends javax.swing.JFrame {
         ShowOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ShowOrderActionPerformed(evt);
-            }
-        });
-
-        update.setText("Update");
-        update.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateActionPerformed(evt);
             }
         });
 
@@ -137,48 +123,43 @@ public class VendorStatus extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(36, 36, 36)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cancel)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel6)
                     .addComponent(jLabel7)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ShowOrder)
-                    .addComponent(update)
-                    .addComponent(accept))
-                .addGap(146, 146, 146)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(accept)
+                    .addComponent(cancel))
+                .addGap(53, 53, 53)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 783, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(85, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap(103, Short.MAX_VALUE)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(11, 11, 11)
                         .addComponent(ShowOrder)
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(update)
                         .addGap(18, 18, 18)
                         .addComponent(accept)
                         .addGap(18, 18, 18)
                         .addComponent(cancel)
-                        .addGap(117, 117, 117)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(56, 56, 56))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(82, 82, 82))))
+                        .addGap(271, 271, 271))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -186,7 +167,9 @@ public class VendorStatus extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,7 +177,7 @@ public class VendorStatus extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -211,7 +194,7 @@ public class VendorStatus extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 712, Short.MAX_VALUE)
+            .addGap(0, 803, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -223,56 +206,63 @@ public class VendorStatus extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-               // TODO add your handling code here:
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void ShowOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowOrderActionPerformed
-        displayOrders();
-    }//GEN-LAST:event_ShowOrderActionPerformed
+        String vendorID = jTextField4.getText().trim(); // Get the vendorID from the text field
+    if (!vendorID.isEmpty()) {
+        displayOrdersByVendorID(vendorID); // Call the new method to display orders by vendorID
+    } else {
+        JOptionPane.showMessageDialog(this, "Please enter a VendorID.");
+    }
+}
 
-    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
-        displayPendingOrders();
-    }//GEN-LAST:event_updateActionPerformed
-
-    private void acceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptActionPerformed
-        updateOrderStatus("Accepted");
-    }//GEN-LAST:event_acceptActionPerformed
-
-    private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
-        updateOrderStatus("Cancelled");
-    }//GEN-LAST:event_cancelActionPerformed
-
-    private void displayOrders() {
-        tableModel.setRowCount(0); // Clear existing rows
-        List<String[]> orders = readOrdersFromFile("Order.txt");
-        for (String[] order : orders) {
+private void displayOrdersByVendorID(String vendorID) {
+    tableModel.setRowCount(0); // Clear existing rows
+    List<String[]> orders = readOrdersFromFile("order.txt");
+    for (String[] order : orders) {
+        if (order[7].equals(vendorID)) { // Assuming vendorID is in the 1st column
             tableModel.addRow(order);
         }
     }
+
+    }//GEN-LAST:event_ShowOrderActionPerformed
+
+    private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
+        updateOrderStatus("4");
+        deductFromBalance();
+    }//GEN-LAST:event_cancelActionPerformed
+
+    private void acceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptActionPerformed
+        updateOrderStatus("5");
+    }//GEN-LAST:event_acceptActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
     
-    private void displayPendingOrders() {
-        tableModel.setRowCount(0); // Clear existing rows
-        List<String[]> orders = readOrdersFromFile("Order.txt");
-        for (String[] order : orders) {
-            if (order[4].equals("Pending")) { // Assuming status is in the 5th column
-                tableModel.addRow(order);
-            }
-        }
-    }
+    
+    
+    
     
     private void updateOrderStatus(String newStatus) {
         int selectedRow = jTable1.getSelectedRow();
         if (selectedRow != -1) {
-            String vendorID = (String) tableModel.getValueAt(selectedRow, 0);
-            String itemID = (String) tableModel.getValueAt(selectedRow, 1);
+            String customerID = (String) tableModel.getValueAt(selectedRow, 0);
+            String orderID = (String) tableModel.getValueAt(selectedRow, 1);
             String item = (String) tableModel.getValueAt(selectedRow, 2);
-            String price = (String) tableModel.getValueAt(selectedRow, 3);
+            String amount = (String) tableModel.getValueAt(selectedRow, 3);
+            String type = (String) tableModel.getValueAt(selectedRow, 4);
+            String date = (String) tableModel.getValueAt(selectedRow, 5);
+            String status = (String) tableModel.getValueAt(selectedRow, 6);
+            String vendorID = (String) tableModel.getValueAt(selectedRow, 7);
 
             // Update the status in the table
-            tableModel.setValueAt(newStatus, selectedRow, 4);
+            tableModel.setValueAt(newStatus, selectedRow, 6);
 
             // Rewrite the file with updated status
-            rewriteOrdersFile("Order.txt", vendorID, itemID, item, price, newStatus);
+            rewriteOrdersFile("order.txt", customerID, orderID, item, amount, type, date, newStatus, vendorID);
         } else {
             JOptionPane.showMessageDialog(this, "Please select an order to update.");
         }
@@ -291,13 +281,12 @@ public class VendorStatus extends javax.swing.JFrame {
         return orders;
     }
     
-    
-    private void rewriteOrdersFile(String fileName, String vendorID, String itemID, String item, String price, String status) {
+    private void rewriteOrdersFile(String fileName, String customerID, String orderID, String item, String amount, String type, String date, String status, String vendorID) {
         List<String[]> orders = readOrdersFromFile(fileName);
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
             for (String[] order : orders) {
-                if (order[0].equals(vendorID) && order[1].equals(itemID)) {
-                    bw.write(vendorID + "," + itemID + "," + item + "," + price + "," + status);
+                if (order[0].equals(customerID) && order[1].equals(orderID)) {
+                    bw.write(customerID + "," + orderID + "," + item + "," + amount + "," + type + "," + date + "," + status + "," + vendorID);
                 } else {
                     bw.write(String.join(",", order));
                 }
@@ -307,15 +296,92 @@ public class VendorStatus extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-
-        
-   
     
-    
-    /**
-     * @param args the command line arguments
-     */
+    private void deductFromBalance() {
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow != -1) {
+            String customerID = (String) tableModel.getValueAt(selectedRow, 0);
+            String item = (String) tableModel.getValueAt(selectedRow, 2);
+            String amountStr = (String) tableModel.getValueAt(selectedRow, 3);
+            String vendorID = (String) tableModel.getValueAt(selectedRow, 7);
 
+            int quantity = Integer.parseInt(amountStr);
+            double price = getPriceFromMenu(vendorID, item);
+
+            if (price >= 0) {
+                double totalDeduction = price * quantity;
+                updateBalance(customerID, totalDeduction);
+            } else {
+                JOptionPane.showMessageDialog(this, "Item not found in menu.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select an order to cancel.");
+        }
+    }
+
+    private double getPriceFromMenu(String vendorID, String item) {
+        try (BufferedReader br = new BufferedReader(new FileReader("menu.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length == 3) {
+                    String menuVendorID = parts[0];
+                    String menuItem = parts[1];
+                    double price = Double.parseDouble(parts[2]);
+
+                    if (menuVendorID.equals(vendorID) && menuItem.equals(item)) {
+                        return price; // Return the price if vendorID and item match
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return -1; // Return -1 if item not found
+    }
+
+    private void updateBalance(String customerID, double totalDeduction) {
+        List<String[]> balances = readBalancesFromFile("balance.txt");
+        boolean found = false;
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("balance.txt"))) {
+            for (String[] balance : balances) {
+                if (balance[0].equals(customerID)) {
+                    double currentBalance = Double.parseDouble(balance[1]);
+                    double newBalance = currentBalance - totalDeduction;
+                    bw.write(customerID + "," + newBalance);
+                    found = true;
+                } else {
+                    bw.write(String.join(",", balance));
+                }
+                bw.newLine();
+            }
+
+            if (!found) {
+                JOptionPane.showMessageDialog(this, "Customer ID not found.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private List<String[]> readBalancesFromFile(String fileName) {
+        List<String[]> balances = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                balances.add(line.split(","));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return balances;
+    }
+
+
+
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ShowOrder;
@@ -324,7 +390,6 @@ public class VendorStatus extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -332,6 +397,5 @@ public class VendorStatus extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
 }
