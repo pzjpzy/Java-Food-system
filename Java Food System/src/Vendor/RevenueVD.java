@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package DeliveryRunner;
+package Vendor;
 
 import javax.swing.JFrame;
 import Customer.*;
@@ -22,13 +22,13 @@ import java.util.Map;
  *
  * @author pangz
  */
-public class RevenueDD extends javax.swing.JPanel {
+public class RevenueVD extends javax.swing.JPanel {
 
     /**
      * Creates new form RevenueD
      */
     JFrame frame;
-    public RevenueDD(JFrame frame) {
+    public RevenueVD(JFrame frame) {
         initComponents();
         this.frame = frame;
         setBounds(0,0,1536,864);
@@ -172,15 +172,14 @@ public class RevenueDD extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(245, 239, 255));
         setMaximumSize(new java.awt.Dimension(1532, 864));
         setMinimumSize(new java.awt.Dimension(1532, 864));
 
-        jPanel1.setBackground(new java.awt.Color(162, 148, 249));
+        jPanel1.setBackground(new java.awt.Color(217, 217, 217));
         jPanel1.setForeground(new java.awt.Color(162, 148, 249));
         jPanel1.setAutoscrolls(true);
 
-        jButton1.setBackground(new java.awt.Color(229, 217, 242));
+        jButton1.setBackground(new java.awt.Color(116, 136, 158));
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jButton1.setText("Log Out");
         jButton1.setFocusPainted(false);
@@ -221,7 +220,7 @@ public class RevenueDD extends javax.swing.JPanel {
                 .addGap(32, 32, 32))
         );
 
-        jPanel2.setBackground(new java.awt.Color(229, 217, 242));
+        jPanel2.setBackground(new java.awt.Color(217, 217, 217));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel1.setText("Daily Earning");
@@ -251,7 +250,7 @@ public class RevenueDD extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel4.setBackground(new java.awt.Color(229, 217, 242));
+        jPanel4.setBackground(new java.awt.Color(217, 217, 217));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel6.setText("Monthly Earning");
@@ -283,7 +282,7 @@ public class RevenueDD extends javax.swing.JPanel {
                 .addContainerGap(231, Short.MAX_VALUE))
         );
 
-        jPanel5.setBackground(new java.awt.Color(229, 217, 242));
+        jPanel5.setBackground(new java.awt.Color(217, 217, 217));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel8.setText("Yearly Earning");

@@ -15,7 +15,7 @@ import  Vendor.*;
  */
 public class frame extends JFrame{
     public frame() {
-        RevenueD panel  = new RevenueD(this);           //put your login panel here
+        RevenueVD panel  = new RevenueVD(this);           //put your login panel here
         
         
         setTitle("Food Management System");
