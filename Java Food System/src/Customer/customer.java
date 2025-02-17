@@ -17,14 +17,13 @@ import javax.swing.JOptionPane;
  *
  * @author pangz
  */
-public class customer {
-//    public static String userID = "C1";
-    public static String userID = "R1";
-     public static String orderID = null;
-     
+public class customer extends user {
+    
+     @Override
      public void setOrderID(String ID){
          this.orderID = ID;
      }
+     @Override
      public String getOrderID(){
          return orderID;
      }

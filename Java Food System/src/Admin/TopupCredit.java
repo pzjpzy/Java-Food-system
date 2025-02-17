@@ -2,26 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package DeliveryRunner;
+package Admin;
 
 /**
  *
  * @author Nour
  */
-import javax.swing.JFrame;
-public class DeliveryRunnerHome extends javax.swing.JPanel {
+public class TopupCredit extends javax.swing.JPanel {
 
     /**
-     * Creates new form DeliveryRunnerHome
+     * Creates new form TopupCredit
      */
-    JFrame frame;
-    public DeliveryRunnerHome(JFrame frame) {
+    public TopupCredit() {
         initComponents();
-        setBounds(0,0,1535,864);
-        this.frame = frame;
-        setVisible(true);
-        
-        frame.setLayout(null);
     }
 
     /**

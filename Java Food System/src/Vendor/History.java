@@ -6,8 +6,13 @@ package Vendor;
 
 /**
  *
- * @author pangz
+ * @author Choo JF
  */
-public class test {
+public class History {
+    
+    public static void main(String[] args) {
+        VendorHistory ar=new VendorHistory();
+        ar.setVisible(true);
+    }
     
 }
