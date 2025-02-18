@@ -243,7 +243,7 @@ private void displayOrdersByVendorID(String vendorID) {
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
         updateOrderStatus("4");
-        deductFromBalance();
+        addFromBalance();
     }//GEN-LAST:event_cancelActionPerformed
 
     private void acceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptActionPerformed
@@ -264,9 +264,6 @@ private void displayOrdersByVendorID(String vendorID) {
     /**
      * @param args the command line arguments
      */
-    
-    
-    
     
     
     private void updateOrderStatus(String newStatus) {
@@ -320,7 +317,7 @@ private void displayOrdersByVendorID(String vendorID) {
         }
     }
     
-    private void deductFromBalance() {
+    private void addFromBalance() {
         int selectedRow = jTable1.getSelectedRow();
         if (selectedRow != -1) {
             String customerID = (String) tableModel.getValueAt(selectedRow, 0);
@@ -332,8 +329,8 @@ private void displayOrdersByVendorID(String vendorID) {
             double price = getPriceFromMenu(vendorID, item);
 
             if (price >= 0) {
-                double totalDeduction = price * quantity;
-                updateBalance(customerID, totalDeduction);
+                double totalAddition = price * quantity;
+                updateBalance(customerID, totalAddition);
             } else {
                 JOptionPane.showMessageDialog(this, "Item not found in menu.");
             }
@@ -363,7 +360,7 @@ private void displayOrdersByVendorID(String vendorID) {
         return -1; // Return -1 if item not found
     }
 
-    private void updateBalance(String customerID, double totalDeduction) {
+    private void updateBalance(String customerID, double totalAddition) {
         List<String[]> balances = readBalancesFromFile("balance.txt");
         boolean found = false;
 
@@ -371,7 +368,7 @@ private void displayOrdersByVendorID(String vendorID) {
             for (String[] balance : balances) {
                 if (balance[0].equals(customerID)) {
                     double currentBalance = Double.parseDouble(balance[1]);
-                    double newBalance = currentBalance - totalDeduction;
+                    double newBalance = currentBalance + totalAddition;
                     bw.write(customerID + "," + newBalance);
                     found = true;
                 } else {

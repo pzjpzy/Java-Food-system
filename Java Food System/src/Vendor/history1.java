@@ -4,6 +4,7 @@
  */
 package Vendor;
 
+import Customer.LogIn;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -45,6 +46,7 @@ public class history1 extends javax.swing.JPanel {
         jPanel11 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         backtomain = new javax.swing.JButton();
+        logout = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
@@ -70,12 +72,21 @@ public class history1 extends javax.swing.JPanel {
             }
         });
 
+        logout.setText("Log Out");
+        logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGap(514, 514, 514)
+                .addGap(30, 30, 30)
+                .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(367, 367, 367)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(backtomain, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -84,11 +95,17 @@ public class history1 extends javax.swing.JPanel {
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addContainerGap(42, Short.MAX_VALUE)
+                .addContainerGap(71, Short.MAX_VALUE)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13)
-                    .addComponent(backtomain, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(backtomain, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel11Layout.createSequentialGroup()
+                            .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(12, 12, 12))))
+                .addGap(39, 39, 39))
         );
 
         jPanel12.setBackground(new java.awt.Color(34, 40, 44));
@@ -249,6 +266,14 @@ public class history1 extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_loadHistoryActionPerformed
 
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
+        frame.getContentPane().removeAll();
+        LogIn panel = new LogIn(frame);   //the panel you want to switch to
+        frame.add(panel);
+        frame.revalidate();
+        frame.repaint();
+    }//GEN-LAST:event_logoutActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backtomain;
@@ -263,13 +288,40 @@ public class history1 extends javax.swing.JPanel {
     private javax.swing.JTable jTable4;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JButton loadHistory;
+    private javax.swing.JButton logout;
     // End of variables declaration//GEN-END:variables
 
-    private void dispose() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
-    private boolean isDateInTimeframe(String orderDate, String timeframeSelected) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+    private boolean isDateInTimeframe(String orderDate, String timeframe) {
+        // Parse the order date
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    try {
+        Date date = sdf.parse(orderDate);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        
+        // Get the current date
+        Calendar now = Calendar.getInstance();
+        
+        switch (timeframe) {
+            case "Daily":
+                return cal.get(Calendar.YEAR) == now.get(Calendar.YEAR) &&
+                       cal.get(Calendar.DAY_OF_YEAR) == now.get(Calendar.DAY_OF_YEAR);
+            case "Monthly":
+                return cal.get(Calendar.YEAR) == now.get(Calendar.YEAR) &&
+                       cal.get(Calendar.MONTH) == now.get(Calendar.MONTH);
+            case "Quarterly":
+                return cal.get(Calendar.YEAR) == now.get(Calendar.YEAR) &&
+                       (cal.get(Calendar.MONTH) / 3) == (now.get(Calendar.MONTH) / 3);
+            case "Yearly":
+                return cal.get(Calendar.YEAR) == now.get(Calendar.YEAR);
+            default:
+                return false;
+        }
+    } catch (ParseException e) {
+        e.printStackTrace();
+        return false;
+    }
     }
 }

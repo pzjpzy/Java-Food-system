@@ -6,8 +6,8 @@ C1,O5,Pasta,1,nothing,03-02-2025,0,V1
 C1,O5,Hamburger,1,nothing,03-02-2025,0,V1
 C1,O6,Pasta,1,nothing,03-02-2025,0,V1
 C1,O6,Hamburger,2,nothing,03-02-2025,0,V1
-C1,O7,Pasta,1,Delivery,03-02-2025,3,V1
-C1,O7,Hamburger,1,Delivery,03-02-2025,3,V1
+C1,O7,Pasta,1,Delivery,03-02-2025,4,V1
+C1,O7,Pasta,1,Delivery,03-02-2025,4,V1
 C1,O8,Pasta,1,Delivery,03-02-2025,4,V1
 C1,O8,Hamburger,2,Delivery,03-02-2025,4,V1
 C1,O9,Pasta,1,Delivery,03-02-2025,4,V1
