@@ -233,7 +233,33 @@ public class orderConfirm extends javax.swing.JPanel {
                 
             }
     }
+    
+    // Method to simulate payment processing
+    public static String processPayment(String userID, String total) throws IOException {
+        
+        String line;
+        String balanc;
+        FileReader fr4 = new FileReader("Balance.txt");
+        BufferedReader br4  = new BufferedReader(fr4);
+        while((line = br4.readLine()) != null){
+                String balance[] = line.split(",");
+                if (balance[0].equals(userID)){
+                    balanc =
+                    balanc = String.valueOf(Float.valueOf(balance[1]) - Float.valueOf(total));
+                    //balance - total
+                    return balanc;
+                }
+                else{
+                    //do nothing
+                }
+        }
+        
+        fr4.close();
+        br4.close();
 
+        throw new IOException("Payment failed, insufficient amount.");
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -510,12 +536,16 @@ public class orderConfirm extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         String order;
+        String balance = null;
         String task = "error";
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDateTime now = LocalDateTime.now();
         String date = dtf.format(now);
         
         try {
+            
+            balance = processPayment(userID);
+            
             //store every line in array
             FileReader fr = new FileReader("Order.txt");
             BufferedReader br  = new BufferedReader(fr);

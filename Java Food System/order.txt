@@ -29,3 +29,7 @@ C1,O17,Hamburger,1,Dine in,03-02-2025,1,V1
 C1,017,Coke,2,Delivery,15-2-2025,1,V1
 C1,O18,Hamburger,3,Delivery,16-02-2025,4,V1
 C1,O18,Hamburger,3,Delivery,16-02-2025,4,V1
+C1,O19,Pasta,0,nothing,18-02-2025,0,V1
+C1,O19,Hamburger,0,nothing,18-02-2025,0,V1
+C1,O20,Pasta,7,nothing,18-02-2025,0,V1
+C1,O20,Hamburger,8,nothing,18-02-2025,0,V1
