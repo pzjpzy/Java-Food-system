@@ -8,7 +8,7 @@ package Vendor;
  *
  * @author Choo JF
  */
-public class MainPage {
+public class VHome {
     
     public static void main(String[] args) {
         VendorPage ar=new VendorPage();
