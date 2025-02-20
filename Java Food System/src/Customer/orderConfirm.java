@@ -235,19 +235,32 @@ public class orderConfirm extends javax.swing.JPanel {
     }
     
     // Method to simulate payment processing
-    public static String processPayment(String userID, String total) throws IOException {
+    public static void processPayment(String userID, Double total) throws IOException {
         
-        String line;
+        String line = null;
         String balanc;
+        String balanced;
         FileReader fr4 = new FileReader("Balance.txt");
         BufferedReader br4  = new BufferedReader(fr4);
-        while((line = br4.readLine()) != null){
-                String balance[] = line.split(",");
+            ArrayList<String> table = new ArrayList<>();
+            
+            while((line = br4.readLine()) != null){
+                table.add(line);
+            }
+            fr4.close();
+            br4.close();
+        for (int i=0; i < table.size(); i++) {
+                String record = table.get(i);
+                String balance[] = record.split(",");
                 if (balance[0].equals(userID)){
-                    balanc =
-                    balanc = String.valueOf(Float.valueOf(balance[1]) - Float.valueOf(total));
-                    //balance - total
-                    return balanc;
+                    if (total < Float.valueOf(balance[1])){
+                        balanc = String.format("%.2f",Double.valueOf(balance[1]) - total);
+                        //balance - total
+                        balance[1] = balanc;
+                        balanced = String.join(",", balance);
+                        table.set(i,balanced);
+                        
+                    }                                 
                 }
                 else{
                     //do nothing
@@ -256,6 +269,15 @@ public class orderConfirm extends javax.swing.JPanel {
         
         fr4.close();
         br4.close();
+        
+        //write every line into file
+            FileWriter fw4 = new FileWriter("Balance.txt");
+            for (String record : table) {
+                if (record != null){
+                    fw4.append(record + "\n");
+                }
+            }
+            fw4.close(); 
 
         throw new IOException("Payment failed, insufficient amount.");
 
@@ -544,7 +566,7 @@ public class orderConfirm extends javax.swing.JPanel {
         
         try {
             
-            balance = processPayment(userID);
+            processPayment(userID,total);
             
             //store every line in array
             FileReader fr = new FileReader("Order.txt");
