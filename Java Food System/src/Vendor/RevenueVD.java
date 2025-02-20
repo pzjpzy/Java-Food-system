@@ -9,12 +9,7 @@ import Customer.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -32,119 +27,92 @@ public class RevenueVD extends javax.swing.JPanel {
         initComponents();
         this.frame = frame;
         setBounds(0,0,1536,864);
+//        String vendorID = "V1";        
+//        FileReader fr = new FileReader("order.txt");
+//        BufferedReader br = new BufferedReader(fr);
 
+       // Map to store vendor_id as key and menu details (array[1] and array[2]) as value
+        Map<String, String[]> vendorMenuMap = new HashMap<>();
 
-        // Lists to store order IDs and dates
-        List<String> orderIdsWithStatus2 = new ArrayList<>();
-        Map<String, LocalDate> orderIdToDateMap = new HashMap<>();
-        System.out.println("test");
-
-        // Step 1: Read task.txt and collect order IDs with status 2
+        // Read menu.txt and populate the vendorMenuMap
         try {
-            String deliveryId = "D1";        
-            FileReader fr = new FileReader("Task.txt");
+            FileReader fr = new FileReader("menu.txt");
             BufferedReader br = new BufferedReader(fr);
+            String vendorID = "V1";
             String line;
             while ((line = br.readLine()) != null) {
-                String[] values = line.split(":");
-                // Split the line by colon (:) instead of comma (,)
-                String[] array = line.split(":"); // Colon-separated values
-                if (array.length >= 5 && "2".equals(array[4].trim()) && deliveryId.equals(array[0])) { // Check if status is 2
-                    String orderId = array[2].trim(); // O4, O7, etc.
-                    orderIdsWithStatus2.add(orderId);
-                    System.out.println("Found order ID with status 2: " + orderId); // Debug
+                String[] array = line.split(","); // Assuming the file is comma-separated
+                if (array.length >= 3 && array[0].equals(vendorID)) {
+                    String vendorId = array[0].trim();
+                    String menuItem = array[1].trim();
+                    String price = array[2].trim();
+
+                    // Debug: Print parsed values
+//                    System.out.println("Menu - Vendor ID: " + vendorId + ", Item: " + menuItem + ", Price: " + price);
+
+                    vendorMenuMap.put(vendorId, new String[]{menuItem, price});
+                } else {
+                    System.err.println("Invalid line in menu.txt: " + line);
                 }
             }
-            br.close();
-            fr.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        // Step 2: Read order.txt and map order IDs to their dates
+
+        // Debug: Print the vendor menu map
+//        System.out.println("Vendor Menu Map: " + vendorMenuMap);
+
+        // Variables to store the total and count
+        double total = 0.0;
+        int count = 0;
+
+        // Read order.txt and process the data
         try {
             FileReader fr = new FileReader("order.txt");
             BufferedReader br = new BufferedReader(fr);
             String line;
             while ((line = br.readLine()) != null) {
-                String[] array = line.split(","); // Assuming comma-separated values
-                if (array.length >= 6 && orderIdsWithStatus2.contains(array[1].trim())) {
-                    String orderId = array[1].trim();
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy"); // Adjust the pattern
-                    LocalDate orderDate = LocalDate.parse(array[5].trim(), formatter);
-                    orderIdToDateMap.put(orderId, orderDate);
-//                    System.out.println("Mapped order ID to date: " + orderId + " -> " + orderDate); // Debug
+                String[] array1 = line.split(","); 
+                if (array1.length >= 8) {
+                    String orderItem = array1[2].trim();
+                    String orderStatus = array1[6].trim();
+                    String vendorID = array1[7].trim();
+
+                    // Debug: Print parsed values
+//                    System.out.println("Order - Vendor ID: " + vendorID + ", Item: " + orderItem + ", Status: " + orderStatus);
+
+                    if (vendorMenuMap.containsKey(vendorID)) {
+                        String[] menuDetails = vendorMenuMap.get(vendorID);
+                        String menuItem = menuDetails[0];
+                        double price = Double.parseDouble(menuDetails[1]);
+
+                        // Check if the conditions are met
+                        if (orderItem.equals(menuItem) && orderStatus.equals("2") || orderStatus.equals("3")) {
+                            total += price; // Add the price to the total
+                            count++; // Increment the count
+
+                            // Debug: Print matched order
+//                            System.out.println("Matched Order - Vendor ID: " + vendorID + ", Item: " + orderItem + ", Price: " + price);
+                        }
+                    }
+                } else {
+                    System.err.println("Invalid line in order.txt: " + line);
                 }
             }
-            fr.close();
-            br.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        // Step 3: Calculate daily, monthly, and yearly counts
-        LocalDate currentDate = LocalDate.now();
-        int dailyCount = 0;
-        int monthlyCount = 0;
-        int yearlyCount = 0;
-
-        for (Map.Entry<String, LocalDate> entry : orderIdToDateMap.entrySet()) {
-            LocalDate orderDate = entry.getValue();
-            long daysDifference = ChronoUnit.DAYS.between(orderDate, currentDate);
-
-            if (daysDifference == 0) {
-                dailyCount++;
-            }
-            if (orderDate.getMonth() == currentDate.getMonth() && orderDate.getYear() == currentDate.getYear()) {
-                monthlyCount++;
-            }
-            if (orderDate.getYear() == currentDate.getYear()) {
-                yearlyCount++;
-            }
-        }
-
-
-        // Step 4: Count the lines in task.txt that meet the condition
-        int taskLinesWithStatus2 = orderIdsWithStatus2.size();
-
-        // Output results
-        
-        String x = "RM " + dailyCount*5;
-        String y = "RM " + monthlyCount*5;
-        String z = "RM " + yearlyCount*5;
-        jLabel3.setText(x);
-        jLabel7.setText(y);
-        jLabel9.setText(z);
-//        System.out.println("Lines in task.txt with status 2: " + taskLinesWithStatus2);
+        // Output the results
+//        System.out.println("Total: " + total);
+//        System.out.println("Number of lines meeting the condition: " + count);
+    
+        String x = "RM" + total;
+        int y = count;
+        jLabel1.setText(x);
+        jLabel3.setText(String.valueOf(y));
     }
 
-//        String file = "C:\\Users\\pangz\\OneDrive - Asia Pacific University\\Year 3 sem 1\\OOP Java\\Assignment\\Java-Food-system\\Java Food System\\task.txt"; // Path to the text file
-//        int count = 0; // Counter for lines meeting the condition
-//
-//        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-//            String line;
-//            while ((line = br.readLine()) != null) {
-//                // Split the line by spaces or any delimiter used in the file
-//                String[] array = line.split(",");
-//
-//                // Check if the array has at least 5 elements
-//                if (array.length >= 5) {
-//                    String deliveryId = array[0];
-//                    int status = Integer.parseInt(array[4]);
-//
-//                    // Check if the status is 2
-//                    if (status == 2) {
-//                        System.out.println("Delivery ID: " + deliveryId + " has status 2.");
-//                        count++;
-//                    }
-//                }
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        // Print the total count of lines meeting the condition
-//        System.out.println("Total lines with status 2: " + count);
-//    }
 
     
 
@@ -162,15 +130,11 @@ public class RevenueVD extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1532, 864));
         setMinimumSize(new java.awt.Dimension(1532, 864));
@@ -220,98 +184,49 @@ public class RevenueVD extends javax.swing.JPanel {
                 .addGap(32, 32, 32))
         );
 
-        jPanel2.setBackground(new java.awt.Color(217, 217, 217));
+        jPanel3.setBackground(new java.awt.Color(217, 217, 217));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel4.setText("Total Revenue :");
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel5.setText("Paid Order :");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel1.setText("Daily Earning");
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("jLabel1");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Jlabel3");
+        jLabel3.setText("jLabel3");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(165, 165, 165)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(113, 113, 113)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(195, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(129, 129, 129)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(119, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(145, 145, 145)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel4.setBackground(new java.awt.Color(217, 217, 217));
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel6.setText("Monthly Earning");
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Jlabel7");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(71, Short.MAX_VALUE)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(148, 148, 148)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(231, Short.MAX_VALUE))
-        );
-
-        jPanel5.setBackground(new java.awt.Color(217, 217, 217));
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel8.setText("Yearly Earning");
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("Jlabel9");
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(81, Short.MAX_VALUE)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(145, 145, 145)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(99, 99, 99)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(188, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -320,23 +235,16 @@ public class RevenueVD extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(286, 286, 286)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(62, 62, 62)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(133, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -365,13 +273,9 @@ public class RevenueVD extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }
