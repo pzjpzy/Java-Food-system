@@ -27,7 +27,7 @@ public abstract class user {
      
      public static void logout(JFrame frame){
         frame.getContentPane().removeAll();
-        SignUp panel = new SignUp(frame);   //the panel you want to switch to
+        LogIn panel = new LogIn(frame);   //the panel you want to switch to
         frame.add(panel);
         frame.revalidate();
         frame.repaint();

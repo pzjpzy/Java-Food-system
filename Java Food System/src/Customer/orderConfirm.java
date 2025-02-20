@@ -233,7 +233,55 @@ public class orderConfirm extends javax.swing.JPanel {
                 
             }
     }
+    
+    // Method to simulate payment processing
+    public static void processPayment(String userID, Double total) throws IOException {
+        
+        String line = null;
+        String balanc;
+        String balanced;
+        FileReader fr4 = new FileReader("Balance.txt");
+        BufferedReader br4  = new BufferedReader(fr4);
+            ArrayList<String> table = new ArrayList<>();
+            
+            while((line = br4.readLine()) != null){
+                table.add(line);
+            }
+            fr4.close();
+            br4.close();
+        for (int i=0; i < table.size(); i++) {
+                String record = table.get(i);
+                String balance[] = record.split(",");
+                if (balance[0].equals(userID)){
+                    if (total < Float.valueOf(balance[1])){
+                        balanc = String.format("%.2f",Double.valueOf(balance[1]) - total);
+                        //balance - total
+                        balance[1] = balanc;
+                        balanced = String.join(",", balance);
+                        table.set(i,balanced);
+                        
+                    }                                 
+                }
+                else{
+                    //do nothing
+                }
+        }
+        
+        fr4.close();
+        br4.close();
+        
+        //write every line into file
+            FileWriter fw4 = new FileWriter("Balance.txt");
+            for (String record : table) {
+                if (record != null){
+                    fw4.append(record + "\n");
+                }
+            }
+            fw4.close(); 
 
+        throw new IOException("Payment failed, insufficient amount.");
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -396,11 +444,7 @@ public class orderConfirm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        test2 panel = new test2(frame);   //the panel you want to switch to
-//        frame.remove(this);
-//        frame.add(panel);
-//        frame.revalidate();
-//        frame.repaint();
+    user.logout(frame);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -514,12 +558,16 @@ public class orderConfirm extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         String order;
+        String balance = null;
         String task = "error";
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDateTime now = LocalDateTime.now();
         String date = dtf.format(now);
         
         try {
+            
+            processPayment(userID,total);
+            
             //store every line in array
             FileReader fr = new FileReader("Order.txt");
             BufferedReader br  = new BufferedReader(fr);

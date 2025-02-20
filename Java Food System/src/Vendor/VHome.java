@@ -2,15 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+package Vendor;
 
 /**
  *
  * @author Choo JF
  */
-class jTextFieldLN {
-
-    static Object getText() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+public class VHome {
+    
+    public static void main(String[] args) {
+        VendorPage ar=new VendorPage();
+        ar.setVisible(true);
     }
     
 }

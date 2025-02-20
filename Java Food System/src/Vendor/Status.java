@@ -14,5 +14,4 @@ public class Status {
         VendorStatus ar=new VendorStatus();
         ar.setVisible(true);
     }
-    
 }

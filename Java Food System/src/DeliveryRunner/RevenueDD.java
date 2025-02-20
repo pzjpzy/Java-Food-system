@@ -41,6 +41,7 @@ public class RevenueDD extends javax.swing.JPanel {
 
         // Step 1: Read task.txt and collect order IDs with status 2
         try {
+            String deliveryId = "D1";        
             FileReader fr = new FileReader("Task.txt");
             BufferedReader br = new BufferedReader(fr);
             String line;
@@ -48,8 +49,7 @@ public class RevenueDD extends javax.swing.JPanel {
                 String[] values = line.split(":");
                 // Split the line by colon (:) instead of comma (,)
                 String[] array = line.split(":"); // Colon-separated values
-                if (array.length >= 5 && "2".equals(array[4].trim())) { // Check if status is 2
-                    String deliveryId = array[0].trim(); // D1, D0, etc.
+                if (array.length >= 5 && "2".equals(array[4].trim()) && deliveryId.equals(array[0])) { // Check if status is 2
                     String orderId = array[2].trim(); // O4, O7, etc.
                     orderIdsWithStatus2.add(orderId);
                     System.out.println("Found order ID with status 2: " + orderId); // Debug
