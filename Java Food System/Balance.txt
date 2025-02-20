@@ -1,1 +1,1 @@
-customerID, Balance
+C1,130.0

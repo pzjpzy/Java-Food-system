@@ -282,12 +282,14 @@ public class LogIn extends javax.swing.JPanel {
                 frame.remove(this);
                 switch (role.toLowerCase()) {
                     case "admin":
+                        ChooseBalance.customerID = parts[3];
                         frame.add(new AdminHome(frame)); // Admin home panel
                         break;
                     case "customer":
                         customer customer = new customer();
                         customer.setUserID(parts[3]);
-                        frame.add(new cusMainPage(frame)); // Customer home panel
+                        ChooseBalance.customerID = parts[3];
+                        frame.add(new ChooseBalance(frame)); // Customer home panel
                         break;
                     case "manager":
                         frame.add(new ManagerHome(frame)); // Manager home panel
