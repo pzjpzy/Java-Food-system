@@ -323,11 +323,11 @@ public class cusMainPage extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel3MouseReleased
 
     private void jPanel5MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseReleased
-//        frame.remove(this);
-//        Notification panel = new Notification(frame);
-//        frame.add(panel);
-//        frame.revalidate();
-//        frame.repaint();
+        frame.remove(this);
+        Receipt panel = new Receipt(frame);
+        frame.add(panel);
+        frame.revalidate();
+        frame.repaint();
     }//GEN-LAST:event_jPanel5MouseReleased
 
 
