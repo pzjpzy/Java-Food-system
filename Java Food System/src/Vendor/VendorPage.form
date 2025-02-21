@@ -246,6 +246,9 @@
           <Image iconType="3" name="/DeliveryRunner/bell.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel10MouseReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="backtomain">
       <Properties>

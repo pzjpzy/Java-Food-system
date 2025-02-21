@@ -228,7 +228,7 @@ public class NotificationV extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseReleased
-        mainPage panel = new mainPage(frame);   //the panel you want to switch to
+        VendorPage panel = new VendorPage(frame);   //the panel you want to switch to
         frame.remove(this);
         frame.add(panel);
         frame.revalidate();
@@ -240,7 +240,7 @@ public class NotificationV extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseReleased
-        NotificationH panel = new NotificationH(frame);   //the panel you want to switch to
+        NotificationVH panel = new NotificationVH(frame);   //the panel you want to switch to
         frame.remove(this);
         frame.add(panel);
         frame.revalidate();
