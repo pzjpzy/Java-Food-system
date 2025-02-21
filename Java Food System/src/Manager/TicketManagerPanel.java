@@ -51,7 +51,7 @@ public class TicketManagerPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Back");
         jButton1.setMaximumSize(new java.awt.Dimension(55, 25));
         jButton1.setMinimumSize(new java.awt.Dimension(55, 25));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -114,7 +114,11 @@ public class TicketManagerPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // back button
+        frame.getContentPane().removeAll();
+        ManagerHome panel = new ManagerHome(frame);   //the panel you want to switch to
+        frame.add(panel);
+        frame.revalidate();
+        frame.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
