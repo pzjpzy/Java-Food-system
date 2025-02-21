@@ -253,14 +253,14 @@ public class orderConfirm extends javax.swing.JPanel {
                 String record = table.get(i);
                 String balance[] = record.split(",");
                 if (balance[0].equals(userID)){
-                    if (total < Float.valueOf(balance[1])){
+                    if (total <= Float.valueOf(balance[1])){
                         balanc = String.format("%.2f",Double.valueOf(balance[1]) - total);
                         //balance - total
                         balance[1] = balanc;
                         balanced = String.join(",", balance);
                         table.set(i,balanced);
                         
-                    }                                 
+                    } else throw new IOException("Payment failed, insufficient amount.");                      
                 }
                 else{
                     //do nothing
@@ -279,7 +279,7 @@ public class orderConfirm extends javax.swing.JPanel {
             }
             fw4.close(); 
 
-        throw new IOException("Payment failed, insufficient amount.");
+        
 
     }
     /**
@@ -657,6 +657,11 @@ public class orderConfirm extends javax.swing.JPanel {
             fw.close(); 
             
             JOptionPane.showMessageDialog(this, "Payment successfull!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            frame.getContentPane().removeAll();
+            cusMainPage panel = new cusMainPage(frame);   //the panel you want to switch to
+            frame.add(panel);
+            frame.revalidate();
+            frame.repaint();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Payment failed.", "Error", JOptionPane.ERROR_MESSAGE);
         }

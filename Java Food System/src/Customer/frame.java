@@ -10,7 +10,7 @@ import Vendor.*;
 
 public class frame extends JFrame {
     public frame() {
-        cusMainPage panel1 = new cusMainPage(this);  // put your login panel here
+        LogIn panel1 = new LogIn(this);  // put your login panel here
 
         setTitle("Ordering Food System");
         setVisible(true);
