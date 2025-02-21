@@ -39,13 +39,16 @@ public class CustComplaint extends javax.swing.JPanel {
         orders = new ArrayList<>();
         loadOrders();
         populateOrderDropdown();
+                        setBounds(0, 0, 1536, 864); // This line must exist in every JPanel
+        this.frame = frame;
+        frame.setLayout(null);
     }
     /**
      * Loads available orders from a file or a data source.
      */
     private void loadOrders() {
         // Example: Load orders from a file (you can customize this logic)
-        try (BufferedReader br = new BufferedReader(new FileReader("orders.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("order.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 orders.add(line); // Each line represents an order ID
@@ -98,10 +101,10 @@ public class CustComplaint extends javax.swing.JPanel {
         }
     }
     public static void main(String[] args) {
-        // Create a JFrame to hold the CustReview JPanel
-        JFrame frame = new JFrame("Customer Review");
+        // Create a JFrame to hold the CustComplaintJPanel
+        JFrame frame = new JFrame("Customer Complaint");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new CustReview()); // Add the CustReview JPanel to the frame
+        frame.add(new CustComplaint()); // Add the CustComplaintJPanel to the frame
         frame.pack(); // Adjust the window size to fit components
         frame.setVisible(true); // Show the window
     }

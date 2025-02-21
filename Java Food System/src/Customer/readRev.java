@@ -57,7 +57,7 @@ public class readRev extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -100,7 +100,7 @@ public class readRev extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
+filterReviews();
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -125,7 +125,7 @@ public class readRev extends javax.swing.JFrame {
         tableModel.setRowCount(0); // Clear existing rows
         Set<String> orderIds = new HashSet<>();
         
-        try (BufferedReader br = new BufferedReader(new FileReader("review.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("reviews.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
@@ -150,16 +150,27 @@ public class readRev extends javax.swing.JFrame {
     /**
      * Filters reviews based on selected Order ID.
      */
-    private void filterReviews() {
-        String selectedOrder = (String) jComboBox1.getSelectedItem();
-        tableModel.setRowCount(0); // Clear table before filtering
+private void filterReviews() {
+    if (jComboBox1.getSelectedItem() == null) {
+        JOptionPane.showMessageDialog(this, "No order selected!", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
 
-        for (String[] review : reviewsList) {
-            if (selectedOrder.equals("All Orders") || review[1].equals(selectedOrder)) {
-                tableModel.addRow(review);
-            }
+    String selectedOrder = (String) jComboBox1.getSelectedItem();
+    
+    if (reviewsList == null || reviewsList.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "No reviews available!", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    tableModel.setRowCount(0); // Clear table before filtering
+
+    for (String[] review : reviewsList) {
+        if (review.length > 1 && ("All Orders".equals(selectedOrder) || review[1].equals(selectedOrder))) {
+            tableModel.addRow(review);
         }
     }
+}
 
     /**
      * Main method to run the application.

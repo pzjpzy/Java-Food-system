@@ -29,7 +29,7 @@ public class CustReview extends javax.swing.JPanel {
      */
     private void loadOrders() {
         // Example: Load orders from a file (you can customize this logic)
-        try (BufferedReader br = new BufferedReader(new FileReader("orders.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("order.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 orders.add(line); // Each line represents an order ID
