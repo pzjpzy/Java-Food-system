@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -233,6 +234,7 @@ public class VendorPanel extends javax.swing.JFrame {
 
         if (vendorId.isEmpty() || item.isEmpty() || price.isEmpty()) {
             // Optionally show a message dialog to inform the user to fill all fields
+            JOptionPane.showMessageDialog(this, "Please fill all fields.");
             return;
         }
 
