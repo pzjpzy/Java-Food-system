@@ -45,7 +45,7 @@ public class NotificationCH extends javax.swing.JPanel {
         header.setFont(new Font("Arial", Font.BOLD, 16));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
                 
-        String userID = "C1";
+
         try{
         FileReader fr = new FileReader("Notification.txt");
         BufferedReader br = new BufferedReader(fr);
@@ -54,13 +54,12 @@ public class NotificationCH extends javax.swing.JPanel {
         
             while((line = br.readLine())!= null){
                 String values[] = line.split(":");
-                if(values[0].equals(userID)){
+                if(values[0].equals(customer.userID)){
                     String date = values[2].trim();
                     LocalDate fileDate = LocalDate.parse(date,formatter);
-                    System.out.println(fileDate);
                     LocalDate currentDate = LocalDate.now();
 
-                    if(!fileDate.equals(currentDate) && values[0].equals(customer.userID)){
+                    if(!fileDate.equals(currentDate)){
                         String array[] = {values[3]};
                         container.addRow(array);
                     }
@@ -118,7 +117,7 @@ public class NotificationCH extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Notification");
+        jLabel2.setText("Notification History");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
