@@ -53,7 +53,7 @@ public class NotificationH extends javax.swing.JPanel {
         
             while((line = br.readLine())!= null){
                 String values[] = line.split(":");
-                if(values[0].equals(userID)){
+                if(values[0].equals(runner.userID)){
                     String date = values[2].trim();
                     LocalDate fileDate = LocalDate.parse(date,formatter);
                     System.out.println(fileDate);
