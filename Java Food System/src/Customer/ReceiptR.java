@@ -19,50 +19,22 @@ import javax.swing.table.JTableHeader;
  *
  * @author pangz
  */
-public class Receipt extends javax.swing.JPanel {
+public class ReceiptR extends javax.swing.JPanel {
     
     JFrame frame;
-    private DefaultTableModel container = new DefaultTableModel();
-    private String ColumnName[] = {"Date","Amount"};
     
-    public Receipt(JFrame frame) {   
+    
+    public ReceiptR(JFrame frame) {   
         initComponents();
         setBounds(0,0,1535,864);
         this.frame = frame;
         setVisible(true);
         
-        container.setColumnIdentifiers(ColumnName);
-        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
-        renderer.setHorizontalAlignment(SwingConstants.CENTER);
+       
         
-        jTable1.setDefaultRenderer(Object.class, renderer);
-        jTable1.setRowHeight(30);
-        
-        JTableHeader header = jTable1.getTableHeader();
-        header.setFont(new Font("Arial", Font.BOLD, 16));
-                
-        String userID = "C1";
-        try{
-        FileReader fr = new FileReader("Receipt.txt");
-        BufferedReader br = new BufferedReader(fr);
-        String line = null;
-        
-        
-            while((line = br.readLine())!= null){
-                String values[] = line.split(",");
-                if(values[0].equals(userID)){
-                    String array[] = {values[2],values[1]};
-                    container.addRow(array);
-                }
-            }
 
-        br.close();
-        fr.close();
         
-        
-        }catch(IOException e){
-            System.out.println("error");
-        }
+      
     }
 
     /**
@@ -77,10 +49,8 @@ public class Receipt extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        textArea1 = new java.awt.TextArea();
 
         setMaximumSize(new java.awt.Dimension(1532, 864));
         setMinimumSize(new java.awt.Dimension(1532, 864));
@@ -131,24 +101,6 @@ public class Receipt extends javax.swing.JPanel {
                 .addGap(32, 32, 32))
         );
 
-        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 14));
-        jTable1.setModel(container);
-        jScrollPane1.setViewportView(jTable1);
-
-        jButton3.setBackground(new java.awt.Color(136, 151, 170));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jButton3.setText("Generate");
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jButton3MouseReleased(evt);
-            }
-        });
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
         jButton4.setBackground(new java.awt.Color(136, 151, 170));
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jButton4.setText("Back");
@@ -169,16 +121,11 @@ public class Receipt extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(242, 242, 242)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 839, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(218, 218, 218)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addComponent(textArea1, javax.swing.GroupLayout.PREFERRED_SIZE, 809, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(243, 243, 243)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(1106, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,17 +133,12 @@ public class Receipt extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(273, 273, 273)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(179, 179, 179)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(157, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(460, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(333, 333, 333)))
+                        .addGap(46, 46, 46)
+                        .addComponent(textArea1, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(160, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -214,38 +156,24 @@ public class Receipt extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseReleased
-        ReceiptR panel = new ReceiptR(frame);   //the panel you want to switch to
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        Receipt panel = new Receipt(frame);   //the panel you want to switch to
         frame.remove(this);
         frame.add(panel);
         frame.revalidate();
         frame.repaint();
-    }//GEN-LAST:event_jButton3MouseReleased
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseReleased
-        cusMainPage panel = new cusMainPage(frame);   //the panel you want to switch to
-        frame.remove(this);
-        frame.add(panel);
-        frame.revalidate();
-        frame.repaint();
-    }//GEN-LAST:event_jButton4MouseReleased
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButton4MouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private java.awt.TextArea textArea1;
     // End of variables declaration//GEN-END:variables
 }
