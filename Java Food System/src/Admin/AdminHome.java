@@ -4,6 +4,7 @@
  */
 package Admin;
 
+import Customer.ChooseBalance;
 import javax.swing.JFrame;
 
 /**
@@ -23,6 +24,7 @@ public class AdminHome extends javax.swing.JPanel {
         setVisible(true);
         
         frame.setLayout(null);
+        System.out.println(ChooseBalance.customerID);
     }
 
     /**
@@ -34,15 +36,17 @@ public class AdminHome extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        setMinimumSize(new java.awt.Dimension(1552, 837));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 1552, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 837, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

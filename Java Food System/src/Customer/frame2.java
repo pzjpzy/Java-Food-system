@@ -13,7 +13,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
  */
 public class frame2 extends JFrame{
     public frame2() {
-        cusMainPage panelz = new cusMainPage(this);
+        ChooseBalance panelz = new ChooseBalance(this);
         setTitle("Ordering Food System");
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

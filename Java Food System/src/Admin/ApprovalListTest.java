@@ -14,7 +14,8 @@ public class ApprovalListTest {
         // Create a JFrame to hold the ApprovalList panel
         JFrame frame = new JFrame("Approval List");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600, 400); // Set the window size
+        //frame.setSize(600, 400); // Set the window size
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH); // Set full-screen mode
         frame.setLocationRelativeTo(null); // Center the window
 
         // Create an instance of ApprovalList and add it to the frame
