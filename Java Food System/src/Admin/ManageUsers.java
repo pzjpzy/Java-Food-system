@@ -29,10 +29,6 @@ public class ManageUsers extends javax.swing.JPanel {
      * Creates new form ManageUsers
      */
     public ManageUsers() {
-        initComponents();
-        txtUserID = new javax.swing.JTextField();
-        txtName = new javax.swing.JTextField();
-        txtRole = new javax.swing.JTextField();
 
         tableManager = new TableManager(jTable1);
         model = (DefaultTableModel) jTable1.getModel();
