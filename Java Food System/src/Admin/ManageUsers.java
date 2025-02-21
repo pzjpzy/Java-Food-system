@@ -19,6 +19,7 @@ import java.io.IOException;
  * @author Nour
  */
 public class ManageUsers extends javax.swing.JPanel {
+    JFrame frame;
     private DefaultTableModel model;
     private TableManager tableManager;
     
@@ -28,11 +29,13 @@ public class ManageUsers extends javax.swing.JPanel {
     /**
      * Creates new form ManageUsers
      */
+<<<<<<< HEAD
     public ManageUsers() {
+=======
+    public ManageUsers(JFrame frame) {
         initComponents();
-        txtUserID = new javax.swing.JTextField();
-        txtName = new javax.swing.JTextField();
-        txtRole = new javax.swing.JTextField();
+        this.frame = frame;
+>>>>>>> f84a06eac8d04b2fe2db27fa35427ca8f537462c
 
         tableManager = new TableManager(jTable1);
         model = (DefaultTableModel) jTable1.getModel();
@@ -56,7 +59,7 @@ public class ManageUsers extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        txtUserID = new javax.swing.JTextField();
+        jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -66,6 +69,7 @@ public class ManageUsers extends javax.swing.JPanel {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jTextField2 = new javax.swing.JTextField();
 
         setMinimumSize(new java.awt.Dimension(1552, 837));
 
@@ -148,6 +152,8 @@ public class ManageUsers extends javax.swing.JPanel {
             }
         });
 
+        jTextField2.setText("jTextField2");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -156,18 +162,23 @@ public class ManageUsers extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
                             .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(94, 94, 94)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtName)
-                                    .addComponent(txtUserID)
-                                    .addComponent(txtRole, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jLabel3)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel4))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtName)
+                                            .addComponent(jTextField1)
+                                            .addComponent(txtRole, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(133, 133, 133)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(122, 122, 122)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(64, 64, 64)
@@ -205,7 +216,7 @@ public class ManageUsers extends javax.swing.JPanel {
                                 .addGap(64, 64, 64)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel2)
-                                    .addComponent(txtUserID, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(52, 52, 52)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel3)
@@ -213,7 +224,9 @@ public class ManageUsers extends javax.swing.JPanel {
                                 .addGap(65, 65, 65)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel4)
-                                    .addComponent(txtRole, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtRole, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(90, 90, 90)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 227, Short.MAX_VALUE)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25))))
@@ -252,14 +265,14 @@ public class ManageUsers extends javax.swing.JPanel {
 
 
 private void clearFields() {
-    txtUserID.setText("");
+    jTextField1.setText("");
     txtName.setText("");
     txtRole.setText("");
 }
 
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-    String userid = txtUserID.getText();
+    String userid = jTextField1.getText();
     String name = txtName.getText();
     String role = txtRole.getText();
 
@@ -280,7 +293,7 @@ private void clearFields() {
       int selectedRow = jTable1.getSelectedRow();
     
     if (selectedRow != -1) {
-        String userid = txtUserID.getText();
+        String userid = jTextField1.getText();
         String name = txtName.getText();
         String role = txtRole.getText();
 
@@ -299,7 +312,7 @@ private void clearFields() {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-    txtUserID.setText("");
+    jTextField1.setText("");
     txtName.setText("");
     txtRole.setText(""); 
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -311,10 +324,15 @@ private void clearFields() {
         String userid = String.valueOf(jTable1.getModel().getValueAt(row, 0));
         String name = String.valueOf(jTable1.getModel().getValueAt(row, 1));
         String role = String.valueOf(jTable1.getModel().getValueAt(row, 2));
-
-        txtUserID.setText(userid);
-        txtName.setText(name);
-        txtRole.setText(role);
+        
+        System.out.println(userid);
+        this.jTextField1.setText(userid);
+        this.txtName.setText(name);
+        this.txtRole.setText(role);
+        jTextField2.setText(userid);
+        
+        this.revalidate(); // Refresh the container
+        this.repaint();
 
     }//GEN-LAST:event_jTable1MouseReleased
 
@@ -334,8 +352,9 @@ private void clearFields() {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtRole;
-    private javax.swing.JTextField txtUserID;
     // End of variables declaration//GEN-END:variables
 }
