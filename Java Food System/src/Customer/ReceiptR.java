@@ -4,17 +4,9 @@
  */
 package Customer;
 
-import DeliveryRunner.*;
 import java.awt.Font;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import javax.swing.JFrame;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-
+import Customer.Receipt.*;
 /**
  *
  * @author pangz
@@ -30,7 +22,23 @@ public class ReceiptR extends javax.swing.JPanel {
         this.frame = frame;
         setVisible(true);
         
+        textArea1.setFont(new Font("Segeo UI",Font.PLAIN,24));
+        String receipt = """
+                                                                        Dabao company
+                                                        34, Jalan Bandar Loh 3/4, Bandar Kinarara6,
+                                                                    45870Puchong, Selangor
+                         ---------------------------------------------------------------------------------------------------------                                                 
+                         """+
+                         "                            Amount : " +Receipt.Rdata + "\n" +
+                         "\n"+
+                         "                            Date : " + Receipt.Date+"\n" +
+                         """
+                         ---------------------------------------------------------------------------------------------------------
+                                                                    Thank you for top up !
+                         """
+                            ;
         
+        textArea1.setText(receipt);
        
         
 

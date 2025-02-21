@@ -10,6 +10,6 @@ package Customer;
  */
 public class zai_jie_Main {
     public static void main(String[] args) {
-         frame2 frame2 = new frame2();   
+         frame frame = new frame();   
     }
 }

@@ -24,8 +24,8 @@ public class Receipt extends javax.swing.JPanel {
     JFrame frame;
     private DefaultTableModel container = new DefaultTableModel();
     private String ColumnName[] = {"Date","Amount"};
-    String Date;
-    String Rdata;
+    static String Date;
+    static String Rdata;
     
     public Receipt(JFrame frame) {   
         initComponents();
@@ -217,13 +217,18 @@ public class Receipt extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseReleased
+        int row = jTable1.getSelectedRow();
         
+        Date = String.valueOf(container.getValueAt(row, 0));
+        Rdata = String.valueOf(container.getValueAt(row, 1));
         
         ReceiptR panel = new ReceiptR(frame);   //the panel you want to switch to
         frame.remove(this);
         frame.add(panel);
         frame.revalidate();
         frame.repaint();
+        
+        
     }//GEN-LAST:event_jButton3MouseReleased
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
