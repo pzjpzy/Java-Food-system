@@ -39,6 +39,7 @@ public class orderStatus extends javax.swing.JPanel {
     String userID = customer.userID;
     String orderID = customer.orderID;
     String line = null;
+    String vendorID = "V0";
         
     public orderStatus(JFrame frame) {
         initComponents();
@@ -430,6 +431,7 @@ public class orderStatus extends javax.swing.JPanel {
         LocalDateTime now = LocalDateTime.now();
         String date = dtf.format(now);
         System.out.println(userID + orderID);
+
         
         try {
             //store every line in array
@@ -458,6 +460,7 @@ public class orderStatus extends javax.swing.JPanel {
                     recor[6] = "4";
                     order = String.join(",", recor);
                     table.set(i,order);
+                    vendorID = recor[7];
                 }
             }
             
@@ -471,6 +474,7 @@ public class orderStatus extends javax.swing.JPanel {
             }
             fw.close(); 
             
+            Notify.setNotification(vendorID, "A customer has cancelled your order");
             JOptionPane.showMessageDialog(this, "Order cancelled!", "Success", JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Order cancellation failed.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -503,6 +507,7 @@ public class orderStatus extends javax.swing.JPanel {
                     recor[6] = "1";
                     order = String.join(",", recor);
                     table.set(i,order);
+                    vendorID = recor[7];
                 }
             }
             
@@ -517,7 +522,7 @@ public class orderStatus extends javax.swing.JPanel {
             fw.close(); 
             
             
-            
+            Notify.setNotification(vendorID, "A customer has changed order type");
             System.out.println("status changed successfully");
         } catch (IOException e) {
             System.out.println("error");
@@ -550,6 +555,7 @@ public class orderStatus extends javax.swing.JPanel {
                     recor[6] = "1";
                     order = String.join(",", recor);
                     table.set(i,order);
+                    vendorID = recor[7];
                 }
             }
             
@@ -564,7 +570,7 @@ public class orderStatus extends javax.swing.JPanel {
             fw.close(); 
             
             
-            
+            Notify.setNotification(vendorID, "A customer has changed order type");
             System.out.println("status changed successfully");
         } catch (IOException e) {
             System.out.println("error");
