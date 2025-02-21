@@ -13,7 +13,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
  */
 public class frame1 extends JFrame{
     public frame1() {
-        RevenueDD panel  = new RevenueDD(this);           //put your login panel here
+        mainPage panel  = new mainPage(this);           //put your login panel here
         
         setTitle("Food Management System");
         setVisible(true);

@@ -3,32 +3,52 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Admin;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
-import customer.*;
 
 /**
  *
  * @author Nour
  */
 public class ApprovalList extends javax.swing.JPanel {
-
-    /**
+       /**
      * Creates new form ApprovalList
      */
-    //JFrame frame
+    private DefaultTableModel container = new DefaultTableModel();
+    private String PatientcolumnName[] = {"CustomerID","Top up amount","status"};
+    JFrame frame;
     public ApprovalList(JFrame frame) {
         initComponents();
         loadTableData();
         setBounds(0,0,1536,864);
         //this.frame = frame;
         setVisible(true);
-        
-        
-        
-        
         frame.setLayout(null);
+        
+        container.setColumnIdentifiers(PatientcolumnName);
+        container.setNumRows(0);
+        try{
+            FileReader fr = new FileReader("Topup.txt");
+            BufferedReader br  = new BufferedReader(fr);
+
+            String line;
+            int row = 0;
+
+            while((line = br.readLine()) != null){
+                String values[] = line.split(",");
+                System.out.println(String.valueOf(row) + values);
+                container.addRow(values);
+                row++;
+            }
+        } catch(IOException e){
+            System.out.println("Error");
+        }
     }
     
     private void loadTableData() {
@@ -148,22 +168,13 @@ public class ApprovalList extends javax.swing.JPanel {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "CustomerID", "Amount", "Status"
+        jTable1.setModel(container);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTable1MouseReleased(evt);
             }
-        ));
+        });
         jScrollPane1.setViewportView(jTable1);
-
-        jTextField1.setText("jTextField1");
-
-        jTextField2.setText("jTextField2");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -226,12 +237,104 @@ public class ApprovalList extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        approveRequest(); // Call the approve method
+        try {
+            String request;
+            //store every line in array
+            FileReader fr = new FileReader("Topup.txt");
+            BufferedReader br  = new BufferedReader(fr);
+            String line = null;
+            ArrayList<String> table = new ArrayList<>();
+            
+            while((line = br.readLine()) != null){
+                table.add(line);
+            }
+            fr.close();
+            br.close();
+               
+            for (int i=0; i < table.size(); i++) {
+                String record = table.get(i);
+                String recor[] = record.split(",");
+                
+                if (record != null && recor[0].equals(jTextField1.getText()) && recor[1].equals(jTextField2.getText())) {   //if record same, then overwrite it
+                    //order line
+                    recor[2] = "Approved";
+                    request = String.join(",", recor);
+                    table.set(i,request);
+                }
+            }
+            
+            
+            //write every line into file
+            FileWriter fw = new FileWriter("Topup.txt");
+            for (String record : table) {
+                if (record != null){
+                    fw.append(record + "\n");
+                }
+            }
+            fw.close(); 
+            
+            
+            
+            System.out.println("status changed successfully");
+        } catch (IOException e) {
+            System.out.println("error");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        rejectRequest(); // Call the reject method
+        try {
+            String request;
+            //store every line in array
+            FileReader fr = new FileReader("Topup.txt");
+            BufferedReader br  = new BufferedReader(fr);
+            String line = null;
+            ArrayList<String> table = new ArrayList<>();
+            
+            while((line = br.readLine()) != null){
+                table.add(line);
+            }
+            fr.close();
+            br.close();
+               
+            for (int i=0; i < table.size(); i++) {
+                String record = table.get(i);
+                String recor[] = record.split(",");
+                
+                if (record != null && recor[0].equals(jTextField1.getText()) && recor[1].equals(jTextField2.getText())) {   //if record same, then overwrite it
+                    //order line
+                    recor[2] = "Rejected";
+                    request = String.join(",", recor);
+                    table.set(i,request);
+                }
+            }
+            
+            
+            //write every line into file
+            FileWriter fw = new FileWriter("Topup.txt");
+            for (String record : table) {
+                if (record != null){
+                    fw.append(record + "\n");
+                }
+            }
+            fw.close(); 
+            
+            
+            
+            System.out.println("status changed successfully");
+        } catch (IOException e) {
+            System.out.println("error");
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
+       int row = jTable1.getSelectedRow();
+        String cus = String.valueOf(container.getValueAt(row, 0));
+        String top = String.valueOf(container.getValueAt(row, 1));           
+
+        jTextField1.setText(cus);
+        jTextField2.setText(top);
+
+    }//GEN-LAST:event_jTable1MouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -4,10 +4,8 @@
  */
 package Vendor;
 
-import Customer.*;
 import javax.swing.JFrame;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
-import  Vendor.*;
 
 /**
  *
@@ -15,7 +13,7 @@ import  Vendor.*;
  */
 public class frame extends JFrame{
     public frame() {
-        RevenueVD panel  = new RevenueVD(this);           //put your login panel here
+        testing panel  = new testing(this);           //put your login panel here
         
         
         setTitle("Food Management System");

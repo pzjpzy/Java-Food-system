@@ -1,1 +1,2 @@
-CostumerID,topUpAmount,statusC001,10.0
+C001,10.0,pending
+C1,1234.0,Rejected

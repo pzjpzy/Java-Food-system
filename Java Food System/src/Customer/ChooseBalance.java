@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Customer;
-import Admin.*;
 
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
@@ -19,7 +18,7 @@ import java.util.List;
  * @author Nour
  */
 public class ChooseBalance extends javax.swing.JPanel {
-
+    public static String customerID = "noID";
     /**
      * Creates new form ChooseBalance
      */
@@ -29,10 +28,8 @@ public class ChooseBalance extends javax.swing.JPanel {
         setBounds(0,0,1536,864);
         this.frame = frame;
         setVisible(true);
-        
-        double amount = 10;
+        int amount = 13;
         updateBalanceDisplay();
-        requestTopUp(amount);
         
         
         
@@ -45,11 +42,11 @@ public class ChooseBalance extends javax.swing.JPanel {
         
         private void updateBalanceDisplay() {
     try {
-        String customerID = "C001"; // Replace with actual logged-in ID
+        String customerID = this.customerID; // Replace with actual logged-in ID
         List<String> lines = Files.readAllLines(Paths.get("Balance.txt"));
         for (String line : lines) {
             String[] parts = line.split(",");
-            if (parts[0].equals(customerID)) {
+            if (parts[0].equals(this.customerID)) {
                 jLabel2.setText("Balance: " + parts[parts.length - 1]);
                 break;
             }
@@ -61,8 +58,8 @@ public class ChooseBalance extends javax.swing.JPanel {
         
      private void requestTopUp(double amount) {
     try {
-        String customerID = "C001"; // Shouls replace with actual logged-in ID
-        String entry = customerID + "," + amount + "\n";
+        String customerID = "C1"; // Shouls replace with actual logged-in ID
+        String entry = customerID + "," + amount + "," + "pending" + "\n";
         Files.write(Paths.get("Topup.txt"), entry.getBytes(), java.nio.file.StandardOpenOption.APPEND);
         JOptionPane.showMessageDialog(this, "Top-up request sent successfully!");
     } catch (IOException e) {
@@ -190,9 +187,10 @@ public class ChooseBalance extends javax.swing.JPanel {
         try {
             // Parse the input to a double (assuming the amount is a number)
             double amount = Double.parseDouble(input);
-
+            
             // Send the amount to the admin (for now, just print it)
             sendAmountToAdmin(amount);
+            requestTopUp(amount);
 
             // Notify the customer that the request has been sent
             JOptionPane.showMessageDialog(this, "Top-up request of RM" + amount + " sent to admin for approval.", "Request Sent", JOptionPane.INFORMATION_MESSAGE);
