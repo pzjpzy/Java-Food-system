@@ -5,6 +5,7 @@
 package Vendor;
 
 import Customer.LogIn;
+import Customer.Notify;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -244,7 +245,7 @@ public class vpanel extends javax.swing.JPanel {
     private void backtomainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backtomainActionPerformed
         // Create an instance of VendorPage
         frame.getContentPane().removeAll();
-        testing panel = new testing(frame);   //the panel you want to switch to
+        vpage panel = new vpage(frame);   //the panel you want to switch to
         frame.add(panel);
         frame.revalidate();
         frame.repaint();
@@ -268,6 +269,10 @@ public class vpanel extends javax.swing.JPanel {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("menu.txt", true))) {
             bw.write(vendorId + "," + item + "," + price);
             bw.newLine();
+            
+            //Notify Vendor new order
+            
+            Notify.setNotification("R1", "You have a new order from a customer!");
         } catch (IOException e) {
             e.printStackTrace();
         }

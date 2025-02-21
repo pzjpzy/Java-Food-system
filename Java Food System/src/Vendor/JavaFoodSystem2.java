@@ -4,6 +4,8 @@
  */
 package Vendor;
 
+import Customer.frame;
+
 
 /**
  *

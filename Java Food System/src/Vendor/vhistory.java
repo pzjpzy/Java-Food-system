@@ -19,13 +19,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Choo JF
  */
-public class history1 extends javax.swing.JPanel {
+public class vhistory extends javax.swing.JPanel {
 
     /**
      * Creates new form history1
      */
     JFrame frame;
-    public history1(JFrame frame) {
+    public vhistory(JFrame frame) {
         initComponents();
         setBounds(0,0,1536,864);
         this.frame = frame;
@@ -86,26 +86,21 @@ public class history1 extends javax.swing.JPanel {
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(367, 367, 367)
+                .addGap(389, 389, 389)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(backtomain, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55))
+                .addGap(54, 54, 54))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                 .addContainerGap(71, Short.MAX_VALUE)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(backtomain, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel11Layout.createSequentialGroup()
-                            .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(12, 12, 12))))
-                .addGap(39, 39, 39))
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(backtomain, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(51, 51, 51))
         );
 
         jPanel12.setBackground(new java.awt.Color(34, 40, 44));
@@ -219,7 +214,7 @@ public class history1 extends javax.swing.JPanel {
     private void backtomainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backtomainActionPerformed
         // Create an instance of VendorPage
         frame.getContentPane().removeAll();
-        testing panel = new testing(frame);   //the panel you want to switch to
+        vpage panel = new vpage(frame);   //the panel you want to switch to
         frame.add(panel);
         frame.revalidate();
         frame.repaint();

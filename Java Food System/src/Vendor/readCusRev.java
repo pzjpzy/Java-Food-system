@@ -23,6 +23,10 @@ public class readCusRev extends javax.swing.JFrame {
         loadReviews(); // Load reviews from review.txt
     }
 
+    readCusRev(JFrame frame) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

@@ -5,6 +5,7 @@
 package Vendor;
 
 import Customer.LogIn;
+import Customer.Notify;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.io.*;
@@ -251,7 +252,7 @@ public class vstatus extends javax.swing.JPanel {
     private void backtomainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backtomainActionPerformed
         // Create an instance of VendorPage
         frame.getContentPane().removeAll();
-        testing panel = new testing(frame);   //the panel you want to switch to
+        vpage panel = new vpage(frame);   //the panel you want to switch to
         frame.add(panel);
         frame.revalidate();
         frame.repaint();
@@ -277,12 +278,30 @@ public class vstatus extends javax.swing.JPanel {
     }//GEN-LAST:event_ShowOrderActionPerformed
 
     private void acceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptActionPerformed
+        int selectedRow = jTable1.getSelectedRow(); // Check if a row is selected
+    if (selectedRow != -1) {
         updateOrderStatus("5");
+        
+        // Notify the vendor that the order has been accepted
+        Notify.setNotification("Order Update", "The order has been accepted.");
+    } else {
+        // Show error message if no order is selected
+        JOptionPane.showMessageDialog(this, "Please select an order to accept.");
+    }
     }//GEN-LAST:event_acceptActionPerformed
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
+        int selectedRow = jTable1.getSelectedRow(); // Check if a row is selected
+    if (selectedRow != -1) {
         updateOrderStatus("4");
         addFromBalance();
+        
+        // Notify the vendor that the order has been cancelled
+        Notify.setNotification("Order Update", "The order has been cancelled.");
+    } else {
+        // Show error message if no order is selected
+        JOptionPane.showMessageDialog(this, "Please select an order to cancel.");
+    }
     }//GEN-LAST:event_cancelActionPerformed
 
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed

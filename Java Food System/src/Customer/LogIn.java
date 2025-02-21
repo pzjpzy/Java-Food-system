@@ -295,7 +295,7 @@ public class LogIn extends javax.swing.JPanel {
                         frame.add(new ManagerHome(frame)); // Manager home panel
                         break;
                     case "vendor":
-                        frame.add(new testing(frame)); // Vendor home panel
+                        frame.add(new vpage(frame)); // Vendor home panel
                         break;
                     case "deliveryrunner":
                         runner runner = new runner();
