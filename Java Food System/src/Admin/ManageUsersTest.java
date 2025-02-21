@@ -15,7 +15,7 @@ public class ManageUsersTest {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH); // Set to full screen
         frame.setUndecorated(false); // Keep window decorations (title bar, etc.)
-        frame.add(new ManageUsers()); // Add your ManageUsers panel
+        frame.add(new ManageUsers(frame)); // Add your ManageUsers panel
         frame.setVisible(true); // Show the window
     }
 }

@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
+import Customer.LogIn;
+
+
+
 
 /**
  *
@@ -116,6 +120,11 @@ public class ApprovalList extends javax.swing.JPanel {
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton1.setText("Log Out");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Adobe Caslon Pro", 0, 48)); // NOI18N
         jLabel1.setText("Top-up Approval List");
@@ -335,6 +344,14 @@ public class ApprovalList extends javax.swing.JPanel {
         jTextField2.setText(top);
 
     }//GEN-LAST:event_jTable1MouseReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        LogIn panel = new LogIn(frame);
+        frame.remove(this);
+        frame.add(panel);
+        frame.revalidate();
+        frame.repaint();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

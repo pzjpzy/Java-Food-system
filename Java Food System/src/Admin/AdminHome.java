@@ -4,8 +4,9 @@
  */
 package Admin;
 
-import Customer.ChooseBalance;
 import javax.swing.JFrame;
+import Customer.LogIn; 
+
 
 /**
  *
@@ -24,7 +25,6 @@ public class AdminHome extends javax.swing.JPanel {
         setVisible(true);
         
         frame.setLayout(null);
-        System.out.println(ChooseBalance.customerID);
     }
 
     /**
@@ -85,10 +85,20 @@ public class AdminHome extends javax.swing.JPanel {
         jButton2.setBackground(new java.awt.Color(178, 171, 179));
         jButton2.setFont(new java.awt.Font("Chiller", 0, 36)); // NOI18N
         jButton2.setText("Manage Users");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(178, 171, 179));
         jButton3.setFont(new java.awt.Font("Chiller", 0, 36)); // NOI18N
         jButton3.setText("Approval List");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setBackground(new java.awt.Color(178, 171, 179));
         jButton4.setFont(new java.awt.Font("Chiller", 0, 36)); // NOI18N
@@ -137,8 +147,30 @@ public class AdminHome extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    //code
+        LogIn panel = new LogIn(frame);
+        frame.remove(this);
+        frame.add(panel);
+        frame.revalidate();
+        frame.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        frame.getContentPane().removeAll();
+        ManageUsers manageUsersPanel = new ManageUsers(frame); // Create the ManageUsers panel
+        frame.add(manageUsersPanel);
+        frame.revalidate();
+        frame.repaint();
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        frame.getContentPane().removeAll();
+        ApprovalList approvalListPanel = new ApprovalList(frame); // Create the ApprovalList panel
+        frame.add(approvalListPanel);
+        frame.revalidate();
+        frame.repaint();
+
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
