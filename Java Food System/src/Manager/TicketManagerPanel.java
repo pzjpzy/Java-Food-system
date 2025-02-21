@@ -10,7 +10,7 @@ public class TicketManagerPanel extends javax.swing.JPanel {
 
     private List<String[]> ticketList; // Stores ticket data
     private DefaultTableModel tableModel;
-
+    private JFrame frame; // Store the reference to the parent frame
     /**
      * Creates new form TicketManagerPanel
      */
@@ -53,6 +53,11 @@ public class TicketManagerPanel extends javax.swing.JPanel {
         jButton1.setText("jButton1");
         jButton1.setMaximumSize(new java.awt.Dimension(55, 25));
         jButton1.setMinimumSize(new java.awt.Dimension(55, 25));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("jButton2");
 
@@ -100,6 +105,10 @@ public class TicketManagerPanel extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // back button
+    }//GEN-LAST:event_jButton1ActionPerformed
  
     private void initializeTableModel() {
         String[] columnNames = { "Ticket ID", "Order ID", "Customer ID", "Complaint", "Rating", "Status" };

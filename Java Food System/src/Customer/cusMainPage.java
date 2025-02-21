@@ -297,12 +297,11 @@ public class cusMainPage extends javax.swing.JPanel {
     }//GEN-LAST:event_jPanel2MouseReleased
 
     private void jPanel3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseReleased
-        // review and complaints
-//        frame.remove(this);
-//        taskHistory panel = new taskHistory(frame);
-//        frame.add(panel);
-//        frame.revalidate();
-//        frame.repaint();
+review_complaint panel = new review_complaint(frame);
+        frame.remove(this);
+        frame.add(panel);
+        frame.revalidate();
+        frame.repaint();
     }//GEN-LAST:event_jPanel3MouseReleased
 
     private void jPanel4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseReleased

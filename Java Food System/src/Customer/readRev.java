@@ -13,7 +13,7 @@ public class readRev extends javax.swing.JFrame {
 
     private DefaultTableModel tableModel;
     private List<String[]> reviewsList;
-
+    private JFrame frame; // Store the reference to the parent frame
     /**
      * Creates new form readCusRev
      */
@@ -58,9 +58,14 @@ public class readRev extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -97,6 +102,14 @@ public class readRev extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        frame.remove(this);
+        review_complaint panel = new review_complaint(frame);
+        frame.add(panel);
+        frame.revalidate();
+        frame.repaint();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
   private void initializeTableModel() {
         String[] columns = { "Review ID", "Order ID", "Customer ID", "Review", "Rating" };
