@@ -8,3 +8,9 @@ D1:0:19-02-2025:There is an order right now!
 A1:0:20-02-2025:A top up request from dinie, go check in top up.
 R1:0:21-02-2025:Order get cancelled!
 R1:0:21-02-2025:A new order from zai, go check it.
+R1:0:21-02-2025:This is testing for notification :D
+R1:0:21-02-2025:This is testing for notification2 :D
+
+R1:0:22-02-2025:You have a new order from a customer!
+Order Update:0:22-02-2025:The order has been accepted.
+Order Update:0:22-02-2025:The order has been cancelled.

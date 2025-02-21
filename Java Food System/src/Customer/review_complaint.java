@@ -19,9 +19,10 @@ public class review_complaint extends javax.swing.JPanel {
     public review_complaint(JFrame frame) {
         this.frame = frame;
         initComponents();
-        setBounds(0, 0, 1536, 864); // This line must exist in every JPanel
+                setBounds(0, 0, 1536, 864); // This line must exist in every JPanel
         this.frame = frame;
         frame.setLayout(null);
+
     }
 
     /**
