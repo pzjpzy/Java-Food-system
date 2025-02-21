@@ -57,6 +57,11 @@ public class TicketManagerPanel extends javax.swing.JPanel {
         jButton2.setText("jButton2");
 
         jButton3.setText("jButton3");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -91,6 +96,10 @@ public class TicketManagerPanel extends javax.swing.JPanel {
                 .addGap(44, 44, 44))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
  
     private void initializeTableModel() {
         String[] columnNames = { "Ticket ID", "Order ID", "Customer ID", "Complaint", "Rating", "Status" };

@@ -2,25 +2,30 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package Customer;
+package DeliveryRunner;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.io.*;
 import java.util.*;
 
-public class readRev extends javax.swing.JFrame {
+public class readReview extends javax.swing.JFrame {
 
     private DefaultTableModel tableModel;
     private List<String[]> reviewsList;
+    private JFrame frame; // Store the reference to the parent frame
 
     /**
      * Creates new form readCusRev
      */
-    public readRev() {
+    public readReview() {
         initComponents();
         initializeTableModel(); // Initialize table structure
         loadReviews(); // Load reviews from review.txt
+    }
+    public readReview(JFrame frame) {
+        this.frame = frame;
+        initComponents();
     }
 
     @SuppressWarnings("unchecked")
@@ -28,14 +33,23 @@ public class readRev extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
 
+        setFocusCycleRoot(true);
         setMinimumSize(new java.awt.Dimension(1552, 837));
+        setPreferredSize(new java.awt.Dimension(1552, 837));
 
         jLabel1.setText("Read Reviews");
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -56,8 +70,6 @@ public class readRev extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(jTable1);
-
-        jButton1.setText("jButton1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -97,6 +109,15 @@ public class readRev extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        mainPage panel = new mainPage(frame);
+        frame.remove(this);
+        frame.add(panel);
+        frame.revalidate();
+        frame.repaint();
+          
+    }//GEN-LAST:event_jButton1ActionPerformed
 
   private void initializeTableModel() {
         String[] columns = { "Review ID", "Order ID", "Customer ID", "Review", "Rating" };
@@ -153,7 +174,7 @@ public class readRev extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         SwingUtilities.invokeLater(() -> {
-            readRev frame = new readRev();
+            readReview frame = new readReview();
             frame.setVisible(true);
             frame.setSize(800, 600);
             frame.setLocationRelativeTo(null);
