@@ -10,6 +10,9 @@ import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 
 
 
@@ -34,6 +37,19 @@ public class ManageUsers extends javax.swing.JPanel {
         model = (DefaultTableModel) jTable1.getModel();
         loadUsers(); // Load users from file into table
 
+         jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+        @Override
+        public void valueChanged(ListSelectionEvent e) {
+            if (!e.getValueIsAdjusting()) {
+                int selectedRow = jTable1.getSelectedRow();
+                if (selectedRow != -1) {
+                    txtUserID.setText(jTable1.getValueAt(selectedRow, 0).toString());
+                    txtName.setText(jTable1.getValueAt(selectedRow, 1).toString());
+                    txtRole.setText(jTable1.getValueAt(selectedRow, 2).toString());
+                }
+            }
+        }
+    });
     }
 
     /**
