@@ -1,6 +1,17 @@
+<<<<<<< HEAD
 nour, 1122, Admin
 pangzai, 3344, Manager
 dinie, 5566, Customer
 choo, 7788, Vendor
 zaiyong, 9900, Deliveryrunner
 Test, 1234, Vendor
+=======
+nour, 1122, Admin, A1
+pangzai, 3344, Manager, M1
+dinie, 5566, Customer, C1
+zai, 0453, Customer, C2
+choo, 7788, Vendor, V1
+zaiyong, 9900, Deliveryrunner, R1
+Test, 1234, Vendor, V2
+zaijie, 9900, Deliveryrunner, R2
+>>>>>>> 67b5e472198e80856918d14a3b8c76c062541b7e

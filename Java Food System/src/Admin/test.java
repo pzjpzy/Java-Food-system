@@ -13,10 +13,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class test {
     public static void main(String[] args) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate currentDate = LocalDate.now();
-        String formatDate = currentDate.format(formatter);
-        System.out.println(formatDate);
+        
     }
     
     
