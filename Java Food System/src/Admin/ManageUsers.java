@@ -10,8 +10,6 @@ import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 
 
@@ -23,6 +21,9 @@ import javax.swing.event.ListSelectionListener;
 public class ManageUsers extends javax.swing.JPanel {
     private DefaultTableModel model;
     private TableManager tableManager;
+    
+    private DefaultTableModel container = new DefaultTableModel();
+    private String PatientcolumnName[] = {"name","userid","role"};
 
     /**
      * Creates new form ManageUsers
@@ -36,20 +37,7 @@ public class ManageUsers extends javax.swing.JPanel {
         tableManager = new TableManager(jTable1);
         model = (DefaultTableModel) jTable1.getModel();
         loadUsers(); // Load users from file into table
-
-         jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-        @Override
-        public void valueChanged(ListSelectionEvent e) {
-            if (!e.getValueIsAdjusting()) {
-                int selectedRow = jTable1.getSelectedRow();
-                if (selectedRow != -1) {
-                    txtUserID.setText(jTable1.getValueAt(selectedRow, 0).toString());
-                    txtName.setText(jTable1.getValueAt(selectedRow, 1).toString());
-                    txtRole.setText(jTable1.getValueAt(selectedRow, 2).toString());
-                }
-            }
-        }
-    });
+        
     }
 
     /**
@@ -112,23 +100,19 @@ public class ManageUsers extends javax.swing.JPanel {
                 .addContainerGap(71, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "UserID", "Name", "Role"
+        jTable1.setModel(container);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTable1MouseReleased(evt);
             }
-        ));
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel2.setFont(new java.awt.Font("Adobe Caslon Pro", 0, 18)); // NOI18N
-        jLabel2.setText("User ID");
+        jLabel2.setText("Name");
 
         jLabel3.setFont(new java.awt.Font("Adobe Caslon Pro", 0, 18)); // NOI18N
-        jLabel3.setText("Name");
+        jLabel3.setText("UserID");
 
         jLabel4.setFont(new java.awt.Font("Adobe Caslon Pro", 0, 18)); // NOI18N
         jLabel4.setText("Role");
@@ -195,7 +179,7 @@ public class ManageUsers extends javax.swing.JPanel {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,7 +214,7 @@ public class ManageUsers extends javax.swing.JPanel {
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel4)
                                     .addComponent(txtRole, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 227, Short.MAX_VALUE)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25))))
         );
@@ -319,6 +303,20 @@ private void clearFields() {
     txtName.setText("");
     txtRole.setText(""); 
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
+        System.out.println("yes");
+        int row = jTable1.getSelectedRow(); // Get selected row
+
+        String userid = String.valueOf(jTable1.getModel().getValueAt(row, 0));
+        String name = String.valueOf(jTable1.getModel().getValueAt(row, 1));
+        String role = String.valueOf(jTable1.getModel().getValueAt(row, 2));
+
+        txtUserID.setText(userid);
+        txtName.setText(name);
+        txtRole.setText(role);
+
+    }//GEN-LAST:event_jTable1MouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
