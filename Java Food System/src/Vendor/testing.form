@@ -81,11 +81,11 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Component id="logout" min="-2" pref="117" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="551" max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" pref="187" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="434" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="backtomain" min="-2" pref="110" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="298" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -95,8 +95,8 @@
                       <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="logout" min="-2" pref="46" max="-2" attributes="0"/>
-                          <Component id="backtomain" min="-2" pref="45" max="-2" attributes="0"/>
                           <Component id="jLabel4" min="-2" pref="59" max="-2" attributes="0"/>
+                          <Component id="backtomain" alignment="0" min="-2" pref="45" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -150,22 +150,22 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="268" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="201" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="259" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="207" max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="217" max="-2" attributes="0"/>
+                      <EmptySpace pref="230" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="325" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="250" max="-2" attributes="0"/>
                       <Component id="panel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="185" max="32767" attributes="0"/>
                       <Component id="status" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="history" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="353" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="367" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
