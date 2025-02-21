@@ -4,8 +4,6 @@
  */
 package Vendor;
 
-import Manager.*;
-import Customer.*;
 import javax.swing.JFrame;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
