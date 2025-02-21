@@ -297,7 +297,10 @@ public class LogIn extends javax.swing.JPanel {
                     case "vendor":
                         customer vendor = new customer();
                         vendor.setUserID(parts[3]);
+<<<<<<< HEAD
                         //frame.add(new testing(frame)); // Vendor home panel
+=======
+>>>>>>> 941ef4fa87ab33aa84bdc296ce19e55f05f09d80
                         frame.add(new vpage(frame)); // Vendor home panel
                         break;
                     case "deliveryrunner":

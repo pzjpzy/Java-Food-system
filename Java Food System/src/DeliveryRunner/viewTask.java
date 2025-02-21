@@ -5,6 +5,7 @@
 package DeliveryRunner;
 
 
+import Customer.Notify;
 import Customer.customer;
 import Customer.user;
 import java.awt.Color;
@@ -132,6 +133,8 @@ public class viewTask extends javax.swing.JPanel {
                             customer.changeOrderStatus(values[2], "2");
                             //change task status
                             customer.changeTaskStatus(values[2], "1");
+                            
+                            Notify.setNotification(userIDtem, "A delivery runner has accepted your order!");
 
                             frame.getContentPane().removeAll();
                             mainPage panel = new mainPage(frame);
@@ -154,6 +157,8 @@ public class viewTask extends javax.swing.JPanel {
                             customer.changeOrderStatus(values[2], "1");
                             //change task status
                             customer.changeTaskStatus(values[2], "3");
+                            
+                            Notify.setNotification(userIDtem, "Delivery runner rejected your order, finding another runner.....");
                             frame.getContentPane().removeAll();
                             mainPage panel = new mainPage(frame);
                             frame.add(panel);
@@ -176,6 +181,8 @@ public class viewTask extends javax.swing.JPanel {
                             customer.changeOrderStatus(values[2], "3");
                             //change task status
                             customer.changeTaskStatus(values[2], "2");
+                            
+                            Notify.setNotification(userIDtem, "Your order is arrived!");
 
                             frame.getContentPane().removeAll();
                             mainPage panel = new mainPage(frame);
