@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class TableManager {
     private JTable table;
-    private DefaultTableModel model;
+    DefaultTableModel model;
     private String filePath = "users.txt";
 
     // Constructor: Takes JTable as input and manages it
@@ -39,6 +39,10 @@ public class TableManager {
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(null, "File not found: " + filePath, "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+        public DefaultTableModel getModel() {
+        return model;
     }
 
     // Add a new user to the table and save it to users.txt
