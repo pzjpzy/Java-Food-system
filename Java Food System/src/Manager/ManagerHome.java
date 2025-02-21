@@ -308,7 +308,11 @@ public class ManagerHome extends javax.swing.JPanel {
     }//GEN-LAST:event_jPanel4MouseReleased
 
     private void jPanel5MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseReleased
-        // TODO add your handling code here:
+        TicketManagerPanel panel = new TicketManagerPanel(frame);   //the panel you want to switch to
+        frame.remove(this);
+        frame.add(panel);
+        frame.revalidate();
+        frame.repaint();
     }//GEN-LAST:event_jPanel5MouseReleased
 
 
