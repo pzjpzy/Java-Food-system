@@ -289,7 +289,7 @@ public class LogIn extends javax.swing.JPanel {
                         customer customer = new customer();
                         customer.setUserID(parts[3]);
                         ChooseBalance.customerID = parts[3];
-                        frame.add(new ChooseBalance(frame)); // Customer home panel
+                        frame.add(new cusMainPage(frame)); // Customer home panel
                         break;
                     case "manager":
                         frame.add(new ManagerHome(frame)); // Manager home panel

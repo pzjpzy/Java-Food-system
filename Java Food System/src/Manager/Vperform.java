@@ -24,7 +24,7 @@ public class Vperform extends javax.swing.JPanel{
     String vendor_ID;
     private DefaultTableModel container = new DefaultTableModel();
     private javax.swing.DefaultComboBoxModel vendorModel = new javax.swing.DefaultComboBoxModel();
-    private String VendorColumnName[] = {};
+    private String VendorColumnName[] = {"Order_ID","Food","Amount","Type","Date"};
     public Vperform(JFrame frame) {    
         initComponents();
         setBounds(0,0,1535,864);

@@ -45,7 +45,7 @@ public class NotificationC extends javax.swing.JPanel {
         header.setFont(new Font("Arial", Font.BOLD, 16));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
                 
-        String userID = "C1";
+        String userID = customer.userID;
         try{
         FileReader fr = new FileReader("Notification.txt");
         BufferedReader br = new BufferedReader(fr);

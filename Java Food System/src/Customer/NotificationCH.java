@@ -60,7 +60,7 @@ public class NotificationCH extends javax.swing.JPanel {
                     System.out.println(fileDate);
                     LocalDate currentDate = LocalDate.now();
 
-                    if(!fileDate.equals(currentDate)){
+                    if(!fileDate.equals(currentDate) && values[0].equals(customer.userID)){
                         String array[] = {values[3]};
                         container.addRow(array);
                     }

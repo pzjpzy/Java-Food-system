@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Notify {
     
-    public void setNotification(String user_ID,String content){
+    public static void setNotification(String user_ID,String content){
         try{
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             LocalDate currentDate = LocalDate.now();
