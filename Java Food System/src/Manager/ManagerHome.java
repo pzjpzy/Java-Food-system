@@ -325,7 +325,7 @@ public class ManagerHome extends javax.swing.JPanel {
 
     private void jLabel10MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseReleased
         frame.remove(this);
-        Notification panel = new Notification(frame);
+        NotificationM panel = new NotificationM(frame);
         frame.add(panel);
         frame.revalidate();
         frame.repaint();

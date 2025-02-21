@@ -316,7 +316,7 @@ public class cusMainPage extends javax.swing.JPanel {
 
     private void jLabel3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseReleased
         frame.remove(this);
-        Notification panel = new Notification(frame);
+        NotificationC panel = new NotificationC(frame);
         frame.add(panel);
         frame.revalidate();
         frame.repaint();

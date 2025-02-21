@@ -169,6 +169,11 @@ public class VendorPage extends javax.swing.JFrame {
         );
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/DeliveryRunner/bell.png"))); // NOI18N
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabel10MouseReleased(evt);
+            }
+        });
 
         backtomain.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         backtomain.setText("BACK");
@@ -246,6 +251,14 @@ public class VendorPage extends javax.swing.JFrame {
         // Dispose of the current VendorPanel window
         this.dispose();
     }//GEN-LAST:event_backtomainActionPerformed
+
+    private void jLabel10MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseReleased
+        NotificationV panel = new NotificationV(frame);   //the panel you want to switch to
+        frame.remove(this);
+        frame.add(panel);
+        frame.revalidate();
+        frame.repaint();
+    }//GEN-LAST:event_jLabel10MouseReleased
 
     /**
      * @param args the command line arguments
