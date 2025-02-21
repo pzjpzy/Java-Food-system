@@ -14,11 +14,11 @@ public class TicketManagerPanel extends javax.swing.JPanel {
     /**
      * Creates new form TicketManagerPanel
      */
-    public TicketManagerPanel() {
-        initComponents(); // Initialize UI components
-        initializeTableModel(); // Initialize the table model
-        loadTickets(); // Load tickets from file
-
+public TicketManagerPanel(JFrame frame) {
+    this.frame = frame;
+    initComponents();
+    initializeTableModel(); 
+    loadTickets(); 
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
 @SuppressWarnings("unchecked")
