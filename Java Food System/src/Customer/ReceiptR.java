@@ -30,6 +30,7 @@ public class ReceiptR extends javax.swing.JPanel {
         this.frame = frame;
         setVisible(true);
         
+        
        
         
 
