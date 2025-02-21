@@ -69,6 +69,9 @@ public class orderStatus extends javax.swing.JPanel {
                         case "4":
                             jLabel3.setText("Order cancelled");
                             break;
+                        case "9":
+                            jLabel3.setText("No Runner available");
+                            break;
                     }
                 }
                 
@@ -87,7 +90,7 @@ public class orderStatus extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 jLabel3.setText(customer.getOrderStatus(orderID));
-                if (customer.getOrderStatus(orderID).equals("Paid")){
+                if (customer.getOrderStatus(orderID) != null && customer.getOrderStatus(orderID).equals("Paid")){
                     jButton3.setEnabled(true);
                 }else{
                     jButton3.setVisible(false);
@@ -129,6 +132,9 @@ public class orderStatus extends javax.swing.JPanel {
                         case "4":
                             jLabel3.setText("Order cancelled");
                             break;
+                        case "9":
+                            jLabel3.setText("No Runner available");
+                            break;
                     }
                 }
                 
@@ -139,20 +145,23 @@ public class orderStatus extends javax.swing.JPanel {
             System.out.println("error occured");
         }
         
-        // Reorder button
-        JButton Reorder = new JButton("Reorder");
-        Reorder.setBounds(580, 720, 400, 100);
-        Reorder.setFocusable(false);
-        Reorder.setFont(new Font("My Boli", Font.PLAIN, 50));
-        Reorder.setBackground(new Color(209, 232, 238));
-        Reorder.addActionListener((ActionEvent e) -> {
-            frame.getContentPane().removeAll();
-            orderConfirm panel = new orderConfirm(frame, orderID, true);
-            frame.add(panel);
-            frame.revalidate();
-            frame.repaint();
-        });
-        frame.add(Reorder);
+        if (!customer.getOrderStatus(orderID).equals("No Runner available")){
+            // Reorder button
+            JButton Reorder = new JButton("Reorder");
+            Reorder.setBounds(580, 720, 400, 100);
+            Reorder.setFocusable(false);
+            Reorder.setFont(new Font("My Boli", Font.PLAIN, 50));
+            Reorder.setBackground(new Color(209, 232, 238));
+            Reorder.addActionListener((ActionEvent e) -> {
+                frame.getContentPane().removeAll();
+                orderConfirm panel = new orderConfirm(frame, orderID, true);
+                frame.add(panel);
+                frame.revalidate();
+                frame.repaint();
+            });
+            frame.add(Reorder);
+        }
+        
                         
                         
         //show ordered items in text area
@@ -162,12 +171,22 @@ public class orderStatus extends javax.swing.JPanel {
         Timer timer = new Timer(50, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                jButton4.setVisible(false);
+                jButton5.setVisible(false);
                 jLabel3.setText(customer.getOrderStatus(orderID));
                 if (customer.getOrderStatus(orderID).equals("Paid")){
-                    jButton3.setEnabled(true);
-                }else{
-                    jButton3.setEnabled(false);
+                    jButton3.setVisible(true);
+                }//no runner
+                else if (customer.getOrderStatus(orderID).equals("No Runner available")){
+                    jButton3.setVisible(false);
+                    jButton4.setVisible(true);
+                    jButton5.setVisible(true);
                 }
+                else{
+                    jButton3.setVisible(false);
+                }
+                
+                
             }
         });
         timer.start(); // Start the timer
@@ -191,6 +210,8 @@ public class orderStatus extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -266,6 +287,26 @@ public class orderStatus extends javax.swing.JPanel {
             }
         });
 
+        jButton4.setBackground(new java.awt.Color(209, 232, 238));
+        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jButton4.setText("Dine in");
+        jButton4.setFocusable(false);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setBackground(new java.awt.Color(209, 232, 238));
+        jButton5.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jButton5.setText("Take away");
+        jButton5.setFocusable(false);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -274,14 +315,19 @@ public class orderStatus extends javax.swing.JPanel {
                 .addGap(36, 36, 36)
                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
                 .addGap(27, 27, 27))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(124, 124, 124))
+                .addGap(119, 119, 119))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,9 +336,13 @@ public class orderStatus extends javax.swing.JPanel {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35))
         );
 
         jLabel3.setHorizontalAlignment(SwingConstants.CENTER); // Center horizontally
@@ -427,11 +477,107 @@ public class orderStatus extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        String order;
+        
+        try {
+            //store every line in array
+            FileReader fr = new FileReader("Order.txt");
+            BufferedReader br  = new BufferedReader(fr);
+            String line = null;
+            ArrayList<String> table = new ArrayList<>();
+            
+            while((line = br.readLine()) != null){
+                table.add(line);
+            }
+            fr.close();
+            br.close();
+               
+            for (int i=0; i < table.size(); i++) {
+                String record = table.get(i);
+                String recor[] = record.split(",");
+                
+                if (record != null && recor[1].equals(orderID)) {   //if record same, then overwrite it
+                    //order line
+                    recor[4] = "Dine in";
+                    recor[6] = "1";
+                    order = String.join(",", recor);
+                    table.set(i,order);
+                }
+            }
+            
+            
+            //write every line into file
+            FileWriter fw = new FileWriter("Order.txt");
+            for (String record : table) {
+                if (record != null){
+                    fw.append(record + "\n");
+                }
+            }
+            fw.close(); 
+            
+            
+            
+            System.out.println("status changed successfully");
+        } catch (IOException e) {
+            System.out.println("error");
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        String order;
+        
+        try {
+            //store every line in array
+            FileReader fr = new FileReader("Order.txt");
+            BufferedReader br  = new BufferedReader(fr);
+            String line = null;
+            ArrayList<String> table = new ArrayList<>();
+            
+            while((line = br.readLine()) != null){
+                table.add(line);
+            }
+            fr.close();
+            br.close();
+               
+            for (int i=0; i < table.size(); i++) {
+                String record = table.get(i);
+                String recor[] = record.split(",");
+                
+                if (record != null && recor[1].equals(orderID)) {   //if record same, then overwrite it
+                    //order line
+                    recor[4] = "Take away";
+                    recor[6] = "1";
+                    order = String.join(",", recor);
+                    table.set(i,order);
+                }
+            }
+            
+            
+            //write every line into file
+            FileWriter fw = new FileWriter("Order.txt");
+            for (String record : table) {
+                if (record != null){
+                    fw.append(record + "\n");
+                }
+            }
+            fw.close(); 
+            
+            
+            
+            System.out.println("status changed successfully");
+        } catch (IOException e) {
+            System.out.println("error");
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

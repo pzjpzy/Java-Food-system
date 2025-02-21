@@ -70,18 +70,22 @@ public class orderHistory extends javax.swing.JPanel {
         String orderID;
 
         try {
-            FileReader fr = new FileReader("Order.txt");
+            FileReader fr = new FileReader("order.txt");
             BufferedReader br = new BufferedReader(fr);
 
             String line;
             
             for(int i=1; i <= highestNum; i++){
                 orderID = "O" + String.valueOf(i);
-
+                
+                System.out.println("loop" + i);
                 while ((line = br.readLine()) != null) {
                     String[] values = line.split(",");
-
+                    
+                    System.out.println("a1:" + customer.userID + "b1:" + orderID);
+                    System.out.println("a2:" + values[0] + "b3:" + values[1]);
                     if(values[0].equals(customer.userID) && values[1].equalsIgnoreCase(orderID)){
+                        System.out.println("a:" + customer.userID + "b:" + orderID);
                         // Create a sub-panel for each vendor
                         JPanel subban = new JPanel();
                         subban.setLayout(null);

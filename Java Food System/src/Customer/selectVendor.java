@@ -58,13 +58,7 @@ public class selectVendor extends javax.swing.JPanel {
                     label.setBounds(50, 40, 600, 50);
                     subban.add(label);
 
-                    // Review button
-                    JButton review = new JButton("Review");
-                    review.setBounds(650, 20, 200, 100);
-                    review.setFocusable(false);
-                    review.setFont(new Font("My Boli", Font.PLAIN, 25));
-                    review.setBackground(new Color(209, 232, 238));
-                    subban.add(review);
+                   
 
                     // Menu button
                     JButton menu = new JButton("Menu");

@@ -96,8 +96,8 @@ public class viewTask extends javax.swing.JPanel {
                                 username = user[0].trim();
                             }
                         }
-                        fw2.close();
-                        bw2.close();
+                        fw3.close();
+                        bw3.close();
                     }
 
                     // customer name label
@@ -151,7 +151,7 @@ public class viewTask extends javax.swing.JPanel {
                         decline.addActionListener((ActionEvent e) -> {
                             System.out.println("decline button clicked!");
                             //change order status
-                            customer.changeOrderStatus(values[2], "4");
+                            customer.changeOrderStatus(values[2], "1");
                             //change task status
                             customer.changeTaskStatus(values[2], "3");
                             frame.getContentPane().removeAll();
