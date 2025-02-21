@@ -118,12 +118,8 @@ public class testing extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Choo JF\\Downloads\\cart_17472880.png")); // NOI18N
-
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Choo JF\\Downloads\\tracking_1559859.png")); // NOI18N
         jLabel2.setText("jLabel2");
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Choo JF\\Downloads\\credit-card_721447.png")); // NOI18N
         jLabel3.setText("jLabel3");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -141,7 +137,7 @@ public class testing extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(220, 220, 220)
                 .addComponent(panel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
                 .addComponent(status)
                 .addGap(306, 306, 306)
                 .addComponent(history)
