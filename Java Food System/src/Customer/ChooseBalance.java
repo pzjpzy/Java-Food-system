@@ -45,6 +45,7 @@ public class ChooseBalance extends javax.swing.JPanel {
         String customerID = this.customerID; // Replace with actual logged-in ID
         List<String> lines = Files.readAllLines(Paths.get("Balance.txt"));
         for (String line : lines) {
+            System.out.println(line);
             String[] parts = line.split(",");
             if (parts[0].equals(this.customerID)) {
                 jLabel2.setText("Balance: " + parts[parts.length - 1]);

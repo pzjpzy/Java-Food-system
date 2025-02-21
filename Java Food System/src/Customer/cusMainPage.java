@@ -297,7 +297,7 @@ public class cusMainPage extends javax.swing.JPanel {
     }//GEN-LAST:event_jPanel2MouseReleased
 
     private void jPanel3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseReleased
-review_complaint panel = new review_complaint(frame);
+        review_complaint panel = new review_complaint(frame);
         frame.remove(this);
         frame.add(panel);
         frame.revalidate();
