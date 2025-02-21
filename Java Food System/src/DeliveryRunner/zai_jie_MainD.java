@@ -4,6 +4,9 @@
  */
 package DeliveryRunner;
 
+import Customer.customer;
+import java.io.IOException;
+
 
 
 /**
@@ -11,7 +14,7 @@ package DeliveryRunner;
  * @author pangz
  */
 public class zai_jie_MainD {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
          zaijieFrame zaijieFrame = new zaijieFrame();   
     }
 }
