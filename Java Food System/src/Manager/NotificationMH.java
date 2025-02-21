@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package DeliveryRunner;
+package Manager;
 
+import DeliveryRunner.*;
 import Customer.LogIn;
 import java.awt.Font;
 import java.io.BufferedReader;
@@ -21,13 +22,13 @@ import javax.swing.table.JTableHeader;
  *
  * @author pangz
  */
-public class NotificationH extends javax.swing.JPanel {
+public class NotificationMH extends javax.swing.JPanel {
     
     JFrame frame;
     private DefaultTableModel container = new DefaultTableModel();
     private String ColumnName[] = {""};
     
-    public NotificationH(JFrame frame) {   
+    public NotificationMH(JFrame frame) {   
         initComponents();
         setBounds(0,0,1535,864);
         this.frame = frame;
@@ -44,7 +45,7 @@ public class NotificationH extends javax.swing.JPanel {
         header.setFont(new Font("Arial", Font.BOLD, 16));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
                 
-        String userID = "D1";
+        String userID = "M1";
         try{
         FileReader fr = new FileReader("Notification.txt");
         BufferedReader br = new BufferedReader(fr);
@@ -53,7 +54,7 @@ public class NotificationH extends javax.swing.JPanel {
         
             while((line = br.readLine())!= null){
                 String values[] = line.split(":");
-                if(values[0].equals(runner.userID)){
+                if(values[0].equals(userID)){
                     String date = values[2].trim();
                     LocalDate fileDate = LocalDate.parse(date,formatter);
                     System.out.println(fileDate);
@@ -197,7 +198,7 @@ public class NotificationH extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseReleased
-        Notification panel = new Notification(frame);   //the panel you want to switch to
+        NotificationM panel = new NotificationM(frame);   //the panel you want to switch to
         frame.remove(this);
         frame.add(panel);
         frame.revalidate();

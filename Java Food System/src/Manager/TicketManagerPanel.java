@@ -18,6 +18,7 @@ public class TicketManagerPanel extends javax.swing.JPanel {
         initComponents(); // Initialize UI components
         initializeTableModel(); // Initialize the table model
         loadTickets(); // Load tickets from file
+
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
 @SuppressWarnings("unchecked")
@@ -50,7 +51,7 @@ public class TicketManagerPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Back");
         jButton1.setMaximumSize(new java.awt.Dimension(55, 25));
         jButton1.setMinimumSize(new java.awt.Dimension(55, 25));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -59,9 +60,14 @@ public class TicketManagerPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Resolved");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("jButton3");
+        jButton3.setText("In progress");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -82,8 +88,9 @@ public class TicketManagerPanel extends javax.swing.JPanel {
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(1138, 1138, 1138)
                         .addComponent(jButton3)
-                        .addGap(76, 76, 76)
-                        .addComponent(jButton2)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addGap(0, 55, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -103,12 +110,20 @@ public class TicketManagerPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+    updateTicketStatus("In Progress"); // Calls method to update status
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // back button
+        frame.getContentPane().removeAll();
+        ManagerHome panel = new ManagerHome(frame);   //the panel you want to switch to
+        frame.add(panel);
+        frame.revalidate();
+        frame.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    updateTicketStatus("Resolved"); // Calls method to update status
+    }//GEN-LAST:event_jButton2ActionPerformed
  
     private void initializeTableModel() {
         String[] columnNames = { "Ticket ID", "Order ID", "Customer ID", "Complaint", "Rating", "Status" };

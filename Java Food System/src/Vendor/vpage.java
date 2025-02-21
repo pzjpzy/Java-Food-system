@@ -34,6 +34,10 @@ public class vpage extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        logout = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         panel = new javax.swing.JButton();
         status = new javax.swing.JButton();
@@ -50,8 +54,31 @@ public class vpage extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         logout = new javax.swing.JButton();
 
-        jPanel2.setMaximumSize(new java.awt.Dimension(1536, 864));
-        jPanel2.setMinimumSize(new java.awt.Dimension(1536, 864));
+        setMinimumSize(new java.awt.Dimension(1152, 837));
+
+        jPanel1.setBackground(new java.awt.Color(34, 40, 44));
+        jPanel1.setMinimumSize(new java.awt.Dimension(1152, 837));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Main Page");
+        jPanel1.add(jLabel4);
+
+        logout.setText("Log Out");
+        logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutActionPerformed(evt);
+            }
+        });
+        jPanel1.add(logout);
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vendor/bell.png"))); // NOI18N
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabel6MouseReleased(evt);
+            }
+        });
+        jPanel1.add(jLabel6);
 
         jPanel3.setBackground(new java.awt.Color(34, 40, 44));
         jPanel3.setMinimumSize(new java.awt.Dimension(1152, 837));
@@ -281,6 +308,13 @@ public class vpage extends javax.swing.JPanel {
         frame.repaint();
     }//GEN-LAST:event_logoutActionPerformed
 
+    private void jLabel6MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseReleased
+        NotificationV panel = new NotificationV(frame);
+        frame.remove(this);//the panel you want to switch to
+        frame.add(panel);
+        frame.revalidate();
+        frame.repaint();  
+    }//GEN-LAST:event_jLabel6MouseReleased
     private void reviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reviewActionPerformed
         frame.getContentPane().removeAll();
         readCusRev panel = new readCusRev(frame);   //the panel you want to switch to
@@ -304,6 +338,7 @@ public class vpage extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
