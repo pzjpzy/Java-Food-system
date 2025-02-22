@@ -14,16 +14,17 @@ public class CustReview extends javax.swing.JPanel {
     /**
      * Creates new form CustReview
      */
-    public CustReview() {
+    public CustReview(JFrame frame) {
         initComponents();
+        this.frame = frame;
+        setBounds(0, 0, 1536, 864); 
+        frame.setLayout(null);
+        
         orders = new ArrayList<>();
         loadOrders();
         populateOrderDropdown();
     }
-    public CustReview(JFrame frame) {
-        this.frame = frame;
-        initComponents();
-    }
+
     /**
      * Loads available orders from a file or a data source.
      */
@@ -32,7 +33,8 @@ public class CustReview extends javax.swing.JPanel {
         try (BufferedReader br = new BufferedReader(new FileReader("order.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
-                orders.add(line); // Each line represents an order ID
+                String array [] = line.split(",");
+                orders.add(array[1]); // Each line represents an order ID
             }
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error loading orders: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -89,14 +91,7 @@ public class CustReview extends javax.swing.JPanel {
     }
 
     // Main method to launch the application
-    public static void main(String[] args) {
-        // Create a JFrame to hold the CustReview JPanel
-        JFrame frame = new JFrame("Customer Review");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new CustReview()); // Add the CustReview JPanel to the frame
-        frame.pack(); // Adjust the window size to fit components
-        frame.setVisible(true); // Show the window
-    }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

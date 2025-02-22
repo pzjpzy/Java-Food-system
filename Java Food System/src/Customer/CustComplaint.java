@@ -21,21 +21,19 @@ import javax.swing.JOptionPane;
  */
 public class CustComplaint extends javax.swing.JPanel {
 
-    private JFrame frame;
-        private List<String> orders;
+    JFrame frame;
+    private List<String> orders;
 
     /**
      * Creates new form CustComplaint
      */
-    public CustComplaint() {
+    public CustComplaint(JFrame frame){
         initComponents();
-        orders = new ArrayList<>();
-        loadOrders();
-        populateOrderDropdown();
-    }
-    public CustComplaint(JFrame frame) {
         this.frame = frame;
-        initComponents();
+        setBounds(0, 0, 1536, 864); 
+        frame.setLayout(null);
+        
+        
         orders = new ArrayList<>();
         loadOrders();
         populateOrderDropdown();
@@ -100,14 +98,7 @@ public class CustComplaint extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Error saving complaint: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    public static void main(String[] args) {
-        // Create a JFrame to hold the CustComplaintJPanel
-        JFrame frame = new JFrame("Customer Complaint");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new CustComplaint()); // Add the CustComplaintJPanel to the frame
-        frame.pack(); // Adjust the window size to fit components
-        frame.setVisible(true); // Show the window
-    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -130,6 +130,8 @@
               <Dimension value="[1152, 837]"/>
             </Property>
           </Properties>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
           <SubComponents>
             <Component class="javax.swing.JButton" name="panel">
               <Properties>
@@ -206,6 +208,8 @@
               <Color blue="2c" green="28" red="22" type="rgb"/>
             </Property>
           </Properties>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
