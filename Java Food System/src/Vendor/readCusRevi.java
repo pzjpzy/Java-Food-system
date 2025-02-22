@@ -129,33 +129,41 @@ public class readCusRevi extends javax.swing.JPanel {
     /**
      * Loads reviews from "review.txt" and populates the table.
      */
-    private void loadReviews() {
-        reviewsList = new ArrayList<>();
-        tableModel.setRowCount(0); // Clear existing rows
-        Set<String> orderIds = new HashSet<>();
-        
-        try (BufferedReader br = new BufferedReader(new FileReader("reviews.txt"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] data = line.split(",");
-                if (data.length == 5) {
-                    reviewsList.add(data);
-                    tableModel.addRow(data); // Add row to table
-                    orderIds.add(data[1]); // Store Order IDs for dropdown
-                }
-            }
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Error loading reviews: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
+private void loadReviews() {
+    reviewsList = new ArrayList<>();
+    tableModel.setRowCount(0); // Clear existing rows
+    Set<String> orderIds = new HashSet<>();
 
-        // Populate combo box with unique Order IDs
-        jComboBox1.removeAllItems();
-        jComboBox1.addItem("All Orders");
-        for (String orderId : orderIds) {
-            jComboBox1.addItem(orderId);
+    try (BufferedReader br = new BufferedReader(new FileReader("reviews.txt"))) {
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] data = line.split(",");
+            if (data.length == 5) {
+                reviewsList.add(data);
+                tableModel.addRow(data);
+                orderIds.add(data[1]); // Store Order IDs for dropdown
+            }
         }
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(this, "Error loading reviews: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
 
+    // ✅ Prevent duplicate "All Orders" entry
+    jComboBox1.removeAllItems();
+    if (jComboBox1.getItemCount() == 0) { 
+        jComboBox1.addItem("All Orders"); // Add only once
+    }
+    
+    for (String orderId : orderIds) {
+        jComboBox1.addItem(orderId);
+    }
+
+    // Set default selection
+    if (jComboBox1.getItemCount() > 0) {
+        jComboBox1.setSelectedIndex(0);
+        filterReviews();  // Call filter after populating
+    }
+}
     /**
      * Filters reviews based on selected Order ID.
      */
