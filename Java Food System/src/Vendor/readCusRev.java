@@ -17,15 +17,13 @@ public class readCusRev extends javax.swing.JFrame {
     /**
      * Creates new form readCusRev
      */
-    public readCusRev() {
+    public readCusRev(JFrame frame) {
         initComponents();
         initializeTableModel(); // Initialize table structure
         loadReviews(); // Load reviews from review.txt
     }
 
-    readCusRev(JFrame frame) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -131,10 +129,11 @@ filterReviews();
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 //        frame.getContentPane().removeAll();
-//        vpage panel = new vpage(frame);   //the panel you want to switch to
-//        frame.add(panel);
-//        frame.revalidate();
-//        frame.repaint();
+        frame.getContentPane().removeAll();
+        vMain panel = new vMain(frame);   //the panel you want to switch to
+        frame.add(panel);
+        frame.revalidate();
+        frame.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -204,14 +203,7 @@ private void filterReviews() {
     /**
      * Main method to run the application.
      */
-    public static void main(String args[]) {
-        SwingUtilities.invokeLater(() -> {
-            readCusRev frame = new readCusRev();
-            frame.setVisible(true);
-            frame.setSize(800, 600);
-            frame.setLocationRelativeTo(null);
-        });
-    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
