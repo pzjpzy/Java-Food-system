@@ -5,7 +5,9 @@
 package Admin;
 
 import javax.swing.JFrame;
-import Customer.LogIn; 
+import Customer.LogIn;
+import Admin.AdminHome;
+
 
 
 /**
