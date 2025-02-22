@@ -160,10 +160,7 @@ public class readCusRevi extends javax.swing.JPanel {
      * Filters reviews based on selected Order ID.
      */
 private void filterReviews() {
-    if (jComboBox1.getSelectedItem() == null) {
-        JOptionPane.showMessageDialog(this, "No order selected!", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
+    
 
     String selectedOrder = (String) jComboBox1.getSelectedItem();
     
