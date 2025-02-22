@@ -73,7 +73,7 @@ public class CustReview extends javax.swing.JPanel {
      */
     private void saveReview(String orderID, String review, int rating) {
         String reviewID = "R" + UUID.randomUUID().toString().substring(0, 6).toUpperCase(); // Generate a unique review ID
-        String customerID = "C123"; // Example: Replace with actual customer ID
+        String customerID = customer.userID; // Example: Replace with actual customer ID
         String reviewEntry = reviewID + "," + orderID + "," + customerID + "," + review + "," + rating;
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("reviews.txt", true))) {
@@ -103,7 +103,7 @@ public class CustReview extends javax.swing.JPanel {
         setToolTipText("");
         setMinimumSize(new java.awt.Dimension(1552, 837));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
