@@ -1,3 +1,4 @@
 C001,10.0,Approved
 C1,1234.0,Rejected
 C1,123.0,Approved
+C1,50.0,Approved

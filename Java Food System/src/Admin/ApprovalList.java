@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import Customer.LogIn;
+import Customer.Notify;
 import Customer.customer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -290,7 +291,7 @@ public void regenerateTable(){
             }
             fw.close(); 
             
-            
+            Notify.setReceipt(jTextField1.getText(), jTextField2.getText());
             customer.refund(jTextField1.getText(), Double.valueOf(jTextField2.getText()));
             System.out.println("status changed successfully");
         } catch (IOException e) {

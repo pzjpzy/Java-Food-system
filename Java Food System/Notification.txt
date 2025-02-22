@@ -19,3 +19,11 @@ Order Update:0:22-02-2025:The order has been cancelled.
 
 >>>>>>> parent of d9e989a (Merge branch 'main' of https://github.com/pzjpzy/Java-Food-system)
 R1:0:22-02-2025:You have a new order from a customer!
+V1:0:22-02-2025:A customer has cancelled your order
+V1:0:22-02-2025:A customer has cancelled your order
+V1:0:22-02-2025:A customer has cancelled your order
+V1:0:22-02-2025:A customer has cancelled your order
+V1:0:22-02-2025:A customer has cancelled your order
+V1:0:22-02-2025:A customer has cancelled your order
+V1:0:22-02-2025:A customer has cancelled your order
+V1:0:22-02-2025:A customer has cancelled your order

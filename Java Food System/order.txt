@@ -70,3 +70,17 @@ C1,O31,Hamburger,0,Take away,21-02-2025,9,V1
 C1,O31,Coke,0,Take away,21-02-2025,9,V1
 C1,O32,Hamburger,2,nothing,21-02-2025,0,V1
 C1,O32,Pasta,0,nothing,21-02-2025,0,V1
+C1,O33,Hamburger,2,Delivery,22-02-2025,4,V1
+C1,O33,Pasta,0,Delivery,22-02-2025,4,V1
+C1,O34,Hamburger,0,Dine in,22-02-2025,4,V1
+C1,O34,Pasta,1,Dine in,22-02-2025,4,V1
+C1,O35,Hamburger,2,Dine in,22-02-2025,4,V1
+C1,O35,Pasta,0,Dine in,22-02-2025,4,V1
+C1,O36,Hamburger,2,Dine in,22-02-2025,4,V1
+C1,O36,Pasta,0,Dine in,22-02-2025,4,V1
+C1,O37,Hamburger,2,Dine in,22-02-2025,4,V1
+C1,O37,Pasta,0,Dine in,22-02-2025,4,V1
+C1,O38,Hamburger,0,Dine in,22-02-2025,4,V1
+C1,O38,Pasta,2,Dine in,22-02-2025,4,V1
+C1,O39,Hamburger,2,Dine in,22-02-2025,1,V1
+C1,O39,Pasta,0,Dine in,22-02-2025,1,V1
