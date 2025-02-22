@@ -38,7 +38,12 @@ public TicketManagerPanel(JFrame frame) {
         setMinimumSize(new java.awt.Dimension(1552, 837));
         setPreferredSize(new java.awt.Dimension(1552, 837));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"All"}));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -126,6 +131,10 @@ public TicketManagerPanel(JFrame frame) {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
     updateTicketStatus("Resolved"); // Calls method to update status
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        filterTickets();
+    }//GEN-LAST:event_jComboBox1ActionPerformed
  
     private void initializeTableModel() {
         String[] columnNames = { "Ticket ID", "Order ID", "Customer ID", "Complaint", "Rating", "Status" };
@@ -142,6 +151,7 @@ public TicketManagerPanel(JFrame frame) {
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
                 if (data.length == 6) {
+                    jComboBox1.addItem(data[1]);
                     ticketList.add(data);
                     tableModel.addRow(data); // Add row to the table
                 }
@@ -156,7 +166,7 @@ public TicketManagerPanel(JFrame frame) {
         tableModel.setRowCount(0); // Clear the table
 
         for (String[] ticket : ticketList) {
-            if (selectedStatus.equals("All") || ticket[5].equals(selectedStatus)) {
+            if (selectedStatus.equals("All") || ticket[1].equals(jComboBox1.getSelectedItem())) {
                 tableModel.addRow(ticket); // Add matching rows
             }
         }
