@@ -34,6 +34,10 @@ public class ManageUsers extends javax.swing.JPanel {
     public ManageUsers(JFrame frame) {
         initComponents();
         this.frame = frame;
+        setBounds(0,0,1535,864);
+        setVisible(true);
+        
+        frame.setLayout(null);
 
         tableManager = new TableManager(jTable1);
         model = (DefaultTableModel) jTable1.getModel();
@@ -172,8 +176,8 @@ public class ManageUsers extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtName)
-                                    .addComponent(jTextField1)
-                                    .addComponent(txtRole, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtRole, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtUserID, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(122, 122, 122)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(64, 64, 64)
@@ -353,7 +357,6 @@ private void clearFields() {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtRole;
     private javax.swing.JTextField txtUserID;
