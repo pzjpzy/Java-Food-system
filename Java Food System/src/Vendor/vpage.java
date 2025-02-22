@@ -317,7 +317,7 @@ public class vpage extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel6MouseReleased
     private void reviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reviewActionPerformed
         frame.getContentPane().removeAll();
-        readCusRev panel = new readCusRev(frame);   //the panel you want to switch to
+        readReviewV panel = new readReviewV(frame);   //the panel you want to switch to
         frame.add(panel);
         frame.revalidate();
         frame.repaint();

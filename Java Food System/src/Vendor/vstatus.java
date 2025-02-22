@@ -279,11 +279,12 @@ public class vstatus extends javax.swing.JPanel {
 
     private void acceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptActionPerformed
         int selectedRow = jTable1.getSelectedRow(); // Check if a row is selected
+        String customerId = String.valueOf(jTable1.getValueAt(selectedRow, 0));
     if (selectedRow != -1) {
         updateOrderStatus("5");
         
         // Notify the vendor that the order has been accepted
-        Notify.setNotification("Order Update", "The order has been accepted.");
+        Notify.setNotification(customerId, "The order has been accepted.");
     } else {
         // Show error message if no order is selected
         JOptionPane.showMessageDialog(this, "Please select an order to accept.");
@@ -292,12 +293,14 @@ public class vstatus extends javax.swing.JPanel {
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
         int selectedRow = jTable1.getSelectedRow(); // Check if a row is selected
+        String customerId = String.valueOf(jTable1.getValueAt(selectedRow, 0));
     if (selectedRow != -1) {
         updateOrderStatus("4");
         addFromBalance();
         
         // Notify the vendor that the order has been cancelled
-        Notify.setNotification("Order Update", "The order has been cancelled.");
+        
+        Notify.setNotification(customerId, "The order has been cancelled.");
     } else {
         // Show error message if no order is selected
         JOptionPane.showMessageDialog(this, "Please select an order to cancel.");
