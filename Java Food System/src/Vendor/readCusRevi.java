@@ -109,7 +109,7 @@ public class readCusRevi extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-loadReviews();
+filterReviews();
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -149,9 +149,11 @@ private void loadReviews() {
     }
 
     // ✅ Prevent duplicate "All Orders" entry
-    jComboBox1.removeAllItems();
-    if (jComboBox1.getItemCount() == 0) { 
-        jComboBox1.addItem("All Orders"); // Add only once
+    jComboBox1.removeAllItems(); // Clear existing items
+
+    // ✅ Ensure "All Orders" is only added once
+    if (!orderIds.isEmpty()) { 
+        jComboBox1.addItem("All Orders"); 
     }
     
     for (String orderId : orderIds) {
