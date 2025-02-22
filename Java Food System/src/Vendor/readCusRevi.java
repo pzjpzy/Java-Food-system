@@ -115,7 +115,7 @@ public class readCusRevi extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //        frame.getContentPane().removeAll();
         frame.getContentPane().removeAll();
-        vpage panel = new vpage(frame);   //the panel you want to switch to
+        vMain panel = new vMain(frame);   //the panel you want to switch to
         frame.add(panel);
         frame.revalidate();
         frame.repaint();
