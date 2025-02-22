@@ -263,7 +263,7 @@ public class vMain extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseReleased
-        readCusRev panel = new readCusRev(frame);   //the panel you want to switch to
+        readCusRevi panel = new readCusRevi(frame);   //the panel you want to switch to
         frame.remove(this);
         frame.add(panel);
         frame.revalidate();

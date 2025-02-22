@@ -23,6 +23,8 @@ public class readCusRevi extends javax.swing.JPanel {
      */
     public readCusRevi(JFrame frame) {
         initComponents();
+        this.frame = frame;
+        setBounds(0,0,1536,864);
         initializeTableModel(); // Initialize table structure
         loadReviews(); // Load reviews from review.txt
     }
@@ -113,7 +115,7 @@ public class readCusRevi extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //        frame.getContentPane().removeAll();
         frame.getContentPane().removeAll();
-        vpage panel = new vpage(frame);   //the panel you want to switch to
+        vMain panel = new vMain(frame);   //the panel you want to switch to
         frame.add(panel);
         frame.revalidate();
         frame.repaint();
