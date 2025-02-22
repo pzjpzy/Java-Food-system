@@ -251,11 +251,11 @@ public class vstatus extends javax.swing.JPanel {
 
     private void backtomainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backtomainActionPerformed
 //        // Create an instance of VendorPage
-//        frame.getContentPane().removeAll();
-//        vpage panel = new vpage(frame);   //the panel you want to switch to
-//        frame.add(panel);
-//        frame.revalidate();
-//        frame.repaint();
+        frame.getContentPane().removeAll();
+        vMain panel = new vMain(frame);   //the panel you want to switch to
+        frame.add(panel);
+        frame.revalidate();
+        frame.repaint();
     }//GEN-LAST:event_backtomainActionPerformed
 
     private void ShowOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowOrderActionPerformed

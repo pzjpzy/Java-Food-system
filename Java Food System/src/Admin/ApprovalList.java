@@ -29,7 +29,6 @@ public class ApprovalList extends javax.swing.JPanel {
     JFrame frame;
     public ApprovalList(JFrame frame) {
         initComponents();
-        loadTableData();
         setBounds(0,0,1536,864);
         //this.frame = frame;
         setVisible(true);
@@ -53,41 +52,31 @@ public class ApprovalList extends javax.swing.JPanel {
         } catch(IOException e){
             System.out.println("Error");
         }
+        
+        
     }
     
-    private void loadTableData() {
-    List<TopUpRequest> requests = TopUpRequestData.loadRequests(); // Ensure this method exists
-    DefaultTableModel model = (DefaultTableModel) jTable1.getModel(); // Use jTable1
-    model.setRowCount(0); // Clear table before adding new data
-
-    for (TopUpRequest request : requests) {
-        model.addRow(new Object[]{request.getCustomerID(), request.getAmount(), request.getStatus()});
-    }
-}
+public void regenerateTable(){
+    container.setNumRows(0);
     
-    private void rejectRequest() {
-    int selectedRow = jTable1.getSelectedRow();
-    if (selectedRow != -1) {
-        List<TopUpRequest> requests = TopUpRequestData.loadRequests();
-        requests.get(selectedRow).setStatus("Declined");
+    try{
+            FileReader fr = new FileReader("Topup.txt");
+            BufferedReader br  = new BufferedReader(fr);
 
-        // Save updated data
-        TopUpRequestData.saveRequests(requests);
-        loadTableData(); // Refresh JTable
-    }
+            String line;
+            int row = 0;
+
+            while((line = br.readLine()) != null){
+                String values[] = line.split(",");
+                System.out.println(String.valueOf(row) + values);
+                container.addRow(values);
+                row++;
+            }
+        } catch(IOException e){
+            System.out.println("Error");
+        }
 }
 
-    private void approveRequest() {
-    int selectedRow = jTable1.getSelectedRow();
-    if (selectedRow != -1) {
-        List<TopUpRequest> requests = TopUpRequestData.loadRequests();
-        requests.get(selectedRow).setStatus("Approved");
-
-        // Save updated data
-        TopUpRequestData.saveRequests(requests);
-        loadTableData(); // Refresh JTable
-    }
-}
 
 
     /**
@@ -304,6 +293,8 @@ public class ApprovalList extends javax.swing.JPanel {
         } catch (IOException e) {
             System.out.println("error");
         }
+
+        regenerateTable();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -349,6 +340,8 @@ public class ApprovalList extends javax.swing.JPanel {
         } catch (IOException e) {
             System.out.println("error");
         }
+        
+        regenerateTable();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased

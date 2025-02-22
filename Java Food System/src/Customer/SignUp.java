@@ -33,6 +33,9 @@ public class SignUp extends javax.swing.JPanel {
         initComponents();
         setBounds(0,0,1535,864);
         this.frame = frame;
+        setVisible(true);
+        
+        frame.setLayout(null);
     }
 
     /**
