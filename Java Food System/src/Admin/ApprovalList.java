@@ -34,7 +34,7 @@ public class ApprovalList extends javax.swing.JPanel {
     public ApprovalList(JFrame frame) {
         initComponents();
         setBounds(0,0,1536,864);
-        //this.frame = frame;
+        this.frame = frame;
         setVisible(true);
         frame.setLayout(null);
         
