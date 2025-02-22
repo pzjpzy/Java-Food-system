@@ -9,11 +9,11 @@ import javax.swing.table.DefaultTableModel;
 import java.io.*;
 import java.util.*;
 
-public class readCusRev extends javax.swing.JFrame {
+public class readCusRev extends javax.swing.JPanel {
 
     private DefaultTableModel tableModel;
     private List<String[]> reviewsList;
-    private JFrame frame; // Store the reference to the parent frame
+    private JFrame frame ; // Store the reference to the parent frame
     /**
      * Creates new form readCusRev
      */
@@ -221,4 +221,8 @@ private void filterReviews() {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    private void setLocationRelativeTo(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
