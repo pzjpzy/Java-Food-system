@@ -23,9 +23,21 @@ public class Notify {
             FileWriter fw = new FileWriter("Notification.txt",true);
             fw.append(user_ID + ":" + "0" + ":" + formatDate + ":" + content + "\n");
             fw.close();
-            }catch(IOException ex) {
-                System.out.println("Some error occured in Method setNotification");
-            }
+        }catch(IOException ex) {
+            System.out.println("Some error occured in Method setNotification");
+        }
 
+    }
+    public static void setReceipt(String user_ID,String amount){
+        try{
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            LocalDate currentDate = LocalDate.now();
+            String formatDate = currentDate.format(formatter);
+            FileWriter fw = new FileWriter("Receipt.txt",true);
+            fw.append(user_ID + "," + "RM" + amount + "," + formatDate + "\n");
+            fw.close();
+        }catch(IOException ex) {
+            System.out.println("Some error occured in Method setNotification");
+        }
     }
 }
