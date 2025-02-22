@@ -52,10 +52,6 @@ public class CustReview extends javax.swing.JPanel {
    private void filterOrders() {
         String selectedOrder = (String) jComboBox1.getSelectedItem();
 
-        if (selectedOrder == null || selectedOrder.equals("All Orders")) {
-            JOptionPane.showMessageDialog(this, "All orders are displayed.", "Info", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
 
         StringBuilder filteredOrders = new StringBuilder();
         for (String order : orders) {
