@@ -1,8 +1,8 @@
-RBB81FC,Item 2,C123,HALOOOO,1
-RDE6F9E,Item 1,C123,Yesssss,1
-R20329F,Item 1,C123,i dont like,1
-R5C160B,Item 1,C123,asdasdasdas,1
-R849E1C,Item 2,C123,well well well,1
+RBB81FC,Item 2,C1,HALOOOO,1
+RDE6F9E,Item 1,C1,Yesssss,1
+R20329F,Item 1,C1,i dont like,1
+R5C160B,Item 1,C1,asdasdasdas,1
+R849E1C,Item 2,C1,well well well,1
 R0AA8E2,O1,C2,push push,3
 RF30A27,O3,C2,Cappie is the best,5
 RA8A22B,O5,C2,Praying for you all great mita,5

@@ -34,7 +34,7 @@ public class CustReview extends javax.swing.JPanel {
             String line;
             while ((line = br.readLine()) != null) {
                 String array [] = line.split(",");
-                if (array.length == 8 && array[2].equals(customer.userID)) {
+                if (array.length == 8 && array[0].equals(customer.userID)) {
                     orders.add(array[1]); // Each line represents an order ID
                 }
             }
@@ -62,8 +62,6 @@ public class CustReview extends javax.swing.JPanel {
             }
         }
 
-        // Display the filtered orders in a dialog
-        JOptionPane.showMessageDialog(this, "Filtered Order:\n" + filteredOrders, "Filtered Orders", JOptionPane.INFORMATION_MESSAGE);
     }
 
     /**

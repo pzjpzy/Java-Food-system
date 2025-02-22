@@ -296,7 +296,11 @@ public class ManagerHome extends javax.swing.JPanel {
     }//GEN-LAST:event_jPanel2MouseReleased
 
     private void jPanel3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseReleased
-        // TODO add your handling code here:
+        vpanel2 panel = new vpanel2(frame);   //the panel you want to switch to
+        frame.remove(this);
+        frame.add(panel);
+        frame.revalidate();
+        frame.repaint();
     }//GEN-LAST:event_jPanel3MouseReleased
 
     private void jPanel4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseReleased
