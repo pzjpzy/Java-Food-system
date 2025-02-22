@@ -288,7 +288,7 @@ public class Dperform extends javax.swing.JPanel {
         }catch(IOException ex){
             System.out.println("Error occured.");
         }
-        String total = "RM" + String.valueOf(count.getTotal("Task.txt",runner_ID)*5);
+        String total = "RM" + String.valueOf(count.getTotal("Task.txt",runner_ID)*10);
         jLabel4.setText(total);
         
     }//GEN-LAST:event_jButton2MouseReleased
