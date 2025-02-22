@@ -274,7 +274,7 @@ public class LogIn extends javax.swing.JPanel {
             String id = parts[3];
 
             // Check if username and password match
-            if (enteredUsername.equals(username) && enteredPassword.equals(password)) {
+            if (enteredUsername.equals(username.trim()) && enteredPassword.equals(password.trim())) {
                 isLoggedIn = true;
 
                 // Show success message
