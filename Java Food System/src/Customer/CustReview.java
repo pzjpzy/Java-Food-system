@@ -34,7 +34,9 @@ public class CustReview extends javax.swing.JPanel {
             String line;
             while ((line = br.readLine()) != null) {
                 String array [] = line.split(",");
-                orders.add(array[1]); // Each line represents an order ID
+                if (array.length == 8 && array[2].equals(customer.userID)) {
+                    orders.add(array[1]); // Each line represents an order ID
+                }
             }
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error loading orders: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -73,7 +75,7 @@ public class CustReview extends javax.swing.JPanel {
      */
     private void saveReview(String orderID, String review, int rating) {
         String reviewID = "R" + UUID.randomUUID().toString().substring(0, 6).toUpperCase(); // Generate a unique review ID
-        String customerID = "C123"; // Example: Replace with actual customer ID
+        String customerID = customer.userID; // Example: Replace with actual customer ID
         String reviewEntry = reviewID + "," + orderID + "," + customerID + "," + review + "," + rating;
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("reviews.txt", true))) {
