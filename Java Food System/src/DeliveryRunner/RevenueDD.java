@@ -109,9 +109,9 @@ public class RevenueDD extends javax.swing.JPanel {
 
         // Output results
         
-        String x = "RM " + dailyCount*5;
-        String y = "RM " + monthlyCount*5;
-        String z = "RM " + yearlyCount*5;
+        String x = "RM " + dailyCount*10;
+        String y = "RM " + monthlyCount*10;
+        String z = "RM " + yearlyCount*10;
         jLabel3.setText(x);
         jLabel7.setText(y);
         jLabel9.setText(z);

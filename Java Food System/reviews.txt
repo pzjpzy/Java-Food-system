@@ -7,3 +7,4 @@ R0AA8E2,O1,C2,push push,3
 RF30A27,O3,C2,Cappie is the best,5
 RA8A22B,O5,C2,Praying for you all great mita,5
 R9E8BF4,O7,C2,ababababa,5
+RBE8A5D,O26,C2,Why is this happen to me,4
