@@ -34,7 +34,9 @@ public class CustReview extends javax.swing.JPanel {
             String line;
             while ((line = br.readLine()) != null) {
                 String array [] = line.split(",");
-                orders.add(array[1]); // Each line represents an order ID
+                if (array.length == 8 && array[2].equals(customer.userID)) {
+                    orders.add(array[1]); // Each line represents an order ID
+                }
             }
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error loading orders: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

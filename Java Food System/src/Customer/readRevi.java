@@ -143,7 +143,7 @@ public class readRevi extends javax.swing.JPanel {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
-                if (data.length == 5) {
+                if (data.length == 5 && data[2].equals(customer.userID)) {
                     reviewsList.add(data);
                     tableModel.addRow(data); // Add row to table
                     orderIds.add(data[1]); // Store Order IDs for dropdown
