@@ -45,7 +45,6 @@ public class CustReview extends javax.swing.JPanel {
      * Populates the order dropdown with available orders.
      */
     private void populateOrderDropdown() {
-        jComboBox1.addItem("All Orders"); // Default option
         for (String order : orders) {
             jComboBox1.addItem(order); // Add each order ID to the dropdown
         }
@@ -108,7 +107,7 @@ public class CustReview extends javax.swing.JPanel {
         setToolTipText("");
         setMinimumSize(new java.awt.Dimension(1552, 837));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
