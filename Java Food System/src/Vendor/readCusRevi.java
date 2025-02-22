@@ -23,6 +23,8 @@ public class readCusRevi extends javax.swing.JPanel {
      */
     public readCusRevi(JFrame frame) {
         initComponents();
+        this.frame = frame;
+        setBounds(0,0,1536,864);
         initializeTableModel(); // Initialize table structure
         loadReviews(); // Load reviews from review.txt
     }
