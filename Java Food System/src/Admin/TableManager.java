@@ -17,7 +17,7 @@ public class TableManager {
     public TableManager(JTable table) {
         this.table = table;
         this.model = (DefaultTableModel) table.getModel();
-        model.setColumnIdentifiers(new String[]{"UserID", "Name", "Role"}); // Set column headers
+        model.setColumnIdentifiers(new String[]{"Name", "Password", "Role", "UserID"}); // Set 4 column headers
 
         loadUsers(); // Load data when initialized
     }
@@ -32,7 +32,7 @@ public class TableManager {
                 String line = scanner.nextLine();
                 String[] userData = line.split(",");
 
-                if (userData.length == 3) { // Ensure correct format
+                if (userData.length == 4) { // it now reads 4
                     model.addRow(userData);
                 }
             }
@@ -46,8 +46,8 @@ public class TableManager {
     }
 
     // Add a new user to the table and save it to users.txt
-    public void addUser(String userid, String name, String role) {
-        model.addRow(new String[]{userid, name, role});
+    public void addUser(String name, String password, String role, String userid) {
+        model.addRow(new String[]{name, password, role, userid});
         saveToFile();
     }
 
@@ -64,16 +64,17 @@ public class TableManager {
 
     // Save table data back to users.txt
     public void saveToFile() {
-        try (PrintWriter writer = new PrintWriter(new FileWriter(filePath))) {
-            for (int i = 0; i < model.getRowCount(); i++) {
-                writer.println(
-                        model.getValueAt(i, 0) + "," +  // UserID
-                        model.getValueAt(i, 1) + "," +  // Name
-                        model.getValueAt(i, 2)          // Role
-                );
+            try (PrintWriter writer = new PrintWriter(new FileWriter(filePath))) {
+                for (int i = 0; i < model.getRowCount(); i++) {
+                    writer.println(
+                            model.getValueAt(i, 0) + "," +  // Name
+                            model.getValueAt(i, 1) + "," +  // Password
+                            model.getValueAt(i, 2) + "," +  // Role
+                            model.getValueAt(i, 3)          // UserID
+                    );
+                }
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Error saving file!", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Error saving file!", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }
 }
