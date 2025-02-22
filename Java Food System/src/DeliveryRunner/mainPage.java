@@ -310,7 +310,7 @@ public class mainPage extends javax.swing.JPanel {
 
     private void jPanel4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseReleased
         frame.remove(this);
-        readReview panel = new readReview(frame);
+        readReviewi panel = new readReviewi(frame);
         frame.add(panel);
         frame.revalidate();
         frame.repaint();
