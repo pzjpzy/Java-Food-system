@@ -61,7 +61,6 @@ public class CustComplaint extends javax.swing.JPanel {
      * Populates the order dropdown with available orders.
      */
     private void populateOrderDropdown() {
-        jComboBox1.addItem("All Orders"); // Default option
         for (String order : orders) {
             jComboBox1.addItem(order); // Add each order ID to the dropdown
         }
