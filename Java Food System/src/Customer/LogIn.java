@@ -35,9 +35,11 @@ public class LogIn extends javax.swing.JPanel {
 
     public LogIn(JFrame frame) {
         initComponents();
-        setBounds(0,0,1536,864);
+        setBounds(0,0,1535,864);
         this.frame = frame;
         setVisible(true);
+        
+        frame.setLayout(null);
         
         
     }
