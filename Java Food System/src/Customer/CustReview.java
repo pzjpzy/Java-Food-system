@@ -45,7 +45,6 @@ public class CustReview extends javax.swing.JPanel {
      * Populates the order dropdown with available orders.
      */
     private void populateOrderDropdown() {
-        jComboBox1.addItem("All Orders"); // Default option
         for (String order : orders) {
             jComboBox1.addItem(order); // Add each order ID to the dropdown
         }
@@ -53,10 +52,6 @@ public class CustReview extends javax.swing.JPanel {
    private void filterOrders() {
         String selectedOrder = (String) jComboBox1.getSelectedItem();
 
-        if (selectedOrder == null || selectedOrder.equals("All Orders")) {
-            JOptionPane.showMessageDialog(this, "All orders are displayed.", "Info", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
 
         StringBuilder filteredOrders = new StringBuilder();
         for (String order : orders) {
