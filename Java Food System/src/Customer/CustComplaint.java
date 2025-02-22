@@ -49,7 +49,8 @@ public class CustComplaint extends javax.swing.JPanel {
         try (BufferedReader br = new BufferedReader(new FileReader("order.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
-                orders.add(line); // Each line represents an order ID
+                String array[] = line.split(",");
+                orders.add(array[1]); // Each line represents an order ID
             }
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error loading orders: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -86,7 +87,7 @@ public class CustComplaint extends javax.swing.JPanel {
     }
         private void saveComplaint(String orderID, String complaint, int rating) {
         String ticketID = "T" + UUID.randomUUID().toString().substring(0, 6).toUpperCase(); // Generate a unique ticket ID
-        String customerID = "C123"; // Example customer ID
+        String customerID = customer.userID; // Example customer ID
         String status = "Open"; // Default status for new complaints
         String ticketEntry = ticketID + "," + orderID + "," + customerID + "," + complaint + "," + rating + "," + status;
 
@@ -132,14 +133,14 @@ public class CustComplaint extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Submit");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
