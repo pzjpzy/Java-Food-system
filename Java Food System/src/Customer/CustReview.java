@@ -14,16 +14,17 @@ public class CustReview extends javax.swing.JPanel {
     /**
      * Creates new form CustReview
      */
-    public CustReview() {
+    public CustReview(JFrame frame) {
         initComponents();
+        this.frame = frame;
+        setBounds(0, 0, 1536, 864); 
+        frame.setLayout(null);
+        
         orders = new ArrayList<>();
         loadOrders();
         populateOrderDropdown();
     }
-    public CustReview(JFrame frame) {
-        this.frame = frame;
-        initComponents();
-    }
+
     /**
      * Loads available orders from a file or a data source.
      */
@@ -32,7 +33,8 @@ public class CustReview extends javax.swing.JPanel {
         try (BufferedReader br = new BufferedReader(new FileReader("order.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
-                orders.add(line); // Each line represents an order ID
+                String array [] = line.split(",");
+                orders.add(array[1]); // Each line represents an order ID
             }
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error loading orders: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -43,7 +45,6 @@ public class CustReview extends javax.swing.JPanel {
      * Populates the order dropdown with available orders.
      */
     private void populateOrderDropdown() {
-        jComboBox1.addItem("All Orders"); // Default option
         for (String order : orders) {
             jComboBox1.addItem(order); // Add each order ID to the dropdown
         }
@@ -51,10 +52,6 @@ public class CustReview extends javax.swing.JPanel {
    private void filterOrders() {
         String selectedOrder = (String) jComboBox1.getSelectedItem();
 
-        if (selectedOrder == null || selectedOrder.equals("All Orders")) {
-            JOptionPane.showMessageDialog(this, "All orders are displayed.", "Info", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
 
         StringBuilder filteredOrders = new StringBuilder();
         for (String order : orders) {
@@ -89,14 +86,7 @@ public class CustReview extends javax.swing.JPanel {
     }
 
     // Main method to launch the application
-    public static void main(String[] args) {
-        // Create a JFrame to hold the CustReview JPanel
-        JFrame frame = new JFrame("Customer Review");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new CustReview()); // Add the CustReview JPanel to the frame
-        frame.pack(); // Adjust the window size to fit components
-        frame.setVisible(true); // Show the window
-    }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -113,7 +103,7 @@ public class CustReview extends javax.swing.JPanel {
         setToolTipText("");
         setMinimumSize(new java.awt.Dimension(1552, 837));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);

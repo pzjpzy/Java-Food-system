@@ -15,8 +15,10 @@ public class TicketManagerPanel extends javax.swing.JPanel {
      * Creates new form TicketManagerPanel
      */
 public TicketManagerPanel(JFrame frame) {
-    this.frame = frame;
     initComponents();
+    this.frame = frame;
+    setBounds(0, 0, 1536, 864); 
+    frame.setLayout(null);
     initializeTableModel(); 
     loadTickets(); 
     }

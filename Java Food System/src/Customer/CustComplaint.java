@@ -21,21 +21,19 @@ import javax.swing.JOptionPane;
  */
 public class CustComplaint extends javax.swing.JPanel {
 
-    private JFrame frame;
-        private List<String> orders;
+    JFrame frame;
+    private List<String> orders;
 
     /**
      * Creates new form CustComplaint
      */
-    public CustComplaint() {
+    public CustComplaint(JFrame frame){
         initComponents();
-        orders = new ArrayList<>();
-        loadOrders();
-        populateOrderDropdown();
-    }
-    public CustComplaint(JFrame frame) {
         this.frame = frame;
-        initComponents();
+        setBounds(0, 0, 1536, 864); 
+        frame.setLayout(null);
+        
+        
         orders = new ArrayList<>();
         loadOrders();
         populateOrderDropdown();
@@ -51,7 +49,8 @@ public class CustComplaint extends javax.swing.JPanel {
         try (BufferedReader br = new BufferedReader(new FileReader("order.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
-                orders.add(line); // Each line represents an order ID
+                String array[] = line.split(",");
+                orders.add(array[1]); // Each line represents an order ID
             }
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error loading orders: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -62,7 +61,6 @@ public class CustComplaint extends javax.swing.JPanel {
      * Populates the order dropdown with available orders.
      */
     private void populateOrderDropdown() {
-        jComboBox1.addItem("All Orders"); // Default option
         for (String order : orders) {
             jComboBox1.addItem(order); // Add each order ID to the dropdown
         }
@@ -88,7 +86,7 @@ public class CustComplaint extends javax.swing.JPanel {
     }
         private void saveComplaint(String orderID, String complaint, int rating) {
         String ticketID = "T" + UUID.randomUUID().toString().substring(0, 6).toUpperCase(); // Generate a unique ticket ID
-        String customerID = "C123"; // Example customer ID
+        String customerID = customer.userID; // Example customer ID
         String status = "Open"; // Default status for new complaints
         String ticketEntry = ticketID + "," + orderID + "," + customerID + "," + complaint + "," + rating + "," + status;
 
@@ -100,14 +98,7 @@ public class CustComplaint extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Error saving complaint: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    public static void main(String[] args) {
-        // Create a JFrame to hold the CustComplaintJPanel
-        JFrame frame = new JFrame("Customer Complaint");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new CustComplaint()); // Add the CustComplaintJPanel to the frame
-        frame.pack(); // Adjust the window size to fit components
-        frame.setVisible(true); // Show the window
-    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -134,21 +125,21 @@ public class CustComplaint extends javax.swing.JPanel {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
         });
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Submit");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);

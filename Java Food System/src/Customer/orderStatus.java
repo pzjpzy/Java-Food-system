@@ -40,6 +40,7 @@ public class orderStatus extends javax.swing.JPanel {
     String orderID = customer.orderID;
     String line = null;
     String vendorID = "V0";
+    Double total = 0.00;
         
     public orderStatus(JFrame frame) {
         initComponents();
@@ -54,7 +55,23 @@ public class orderStatus extends javax.swing.JPanel {
             BufferedReader br = new BufferedReader(fr);
             while((line = br.readLine())!= null){
                 String values[] = line.split(",");
+                
+                        
+                //show status
                 if (values[1].equals(orderID)){
+                    //calculate total
+                    FileReader fr2 = new FileReader("Menu.txt");
+                    BufferedReader br2  = new BufferedReader(fr2);
+                    while((line = br2.readLine()) != null){
+                        String menu[] = line.split(",");
+                        if (menu[1].equals(values[2])){
+                            total += Double.parseDouble(menu[2]) * Double.parseDouble(values[3]);
+                            System.out.println(menu[2] + " x " +  values[3]);
+                            System.out.println(total);
+                        }
+                    }
+                    fr2.close();
+                    br2.close();
                     cline = values[2] + ": " + values[3] + "\n";
                     content += cline;
                     switch(values[6]){
@@ -82,7 +99,7 @@ public class orderStatus extends javax.swing.JPanel {
         }catch(IOException e){
             System.out.println("error occured");
         }
-        
+        System.out.println("total:" + total);
         //show ordered items in text area
         jTextArea1.setText(content);
         
@@ -90,12 +107,22 @@ public class orderStatus extends javax.swing.JPanel {
         Timer timer = new Timer(50, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                jButton4.setVisible(false);
+                jButton5.setVisible(false);
                 jLabel3.setText(customer.getOrderStatus(orderID));
-                if (customer.getOrderStatus(orderID) != null && customer.getOrderStatus(orderID).equals("Paid")){
-                    jButton3.setEnabled(true);
-                }else{
+                if (customer.getOrderStatus(orderID).equals("Paid")){
+                    jButton3.setVisible(true);
+                }//no runner
+                else if (customer.getOrderStatus(orderID).equals("No Runner available")){
+                    jButton3.setVisible(false);
+                    jButton4.setVisible(true);
+                    jButton5.setVisible(true);
+                }
+                else{
                     jButton3.setVisible(false);
                 }
+                
+                
             }
         });
         timer.start(); // Start the timer
@@ -118,6 +145,17 @@ public class orderStatus extends javax.swing.JPanel {
             while((line = br.readLine())!= null){
                 String values[] = line.split(",");
                 if (values[1].equals(orderID)){
+                    //calculate total
+                    FileReader fr2 = new FileReader("Menu.txt");
+                    BufferedReader br2  = new BufferedReader(fr2);
+                    while((line = br2.readLine()) != null){
+                        String menu[] = line.split(",");
+                        if (menu[1].equals(values[2])){
+                            total += Double.parseDouble(menu[2]) * Double.parseDouble(values[3]);
+                            System.out.println(menu[2] + " x " +  values[3]);
+                            System.out.println(total);
+                        }
+                    }
                     cline = values[2] + ": " + values[3] + "\n";
                     content += cline;
                     switch(values[6]){
@@ -474,6 +512,7 @@ public class orderStatus extends javax.swing.JPanel {
             }
             fw.close(); 
             
+            customer.refund(userID, total);
             Notify.setNotification(vendorID, "A customer has cancelled your order");
             JOptionPane.showMessageDialog(this, "Order cancelled!", "Success", JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException e) {

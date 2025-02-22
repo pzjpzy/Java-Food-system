@@ -4,23 +4,12 @@ import javax.swing.JFrame;
 
 public class review_complaint extends javax.swing.JPanel {
 
-    private JFrame frame; // Store the reference to the parent frame
+    JFrame frame; // Store the reference to the parent frame
 
-    /**
-     * Default constructor (no-argument)
-     */
-    public review_complaint() {
-        initComponents();
-    }
-
-    /**
-     * Constructor with JFrame parameter
-     */
     public review_complaint(JFrame frame) {
         this.frame = frame;
         initComponents();
-                setBounds(0, 0, 1536, 864); // This line must exist in every JPanel
-        this.frame = frame;
+        setBounds(0, 0, 1536, 864); 
         frame.setLayout(null);
 
     }
@@ -66,7 +55,7 @@ public class review_complaint extends javax.swing.JPanel {
             }
         });
 
-        jButton4.setText("jButton4");
+        jButton4.setText("Back");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -116,7 +105,7 @@ public class review_complaint extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        readRev panel = new readRev();
+        readRevi panel = new readRevi(frame);
         frame.remove(this);
         frame.add(panel);
         frame.revalidate();
@@ -124,7 +113,7 @@ public class review_complaint extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        CustComplaint panel = new CustComplaint();
+        CustComplaint panel = new CustComplaint(frame);
         frame.remove(this);
         frame.add(panel);
         frame.revalidate();
