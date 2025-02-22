@@ -5,6 +5,3 @@ choo, 7788, Vendor, V1
 zaiyong, 9900, Deliveryrunner, R1
 Test, 1234, Vendor, V2
 zaijie, 9900, Deliveryrunner, R2
-mangochezz, mangochezz, Customer, C2
-asdf, asdf, Vendor, V3
-qwert, qwert, Delivery Runner, D1

@@ -35,11 +35,9 @@ public class LogIn extends javax.swing.JPanel {
 
     public LogIn(JFrame frame) {
         initComponents();
-        setBounds(0,0,1535,864);
+        setBounds(0,0,1536,864);
         this.frame = frame;
         setVisible(true);
-        
-        frame.setLayout(null);
         
         
     }
@@ -274,7 +272,7 @@ public class LogIn extends javax.swing.JPanel {
             String id = parts[3];
 
             // Check if username and password match
-            if (enteredUsername.equals(username) && enteredPassword.equals(password)) {
+            if (enteredUsername.equals(username.trim()) && enteredPassword.equals(password.trim())) {
                 isLoggedIn = true;
 
                 // Show success message
@@ -291,7 +289,7 @@ public class LogIn extends javax.swing.JPanel {
                         customer customer = new customer();
                         customer.setUserID(parts[3]);
                         ChooseBalance.customerID = parts[3];
-                        frame.add(new cusMainPage(frame)); // Customer home panel
+//                        frame.add(new cusMainPage(frame)); // Customer home panel
                         break;
                     case "manager":
                         frame.add(new ManagerHome(frame)); // Manager home panel
@@ -300,7 +298,8 @@ public class LogIn extends javax.swing.JPanel {
                         customer vendor = new customer();
                         vendor.setUserID(parts[3]);
                         //frame.add(new testing(frame)); // Vendor home panel
-                        frame.add(new vMain(frame)); // Vendor home panel
+                        frame.add(new vpage(frame)); // Vendor home panel
+//                        frame.add(new vpage(frame)); // Vendor home panel
                         break;
                     case "deliveryrunner":
                         runner runner = new runner();
